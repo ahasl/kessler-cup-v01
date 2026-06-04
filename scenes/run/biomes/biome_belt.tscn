@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scenes/run/biome.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/run/asteroid.tscn" id="2"]
+
+[sub_resource type="Gradient" id="beltgrad"]
+offsets = PackedFloat32Array(0, 1)
+colors = PackedColorArray(1, 0.35, 0.35, 0.14, 1, 0.35, 0.35, 0)
+
+[sub_resource type="GradientTexture2D" id="belttex"]
+gradient = SubResource("beltgrad")
+width = 1024
+height = 1024
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="BiomeBelt" type="Node2D"]
+script = ExtResource("1")
+biome_name = "Crimson Belt"
+size = Vector2(1600, 3600)
+requires_alloy = true
+penalty_drain = 10.0
+enter_message = "The Crimson Belt. Hull's holding, somehow. Don't make me say I told you so."
+blocked_message = "Flew into the Crimson Belt with no hull plating. Inspired. Your fuel's leaking everywhere now. Bye."
+
+[node name="Glow" type="Sprite2D" parent="."]
+scale = Vector2(3.6, 3.6)
+texture = SubResource("belttex")
+
+[node name="B1" parent="." instance=ExtResource("2")]
+position = Vector2(-500, -1400)
+modulate = Color(1, 0.55, 0.55, 1)
+
+[node name="B2" parent="." instance=ExtResource("2")]
+position = Vector2(100, -900)
+modulate = Color(1, 0.55, 0.55, 1)
+
+[node name="B3" parent="." instance=ExtResource("2")]
+position = Vector2(550, -1500)
+modulate = Color(1, 0.55, 0.55, 1)
+
+[node name="B4" parent="." instance=ExtResource("2")]
+position = Vector2(-200, -300)
+modulate = Color(1, 0.55, 0.55, 1)
+
+[node name="B5" parent="." instance=ExtResource("2")]
+position = Vector2(400, 200)
+modulate = Color(1, 0.55, 0.55, 1)
+
+[node name="B6" parent="." instance=ExtResource("2")]
+position = Vector2(-600, 600)
+modulate = Color(1, 0.55, 0.55, 1)
+
+[node name="B7" parent="." instance=ExtResource("2")]
+position = Vector2(0, 1050)
+modulate = Color(1, 0.55, 0.55, 1)
+
+[node name="B8" parent="." instance=ExtResource("2")]
+position = Vector2(600, 1300)
+modulate = Color(1, 0.55, 0.55, 1)
+
+[node name="B9" parent="." instance=ExtResource("2")]
+position = Vector2(-300, 1550)
+modulate = Color(1, 0.55, 0.55, 1)
+
+[node name="B10" parent="." instance=ExtResource("2")]
+position = Vector2(350, -250)
+modulate = Color(1, 0.55, 0.55, 1)
+
+[node name="B11" parent="." instance=ExtResource("2")]
+position = Vector2(-550, 150)
+modulate = Color(1, 0.55, 0.55, 1)
+
+[node name="B12" parent="." instance=ExtResource("2")]
+position = Vector2(700, -650)
+modulate = Color(1, 0.55, 0.55, 1)

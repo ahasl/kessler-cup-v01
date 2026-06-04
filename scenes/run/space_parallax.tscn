@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Shader" path="res://shaders/star_tile.gdshader" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/run/gas_giant.tscn" id="2"]
+
+[sub_resource type="ShaderMaterial" id="far"]
+shader = ExtResource("1")
+shader_parameter/cells = 26.0
+shader_parameter/brightness = 0.55
+shader_parameter/twinkle_speed = 0.7
+shader_parameter/tint = Color(0.92, 0.94, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="mid"]
+shader = ExtResource("1")
+shader_parameter/cells = 34.0
+shader_parameter/brightness = 0.8
+shader_parameter/twinkle_speed = 1.0
+shader_parameter/tint = Color(0.96, 0.97, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="near"]
+shader = ExtResource("1")
+shader_parameter/cells = 42.0
+shader_parameter/brightness = 1.0
+shader_parameter/twinkle_speed = 1.3
+shader_parameter/tint = Color(1, 1, 1, 1)
+
+[node name="Parallax" type="ParallaxBackground"]
+layer = -90
+
+[node name="LayerGiant" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.05, 0.05)
+
+[node name="GasGiant" parent="LayerGiant" instance=ExtResource("2")]
+position = Vector2(380, -240)
+
+[node name="LayerFar" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(1024, 1024)
+
+[node name="Stars" type="ColorRect" parent="LayerFar"]
+material = SubResource("far")
+offset_right = 1024.0
+offset_bottom = 1024.0
+
+[node name="LayerMid" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.22, 0.22)
+motion_mirroring = Vector2(1024, 1024)
+
+[node name="Stars" type="ColorRect" parent="LayerMid"]
+material = SubResource("mid")
+offset_right = 1024.0
+offset_bottom = 1024.0
+
+[node name="LayerNear" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.38, 0.38)
+motion_mirroring = Vector2(1024, 1024)
+
+[node name="Stars" type="ColorRect" parent="LayerNear"]
+material = SubResource("near")
+offset_right = 1024.0
+offset_bottom = 1024.0

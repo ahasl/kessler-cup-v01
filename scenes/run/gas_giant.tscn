@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3]
+
+[sub_resource type="Gradient" id="grad"]
+offsets = PackedFloat32Array(0, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="tex"]
+gradient = SubResource("grad")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="GasGiant" type="Node2D"]
+
+[node name="Glow" type="Sprite2D" parent="."]
+modulate = Color(0.45, 0.4, 0.7, 0.18)
+scale = Vector2(1.4, 1.4)
+texture = SubResource("tex")
+
+[node name="Body" type="Polygon2D" parent="."]
+color = Color(0.3, 0.28, 0.45, 0.85)
+polygon = PackedVector2Array(200, 0, 193.2, 51.7, 173.2, 100, 141.4, 141.4, 100, 173.2, 51.7, 193.2, 0, 200, -51.7, 193.2, -100, 173.2, -141.4, 141.4, -173.2, 100, -193.2, 51.7, -200, 0, -193.2, -51.7, -173.2, -100, -141.4, -141.4, -100, -173.2, -51.7, -193.2, 0, -200, 51.7, -193.2, 100, -173.2, 141.4, -141.4, 173.2, -100, 193.2, -51.7)
+
+[node name="Band1" type="Line2D" parent="."]
+points = PackedVector2Array(-180, -72, 180, -72)
+width = 12.0
+default_color = Color(0.4, 0.37, 0.56, 0.5)
+
+[node name="Band2" type="Line2D" parent="."]
+points = PackedVector2Array(-192, 38, 192, 38)
+width = 16.0
+default_color = Color(0.23, 0.21, 0.36, 0.6)
+
+[node name="Band3" type="Line2D" parent="."]
+points = PackedVector2Array(-150, 120, 150, 120)
+width = 9.0
+default_color = Color(0.42, 0.39, 0.58, 0.45)
+
+[node name="Outline" type="Line2D" parent="."]
+points = PackedVector2Array(200, 0, 193.2, 51.7, 173.2, 100, 141.4, 141.4, 100, 173.2, 51.7, 193.2, 0, 200, -51.7, 193.2, -100, 173.2, -141.4, 141.4, -173.2, 100, -193.2, 51.7, -200, 0, -193.2, -51.7, -173.2, -100, -141.4, -141.4, -100, -173.2, -51.7, -193.2, 0, -200, 51.7, -193.2, 100, -173.2, 141.4, -141.4, 173.2, -100, 193.2, -51.7, 200, 0)
+width = 2.0
+default_color = Color(0.55, 0.55, 0.75, 0.4)

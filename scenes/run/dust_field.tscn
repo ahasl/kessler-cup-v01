@@ -1,0 +1,17 @@
+[gd_scene format=3]
+
+[node name="DustField" type="CPUParticles2D" z_index="-5"]
+amount = 220
+lifetime = 12.0
+preprocess = 12.0
+local_coords = false
+emission_shape = 3
+emission_rect_extents = Vector2(1800, 1800)
+direction = Vector2(1, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 12.0
+scale_amount_min = 1.0
+scale_amount_max = 2.2
+color = Color(0.6, 0.72, 0.95, 0.5)

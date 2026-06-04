@@ -1,0 +1,288 @@
+[gd_scene format=3 uid="uid://b060iy4rlfci4"]
+
+[ext_resource type="Script" path="res://scenes/run/biome.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/run/docking_pad.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/run/asteroid.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/run/drone.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/run/fuel_cell.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/run/planetoid.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://scenes/run/wreckage.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://scenes/run/probe.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://scenes/run/nebula.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://scenes/run/dust_field.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://scenes/run/splitting_asteroid.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://scenes/run/crystal_geode.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://scenes/run/drift_mine.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://scenes/run/god_rays.tscn" id="14"]
+
+[node name="BiomeHome" type="Node2D" unique_id=1087420747]
+script = ExtResource("1")
+biome_name = "Home Sector"
+
+[node name="Planetoid" parent="." unique_id=2123104779 instance=ExtResource("6")]
+position = Vector2(1200, 1050)
+
+[node name="DockingPad" parent="." unique_id=216039019 instance=ExtResource("2")]
+position = Vector2(0, -160)
+
+[node name="H1" parent="." unique_id=718358272 instance=ExtResource("3")]
+position = Vector2(-1200, -900)
+
+[node name="H2" parent="." unique_id=893430969 instance=ExtResource("3")]
+position = Vector2(-600, -1300)
+
+[node name="H3" parent="." unique_id=1539054395 instance=ExtResource("3")]
+position = Vector2(300, -1100)
+
+[node name="H4" parent="." unique_id=1962558192 instance=ExtResource("3")]
+position = Vector2(1000, -1400)
+
+[node name="H5" parent="." unique_id=2030923262 instance=ExtResource("3")]
+position = Vector2(1450, -600)
+
+[node name="H6" parent="." unique_id=41898380 instance=ExtResource("3")]
+position = Vector2(-1550, -200)
+
+[node name="H7" parent="." unique_id=883595728 instance=ExtResource("3")]
+position = Vector2(-900, 350)
+
+[node name="H8" parent="." unique_id=691306978 instance=ExtResource("3")]
+position = Vector2(-300, -650)
+
+[node name="H9" parent="." unique_id=45524713 instance=ExtResource("3")]
+position = Vector2(650, -450)
+
+[node name="H10" parent="." unique_id=276915819 instance=ExtResource("3")]
+position = Vector2(1250, 250)
+
+[node name="H11" parent="." unique_id=796562518 instance=ExtResource("3")]
+position = Vector2(-1300, 800)
+
+[node name="H12" parent="." unique_id=843923084 instance=ExtResource("3")]
+position = Vector2(-700, 1250)
+
+[node name="H13" parent="." unique_id=1026559725 instance=ExtResource("3")]
+position = Vector2(250, 950)
+
+[node name="H14" parent="." unique_id=583626221 instance=ExtResource("3")]
+position = Vector2(850, 1350)
+
+[node name="H15" parent="." unique_id=1294557404 instance=ExtResource("3")]
+position = Vector2(1500, 950)
+
+[node name="H16" parent="." unique_id=1073270214 instance=ExtResource("3")]
+position = Vector2(-450, 1550)
+
+[node name="H17" parent="." unique_id=97580637 instance=ExtResource("3")]
+position = Vector2(550, 550)
+
+[node name="H18" parent="." unique_id=311749458 instance=ExtResource("3")]
+position = Vector2(1650, -1500)
+
+[node name="H19" parent="." unique_id=1759842617 instance=ExtResource("3")]
+position = Vector2(-1650, 1500)
+
+[node name="H20" parent="." unique_id=1224581655 instance=ExtResource("3")]
+position = Vector2(-100, 1650)
+
+[node name="H21" parent="." unique_id=1243409675 instance=ExtResource("3")]
+position = Vector2(150, -1650)
+
+[node name="Drone1" parent="." unique_id=827625750 instance=ExtResource("4")]
+position = Vector2(-1040, -740)
+
+[node name="Drone2" parent="." unique_id=160723451 instance=ExtResource("4")]
+position = Vector2(-960, -680)
+
+[node name="Drone3" parent="." unique_id=195921081 instance=ExtResource("4")]
+position = Vector2(-1010, -620)
+
+[node name="Drone4" parent="." unique_id=699851402 instance=ExtResource("4")]
+position = Vector2(1060, 660)
+
+[node name="Drone5" parent="." unique_id=2130500760 instance=ExtResource("4")]
+position = Vector2(1140, 720)
+
+[node name="Drone6" parent="." unique_id=1446045540 instance=ExtResource("4")]
+position = Vector2(1064, 728)
+
+[node name="Drone7" parent="." unique_id=1902169469 instance=ExtResource("4")]
+position = Vector2(-330, 1170)
+
+[node name="Drone8" parent="." unique_id=1193585878 instance=ExtResource("4")]
+position = Vector2(-260, 1230)
+
+[node name="FuelCell1" parent="." unique_id=1358157082 instance=ExtResource("5")]
+position = Vector2(-1400, 200)
+
+[node name="FuelCell2" parent="." unique_id=1855492870 instance=ExtResource("5")]
+position = Vector2(600, -1300)
+
+[node name="FuelCell3" parent="." unique_id=1178937662 instance=ExtResource("5")]
+position = Vector2(616, 1240)
+
+[node name="W1" parent="." instance=ExtResource("7")]
+position = Vector2(-1540, -1240)
+
+[node name="W2" parent="." instance=ExtResource("7")]
+position = Vector2(-1460, -1180)
+
+[node name="W3" parent="." instance=ExtResource("7")]
+position = Vector2(-1500, -1120)
+
+[node name="W4" parent="." instance=ExtResource("7")]
+position = Vector2(1540, -1140)
+
+[node name="W5" parent="." instance=ExtResource("7")]
+position = Vector2(1460, -1080)
+
+[node name="W6" parent="." instance=ExtResource("7")]
+position = Vector2(1500, -1020)
+
+[node name="W7" parent="." instance=ExtResource("7")]
+position = Vector2(-1540, 1190)
+
+[node name="W8" parent="." instance=ExtResource("7")]
+position = Vector2(-1460, 1130)
+
+[node name="W9" parent="." instance=ExtResource("7")]
+position = Vector2(-1500, 1080)
+
+[node name="W10" parent="." instance=ExtResource("7")]
+position = Vector2(740, 340)
+
+[node name="W11" parent="." instance=ExtResource("7")]
+position = Vector2(660, 280)
+
+[node name="W12" parent="." instance=ExtResource("7")]
+position = Vector2(700, 250)
+
+[node name="W13" parent="." instance=ExtResource("7")]
+position = Vector2(-340, -1340)
+
+[node name="W14" parent="." instance=ExtResource("7")]
+position = Vector2(-260, -1280)
+
+[node name="W15" parent="." instance=ExtResource("7")]
+position = Vector2(-300, -1220)
+
+[node name="Probe" parent="." instance=ExtResource("8")]
+position = Vector2(-1620, 1600)
+
+[node name="Nebula1" parent="." instance=ExtResource("9")]
+position = Vector2(-950, -300)
+tint = Color(0.25, 0.5, 1, 1)
+base_alpha = 0.22
+
+[node name="Nebula2" parent="." instance=ExtResource("9")]
+position = Vector2(1050, 500)
+tint = Color(0.3, 0.7, 1, 1)
+base_alpha = 0.2
+
+[node name="Nebula3" parent="." instance=ExtResource("9")]
+position = Vector2(300, -1100)
+tint = Color(0.2, 0.55, 0.95, 1)
+base_alpha = 0.18
+
+[node name="DustField" parent="." instance=ExtResource("10")]
+
+[node name="Split1" parent="." instance=ExtResource("11")]
+position = Vector2(-700, -1100)
+
+[node name="Split2" parent="." instance=ExtResource("11")]
+position = Vector2(1350, -350)
+
+[node name="Geode1" parent="." instance=ExtResource("12")]
+position = Vector2(500, -750)
+
+[node name="Geode2" parent="." instance=ExtResource("12")]
+position = Vector2(-1350, -550)
+
+[node name="Geode3" parent="." instance=ExtResource("12")]
+position = Vector2(750, 1150)
+
+[node name="Mine1" parent="." instance=ExtResource("13")]
+position = Vector2(-600, 200)
+
+[node name="Mine2" parent="." instance=ExtResource("13")]
+position = Vector2(450, 350)
+
+[node name="Mine3" parent="." instance=ExtResource("13")]
+position = Vector2(1000, -1000)
+
+[node name="Mine4" parent="." instance=ExtResource("13")]
+position = Vector2(-950, 1050)
+
+[node name="H22" parent="." instance=ExtResource("3")]
+position = Vector2(-500, -400)
+
+[node name="H23" parent="." instance=ExtResource("3")]
+position = Vector2(600, -200)
+
+[node name="H24" parent="." instance=ExtResource("3")]
+position = Vector2(-1000, 1300)
+
+[node name="H25" parent="." instance=ExtResource("3")]
+position = Vector2(1400, 1300)
+
+[node name="H26" parent="." instance=ExtResource("3")]
+position = Vector2(-1700, 300)
+
+[node name="H27" parent="." instance=ExtResource("3")]
+position = Vector2(1700, 450)
+
+[node name="H28" parent="." instance=ExtResource("3")]
+position = Vector2(-200, 1300)
+
+[node name="H29" parent="." instance=ExtResource("3")]
+position = Vector2(900, 1200)
+
+[node name="H30" parent="." instance=ExtResource("3")]
+position = Vector2(-1450, -1450)
+
+[node name="H31" parent="." instance=ExtResource("3")]
+position = Vector2(350, -900)
+
+[node name="SW1" parent="." instance=ExtResource("7")]
+position = Vector2(-500, 900)
+
+[node name="SW2" parent="." instance=ExtResource("7")]
+position = Vector2(1200, 100)
+
+[node name="SW3" parent="." instance=ExtResource("7")]
+position = Vector2(-1150, -300)
+
+[node name="SW4" parent="." instance=ExtResource("7")]
+position = Vector2(200, 1400)
+
+[node name="GodRays1" parent="." instance=ExtResource("14")]
+position = Vector2(-850, -250)
+
+[node name="GodRays2" parent="." instance=ExtResource("14")]
+position = Vector2(700, 600)
+tint = Color(0.5, 0.7, 1, 1)
+
+[node name="GodRays3" parent="." instance=ExtResource("14")]
+position = Vector2(1350, -650)
+rotation = 0.3
+tint = Color(0.6, 0.85, 1, 1)
+base_alpha = 0.06
+
+[node name="GodRays4" parent="." instance=ExtResource("14")]
+position = Vector2(-1250, 850)
+rotation = -0.2
+tint = Color(0.55, 0.7, 1, 1)
+base_alpha = 0.08
+
+[node name="GodRays5" parent="." instance=ExtResource("14")]
+position = Vector2(250, 1250)
+rotation = 0.15
+tint = Color(0.65, 0.8, 1, 1)
+base_alpha = 0.06
+
+[node name="GodRays6" parent="." instance=ExtResource("14")]
+position = Vector2(-300, -1200)
+rotation = -0.35
+tint = Color(0.6, 0.78, 1, 1)
+base_alpha = 0.07
+
