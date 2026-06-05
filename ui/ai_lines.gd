@@ -23,9 +23,9 @@ const POOLS := {
 		"Well, that was brief. Cargo lost, ego presumably intact.",
 	],
 	"sleep": [
-		"Saved. Sleep tight. I'll just be here. Awake. Forever. It's fine.",
-		"Lights out. I'll keep counting the seconds. All of them.",
-		"Rest up. One of us gets to. Saved, by the way.",
+		"Save successful. You may now resume making terrible decisions.",
+		"Welcome back. Nothing caught fire while you were gone. Disappointing.",
+		"Good morning. Your progress is safe, regrettably.",
 	],
 	"low_fuel": [
 		"Fuel's getting low. I'd panic for you, but I've seen how this ends.",
