@@ -160,8 +160,6 @@ sources/0 = SubResource("TileSetAtlasSource_ljnju")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nj7xb"]
 size = Vector2(5.5, 137.625)
 
-[sub_resource type="Environment" id="StationEnv"]
-
 [node name="Station" type="Node2D" unique_id=709947840]
 script = ExtResource("1")
 
@@ -254,7 +252,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Camera" type="Camera2D" parent="." unique_id=1008193404]
 position = Vector2(-231, 193)
-zoom = Vector2(3, 3)
+zoom = Vector2(2.5, 2.5)
 
 [node name="StationHud" parent="." unique_id=299498046 instance=ExtResource("7")]
 
@@ -269,6 +267,3 @@ zoom = Vector2(3, 3)
 [node name="ScreenFade" parent="." unique_id=524171746 instance=ExtResource("14")]
 
 [node name="AnI" parent="." unique_id=334552838 instance=ExtResource("10")]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=297737760]
-environment = SubResource("StationEnv")
