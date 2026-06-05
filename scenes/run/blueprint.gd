@@ -3,8 +3,8 @@ extends Area2D
 ## a station buildable). The unlock is in-memory immediately and made permanent
 ## when the player next sleeps (saves). Self-contained / modular.
 
-@export var unlock_flag: String = "weapon_workbench"
-@export var unlock_title: String = "Weapon Workbench"
+@export var unlock_flag: String = "research_station"
+@export var unlock_title: String = "Research Station"
 
 var _pulse := 0.0
 

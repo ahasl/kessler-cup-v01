@@ -4,7 +4,7 @@ extends Node
 ##   station -> PERSISTENT storage (saved)
 ##   run     -> TEMPORARY loot bag (wiped every run, never saved)
 
-const RUN_CARRY_SLOTS := 5
+const RUN_CARRY_SLOTS := 6
 const STATION_SLOTS := 999
 
 var station: Inventory

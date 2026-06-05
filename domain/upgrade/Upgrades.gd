@@ -34,33 +34,12 @@ const CATALOG := {
 	"metal_alloy": {
 		"name": "Double Metal Alloy",
 		"category": "ship",
-		"desc": "Reinforced hull — survive new biomes",
+		"desc": "Reinforced hull — survive new biomes (needs Reinforced Alloy)",
 		"levels": [
-			{"cost": {Items.Type.METAL: 15}},  # single unlock level (no numeric value)
+			{"cost": {Items.Type.REINFORCED_ALLOY: 2}},  # gated behind the day-5 quest
 		],
 	},
-	"laser_damage": {
-		"name": "Laser Power",
-		"category": "weapon",
-		"value_label": "laser damage",
-		"base_value": 2.0,
-		"levels": [
-			{"value": 3.0, "cost": {Items.Type.CRYSTAL: 8}},
-			{"value": 4.0, "cost": {Items.Type.CRYSTAL: 14, Items.Type.METAL: 30}},
-			{"value": 6.0, "cost": {Items.Type.CRYSTAL: 22, Items.Type.DATACHIP: 2}},
-		],
-	},
-	"laser_range": {
-		"name": "Laser Range",
-		"category": "weapon",
-		"value_label": "laser range",
-		"base_value": 420.0,
-		"levels": [
-			{"value": 520.0, "cost": {Items.Type.CRYSTAL: 6}},
-			{"value": 640.0, "cost": {Items.Type.CRYSTAL: 12, Items.Type.METAL: 20}},
-			{"value": 780.0, "cost": {Items.Type.CRYSTAL: 20, Items.Type.DATACHIP: 1}},
-		],
-	},
+	# Weapon-category upgrades are intentionally empty for now (researched later).
 }
 
 

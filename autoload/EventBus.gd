@@ -21,6 +21,8 @@ signal inventory_changed
 # --- PROGRESSION ---
 ## A quest/unlock flag was just set (e.g. a blueprint collected).
 signal progress_unlocked(flag: String)
+## A quest was activated or completed (the log should refresh).
+signal quest_updated
 
 # --- AI ASSISTANT (AnI) ---
 ## Emitted whenever AnI should speak. `level` is "info" or "warning".

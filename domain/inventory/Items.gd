@@ -10,9 +10,10 @@ enum Type {
 	DATACHIP,
 	ICE,
 	PLASMA,
+	REINFORCED_ALLOY,
 }
 
-const ALL: Array[Type] = [Type.METAL, Type.CRYSTAL, Type.DATACHIP, Type.ICE, Type.PLASMA]
+const ALL: Array[Type] = [Type.METAL, Type.CRYSTAL, Type.DATACHIP, Type.ICE, Type.PLASMA, Type.REINFORCED_ALLOY]
 
 
 static func display_name(item_type: int) -> String:
@@ -22,6 +23,7 @@ static func display_name(item_type: int) -> String:
 		Type.DATACHIP: return "Data Fragment"
 		Type.ICE: return "Ice"
 		Type.PLASMA: return "Plasma"
+		Type.REINFORCED_ALLOY: return "Reinforced Alloy"
 	return "Unknown"
 
 
@@ -32,10 +34,11 @@ static func color(item_type: int) -> Color:
 		Type.DATACHIP: return Color(1.0, 0.45, 0.95)
 		Type.ICE: return Color(0.75, 0.95, 1.0)
 		Type.PLASMA: return Color(0.70, 0.35, 1.0)
+		Type.REINFORCED_ALLOY: return Color(1.0, 0.6, 0.25)
 	return Color.WHITE
 
 
-## Relative chance an asteroid drops this material (0 = never from asteroids).
+## Relative chance an asteroid drops this material (0 = never from normal asteroids).
 static func drop_weight(item_type: int) -> int:
 	match item_type:
 		Type.METAL: return 55
@@ -43,6 +46,7 @@ static func drop_weight(item_type: int) -> int:
 		Type.DATACHIP: return 4
 		Type.ICE: return 22
 		Type.PLASMA: return 5
+		Type.REINFORCED_ALLOY: return 0  # only from special metal-rich asteroids
 	return 0
 
 

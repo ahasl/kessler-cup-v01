@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" path="res://scenes/run/crystal_geode.tscn" id="12"]
 [ext_resource type="PackedScene" path="res://scenes/run/drift_mine.tscn" id="13"]
 [ext_resource type="PackedScene" path="res://scenes/run/god_rays.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://scenes/run/rich_asteroid.tscn" id="15"]
 
 [node name="BiomeHome" type="Node2D" unique_id=1087420747]
 script = ExtResource("1")
@@ -285,4 +286,10 @@ position = Vector2(-300, -1200)
 rotation = -0.35
 tint = Color(0.6, 0.78, 1, 1)
 base_alpha = 0.07
+
+[node name="RichAsteroidL" parent="." instance=ExtResource("15")]
+position = Vector2(-1650, -1650)
+
+[node name="RichAsteroidR" parent="." instance=ExtResource("15")]
+position = Vector2(1650, -1650)
 

@@ -31,11 +31,11 @@ func get_ship_speed() -> float:
 
 
 func get_laser_damage() -> int:
-	return int(Upgrades.value_at("laser_damage", level_of("laser_damage")))
+	return Upgrades.BASE_LASER_DAMAGE
 
 
 func get_laser_range() -> float:
-	return Upgrades.value_at("laser_range", level_of("laser_range"))
+	return Upgrades.BASE_LASER_RANGE
 
 
 ## Reinforced hull required to survive new biomes (e.g. the Crimson Belt).

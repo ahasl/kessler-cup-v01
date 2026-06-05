@@ -82,8 +82,9 @@ func start_run() -> void:
 	InventoryManager.reset_run()
 	ProgressManager.discard_pending()
 	run_active = true
-	EventBus.run_started.emit()
 	EventBus.say_id("launch")
+	# Emitted last so any quest line it triggers is the message that shows on arrival.
+	EventBus.run_started.emit()
 	_load_scene(SPACE_SCENE)
 
 

@@ -25,3 +25,5 @@ theme_override_constants/separation = 6
 [node name="Slot4" parent="VBox/Slots" instance=ExtResource("2")]
 
 [node name="Slot5" parent="VBox/Slots" instance=ExtResource("2")]
+
+[node name="Slot6" parent="VBox/Slots" instance=ExtResource("2")]

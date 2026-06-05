@@ -77,12 +77,21 @@ home-station dock + E to extract. Out of fuel or straying past a biome edge = ru
 flag is NOT set; shoot it -> drops a `blueprint` pickup -> collecting it calls
 `ProgressManager.unlock(flag)` -> the flag persists on next sleep and the probe
 never respawns. The station shows the matching buildable when the flag is set
-(e.g. the **Weapon Workbench** appears once `weapon_workbench` is unlocked).
+(e.g. the **Research Station** prop appears once `research_station` is unlocked —
+salvaged from the Voyager 1 probe).
 New quest/unlock = new flag id + a probe/blueprint + something gated on `has()`.
 
-Upgrades carry a `category`: "ship" (bought at the PC terminal) or "weapon"
-(bought at the Workbench). `upgrade_panel.tscn` is reused per category; the
-WeaponPanel only matters once the workbench is unlocked.
+Quests: `QuestManager` (autoload, save provider) tracks active/done quests from
+`Quests.LIST` (domain/quests.gd), fired off EventBus signals, announced via AnI,
+shown in the station Quest Log (Log console -> quest_log_panel). Current quests:
+`find_voyager` (side, day 1, completes when the Voyager probe blueprint is salvaged)
+and `reinforced_alloy` (main, day 5, completes when Reinforced Alloy reaches storage).
+Reinforced Alloy is a material dropped only by metal-rich asteroids that appear from
+day 5; it's the cost of the `metal_alloy` hull upgrade -> gates the next biome.
+
+The station **PC terminal** (`upgrade_panel.tscn`) has two tabs built from upgrade
+`category`: **Ship** (fuel_tank, metal_alloy) and **Weapon** (intentionally empty
+for now — weapon upgrades come later via research).
 
 ## Collision layers (run domain)
 1 = player ship · 2 = asteroids (solid) · 4 = pickups (loot/docking/fuel_cell, Area2D) ·

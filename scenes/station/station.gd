@@ -3,16 +3,19 @@ extends Node2D
 ## Holds NO run logic. Props, player, camera, HUD and panels are composed in
 ## station.tscn.
 
-const WORKBENCH_FLAG := "weapon_workbench"
+const RESEARCH_FLAG := "research_station"
 
 @onready var _bed: Interactable = $Props/Bed
 @onready var _terminal: Interactable = $Props/Terminal
 @onready var _door: Interactable = $Props/Door
 @onready var _storage: Interactable = $Props/Storage
-@onready var _workbench: Interactable = $Props/Workbench
+@onready var _research: Interactable = $Props/Research
+@onready var _log: Interactable = $Props/Log
 @onready var _upgrade_panel: CanvasLayer = $UpgradePanel
-@onready var _weapon_panel: CanvasLayer = $WeaponPanel
 @onready var _storage_panel: CanvasLayer = $StoragePanel
+@onready var _research_panel: CanvasLayer = $ResearchPanel
+@onready var _quest_panel: CanvasLayer = $QuestLogPanel
+@onready var _fade: CanvasLayer = $ScreenFade
 
 
 func _ready() -> void:
@@ -20,21 +23,27 @@ func _ready() -> void:
 	_terminal.triggered.connect(_on_terminal)
 	_door.triggered.connect(_on_door)
 	_storage.triggered.connect(_on_storage)
-	_workbench.triggered.connect(_on_workbench)
-	EventBus.progress_unlocked.connect(func(_flag): _update_workbench())
-	_update_workbench()
+	_research.triggered.connect(_on_research)
+	_log.triggered.connect(_on_log)
+	EventBus.progress_unlocked.connect(func(_flag): _update_research())
+	_update_research()
 
 
-# Workbench only exists once its blueprint has been collected.
-func _update_workbench() -> void:
-	var unlocked := ProgressManager.has(WORKBENCH_FLAG)
-	_workbench.visible = unlocked
-	_workbench.monitorable = unlocked
-	_workbench.set_deferred("monitoring", unlocked)
+# The research lab only exists once Voyager 1 has been salvaged.
+func _update_research() -> void:
+	var unlocked := ProgressManager.has(RESEARCH_FLAG)
+	_research.visible = unlocked
+	_research.monitorable = unlocked
+	_research.set_deferred("monitoring", unlocked)
 
 
 func _on_bed() -> void:
+	_fade.flash()
 	GameManager.sleep_and_save()
+
+
+func _on_log() -> void:
+	_quest_panel.open()
 
 
 func _on_terminal() -> void:
@@ -49,5 +58,5 @@ func _on_storage() -> void:
 	_storage_panel.open()
 
 
-func _on_workbench() -> void:
-	_weapon_panel.open()
+func _on_research() -> void:
+	_research_panel.open()

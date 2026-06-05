@@ -23,6 +23,7 @@ InventoryManager="*res://autoload/InventoryManager.gd"
 UpgradeManager="*res://autoload/UpgradeManager.gd"
 ProgressManager="*res://autoload/ProgressManager.gd"
 GameManager="*res://autoload/GameManager.gd"
+QuestManager="*res://autoload/QuestManager.gd"
 
 [display]
 
