@@ -158,7 +158,7 @@ texture = ExtResource("3_nj7xb")
 sources/0 = SubResource("TileSetAtlasSource_ljnju")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nj7xb"]
-size = Vector2(100, 100)
+size = Vector2(5.5, 137.625)
 
 [node name="Station" type="Node2D" unique_id=709947840]
 script = ExtResource("1")
@@ -181,7 +181,7 @@ position = Vector2(-282, 136)
 
 [node name="Terminal" parent="room/Props" unique_id=1436084319 instance=ExtResource("3")]
 unique_name_in_owner = true
-position = Vector2(-207, 188)
+position = Vector2(-209, 197)
 
 [node name="Door" parent="room/Props" unique_id=1153834871 instance=ExtResource("4")]
 unique_name_in_owner = true
@@ -210,9 +210,33 @@ z_index = -1
 tile_map_data = PackedByteArray("AADx/wgAAAAFAAEAAADx/wkAAAAFAAIAAADy/wgAAAAGAAEAAADy/wkAAAAGAAIAAADz/wgAAAAHAAEAAADz/wkAAAAHAAIAAADu/wgAAAAJAAEAAADu/wkAAAAJAAIAAADv/wgAAAAKAAEAAADv/wkAAAAKAAIAAADw/wgAAAALAAEAAADw/wkAAAALAAIAAADx/wcAAAAKAA0AAADw/wcAAAAKAA0AAADv/wcAAAAKAA0AAADu/wcAAAAKAA0AAADz/w8AAAAKAA8AAADy/w8AAAAKAA8AAADx/w8AAAAKAA8AAADw/w8AAAAKAA8AAADv/w8AAAAKAA8AAADt/w4AAAAJAA4AAADt/w0AAAAJAA4AAADt/wwAAAAJAA4AAADt/wsAAAAJAA4AAADt/woAAAAJAA4AAADt/wgAAAAJAA4AAADt/w8AAAAHAA4AAADt/wcAAAAHAA0AAADu/w8AAAAKAA8AAAD1/w8AAAAKAA8AAAD0/w8AAAAKAA8AAAD2/w8AAAAKAA8AAADt/wkAAAAJAA4AAADz/wcAAAAGAA4AAADy/wcAAAAKAA0AAAD3/wcAAAALAA4AAAD3/w4AAAALAA4AAAD3/w0AAAALAA4AAAD3/wwAAAALAA4AAAD3/wsAAAALAA4AAAD3/woAAAALAA4AAAD3/wkAAAALAA4AAAD3/wgAAAALAA4AAAD0/wYAAAAKAA0AAAD1/wYAAAAKAA0AAAD2/wYAAAAKAA0AAADz/wYAAAAHAA0AAAD3/wYAAAAIAA0AAAD0/wcAAAAJAAEAAAD0/wgAAAAJAAIAAAD1/wcAAAAKAAEAAAD1/wgAAAAKAAIAAAD2/wcAAAALAAEAAAD2/wgAAAALAAIAAAD3/w8AAAAIAA4AAAA=")
 tile_set = SubResource("TileSet_7v87s")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="room/wall" unique_id=1930569144]
+[node name="Blocker" type="StaticBody2D" parent="room/wall" unique_id=723701736]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="room/wall/StaticBody2D" unique_id=1409047391]
+[node name="BlockShape2" type="CollisionShape2D" parent="room/wall/Blocker" unique_id=524426604]
+position = Vector2(-195, 88.8125)
+shape = SubResource("RectangleShape2D_nj7xb")
+
+[node name="BlockShape" type="CollisionShape2D" parent="room/wall/Blocker" unique_id=1550059560]
+position = Vector2(-290.25, 183.5)
+shape = SubResource("RectangleShape2D_nj7xb")
+
+[node name="BlockShape3" type="CollisionShape2D" parent="room/wall/Blocker" unique_id=1235250441]
+position = Vector2(-214.25, 241)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_nj7xb")
+
+[node name="BlockShape6" type="CollisionShape2D" parent="room/wall/Blocker" unique_id=1880982050]
+position = Vector2(-180, 141)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_nj7xb")
+
+[node name="BlockShape5" type="CollisionShape2D" parent="room/wall/Blocker" unique_id=750818471]
+position = Vector2(-141, 176)
+shape = SubResource("RectangleShape2D_nj7xb")
+
+[node name="BlockShape4" type="CollisionShape2D" parent="room/wall/Blocker" unique_id=899911026]
+position = Vector2(-262, 157)
+rotation = 1.5707964
 shape = SubResource("RectangleShape2D_nj7xb")
 
 [node name="BG" type="CanvasLayer" parent="." unique_id=1545540207]

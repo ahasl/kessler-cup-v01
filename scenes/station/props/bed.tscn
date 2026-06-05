@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cj81ms7gxen5s" path="res://lib/Sci-Asset-Pack/StaticProps/Props.png" id="2_3epbb"]
 
 [sub_resource type="RectangleShape2D" id="shape"]
-size = Vector2(24, 42)
+size = Vector2(25, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o1odh"]
 atlas = ExtResource("2_3epbb")
@@ -45,4 +45,5 @@ horizontal_alignment = 1
 [node name="Blocker" type="StaticBody2D" parent="." unique_id=92497699]
 
 [node name="BlockShape" type="CollisionShape2D" parent="Blocker" unique_id=1143754805]
+position = Vector2(0.5, 0)
 shape = SubResource("shape")

@@ -26,7 +26,10 @@ func _physics_process(_delta: float) -> void:
 	velocity = input.normalized() * SPEED
 	move_and_slide()
 
+	var prev_dir := _last_direction
 	_update_animation(input)
+	if _last_direction != prev_dir:
+		_update_current()
 
 
 func _update_animation(input: Vector2) -> void:
@@ -65,11 +68,28 @@ func _on_reach_exited(area: Area2D) -> void:
 		_update_current()
 
 
+func _facing_vector() -> Vector2:
+	match _last_direction:
+		"right": return Vector2.RIGHT
+		"left":  return Vector2.LEFT
+		"top":   return Vector2.UP
+		_:       return Vector2.DOWN
+
+
 func _update_current() -> void:
 	if _current != null:
 		_current.set_highlight(false)
 
-	_current = _nearby.back() if not _nearby.is_empty() else null
+	var facing := _facing_vector()
+	var best: Interactable = null
+	var best_dot := 0.0  # must be in front (dot > 0)
 
+	for item in _nearby:
+		var dot := (item.global_position - global_position).normalized().dot(facing)
+		if dot > best_dot:
+			best_dot = dot
+			best = item
+
+	_current = best
 	if _current != null:
 		_current.set_highlight(true)

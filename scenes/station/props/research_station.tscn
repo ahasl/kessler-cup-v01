@@ -350,6 +350,9 @@ texture = ExtResource("2_37t68")
 [sub_resource type="TileSet" id="TileSet_vyrr7"]
 sources/0 = SubResource("TileSetAtlasSource_xvnye")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_37t68"]
+size = Vector2(29, 39)
+
 [node name="ResearchStation" type="Area2D" unique_id=710292269]
 script = ExtResource("1")
 kind = "research"
@@ -359,7 +362,6 @@ position = Vector2(16.5, 4)
 shape = SubResource("shape")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2013095785]
-z_index = 1
 tile_map_data = PackedByteArray(0, 0, 1, 0, 1, 0, 0, 0, 11, 0, 3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 11, 0, 2, 0, 0, 0, 1, 0, 255, 255, 0, 0, 11, 0, 1, 0, 0, 0, 0, 0, 255, 255, 0, 0, 8, 0, 4, 0, 0, 0)
 tile_set = SubResource("TileSet_vt1en")
 
@@ -378,3 +380,9 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 6
 text = "[E] Research"
 horizontal_alignment = 1
+
+[node name="Blocker" type="StaticBody2D" parent="." unique_id=1266018702]
+
+[node name="BlockShape" type="CollisionShape2D" parent="Blocker" unique_id=1219759023]
+position = Vector2(15.5, 4.5)
+shape = SubResource("RectangleShape2D_37t68")
