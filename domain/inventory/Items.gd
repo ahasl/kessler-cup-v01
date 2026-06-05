@@ -41,11 +41,11 @@ static func color(item_type: int) -> Color:
 ## Relative chance an asteroid drops this material (0 = never from normal asteroids).
 static func drop_weight(item_type: int) -> int:
 	match item_type:
-		Type.METAL: return 55
-		Type.CRYSTAL: return 14
+		Type.METAL: return 90
+		Type.CRYSTAL: return 5
 		Type.DATACHIP: return 4
-		Type.ICE: return 22
-		Type.PLASMA: return 5
+		Type.ICE: return 3
+		Type.PLASMA: return 2
 		Type.REINFORCED_ALLOY: return 0  # only from special metal-rich asteroids
 	return 0
 
