@@ -245,17 +245,18 @@ animations = [{
 [sub_resource type="CircleShape2D" id="body"]
 radius = 8.0
 
-[sub_resource type="CircleShape2D" id="reach"]
-radius = 46.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mxyim"]
+radius = 8.0
+height = 26.0
 
 [node name="StationPlayer" type="CharacterBody2D" unique_id=1720546031]
 script = ExtResource("1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=801207691]
+z_index = 2
 position = Vector2(0, -19)
 sprite_frames = SubResource("SpriteFrames_46qkm")
 animation = &"idle_down"
-frame_progress = 0.030766554
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=429457788]
 position = Vector2(0, -11)
@@ -264,4 +265,5 @@ shape = SubResource("body")
 [node name="Reach" type="Area2D" parent="." unique_id=2104830975]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Reach" unique_id=2090006150]
-shape = SubResource("reach")
+position = Vector2(0, -17)
+shape = SubResource("CapsuleShape2D_mxyim")

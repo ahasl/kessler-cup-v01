@@ -5,12 +5,12 @@ extends Node2D
 
 const RESEARCH_FLAG := "research_station"
 
-@onready var _bed: Interactable = $Props/Bed
-@onready var _terminal: Interactable = $Props/Terminal
-@onready var _door: Interactable = $Props/Door
-@onready var _storage: Interactable = $Props/Storage
-@onready var _research: Interactable = $Props/Research
-@onready var _log: Interactable = $Props/Log
+@onready var _bed: Interactable = %Bed
+@onready var _terminal: Interactable = %Terminal
+@onready var _door: Interactable = %Door
+@onready var _storage: Interactable = %Storage
+@onready var _research: Interactable = %Research
+@onready var _log: Interactable = %Log
 @onready var _upgrade_panel: CanvasLayer = $UpgradePanel
 @onready var _storage_panel: CanvasLayer = $StoragePanel
 @onready var _research_panel: CanvasLayer = $ResearchPanel
@@ -35,6 +35,9 @@ func _update_research() -> void:
 	_research.visible = unlocked
 	_research.monitorable = unlocked
 	_research.set_deferred("monitoring", unlocked)
+	var body := _research.get_node_or_null("Blocker")
+	if body:
+		body.process_mode = Node.PROCESS_MODE_INHERIT if unlocked else Node.PROCESS_MODE_DISABLED
 
 
 func _on_bed() -> void:

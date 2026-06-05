@@ -33,10 +33,16 @@ theme_override_font_sizes/font_size = 13
 
 [node name="Prompt" type="Label" parent="."]
 visible = false
-offset_left = -20.0
-offset_top = -58.0
-offset_right = 20.0
-offset_bottom = -38.0
-text = "[E]"
-horizontal_alignment = 1
+offset_left = -60.0
+offset_top = -35.0
+offset_right = 60.0
+offset_bottom = -21.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "[E] Quest Log"
+horizontal_alignment = 1
+
+[node name="Blocker" type="StaticBody2D" parent="."]
+
+[node name="BlockShape" type="CollisionShape2D" parent="Blocker"]
+shape = SubResource("shape")
