@@ -29,6 +29,9 @@ signal quest_updated
 signal overlay_opened
 signal overlay_closed
 
+# --- RESEARCH ---
+signal research_completed(research_id: String)
+
 # --- AI ASSISTANT (AnI) ---
 ## Emitted whenever AnI should speak. `level` is "info" or "warning".
 signal ai_message(text: String, level: String)

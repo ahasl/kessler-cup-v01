@@ -13,23 +13,71 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
-content_margin_left = 20.0
-content_margin_top = 16.0
-content_margin_right = 20.0
-content_margin_bottom = 16.0
+content_margin_left = 22.0
+content_margin_top = 18.0
+content_margin_right = 22.0
+content_margin_bottom = 18.0
 
 [sub_resource type="StyleBoxFlat" id="SepStyle"]
-bg_color = Color(0.22, 0.44, 0.68, 0.5)
+bg_color = Color(0.22, 0.44, 0.68, 0.45)
 content_margin_top = 1.0
 content_margin_bottom = 1.0
 
-[sub_resource type="StyleBoxFlat" id="BtnNormal"]
+[sub_resource type="StyleBoxFlat" id="StartNormal"]
+bg_color = Color(0.06, 0.12, 0.2, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.28, 0.62, 0.82, 0.7)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StartHover"]
+bg_color = Color(0.09, 0.17, 0.3, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.38, 0.78, 0.95, 0.9)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StartDisabled"]
+bg_color = Color(0.04, 0.06, 0.1, 0.7)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.14, 0.2, 0.32, 0.35)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="CloseBtnNormal"]
 bg_color = Color(0.07, 0.09, 0.16, 0.9)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.22, 0.3, 0.48, 0.45)
+border_color = Color(0.22, 0.3, 0.48, 0.4)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
@@ -39,13 +87,13 @@ content_margin_top = 6.0
 content_margin_right = 14.0
 content_margin_bottom = 6.0
 
-[sub_resource type="StyleBoxFlat" id="BtnHover"]
+[sub_resource type="StyleBoxFlat" id="CloseBtnHover"]
 bg_color = Color(0.1, 0.14, 0.23, 0.95)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.28, 0.52, 0.78, 0.7)
+border_color = Color(0.28, 0.52, 0.78, 0.65)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
@@ -83,12 +131,12 @@ theme_override_styles/panel = SubResource("PanelBG")
 
 [node name="VBox" type="VBoxContainer" parent="Root/Center/Panel"]
 layout_mode = 2
-custom_minimum_size = Vector2(380, 0)
-theme_override_constants/separation = 10
+custom_minimum_size = Vector2(360, 0)
+theme_override_constants/separation = 12
 
 [node name="Title" type="Label" parent="Root/Center/Panel/VBox"]
 layout_mode = 2
-text = "RESEARCH LAB"
+text = "WEAPON RESEARCH"
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.38, 0.62, 0.88, 1)
 theme_override_font_sizes/font_size = 15
@@ -97,12 +145,62 @@ theme_override_font_sizes/font_size = 15
 layout_mode = 2
 theme_override_styles/separator = SubResource("SepStyle")
 
-[node name="Body" type="Label" parent="Root/Center/Panel/VBox"]
+[node name="DataLabel" type="Label" parent="Root/Center/Panel/VBox"]
 layout_mode = 2
-text = "Voyager 1's data is still being decoded.
-No research projects available yet."
+text = "Data Fragments: 0"
 horizontal_alignment = 1
-theme_override_colors/font_color = Color(0.52, 0.58, 0.72, 1)
+theme_override_colors/font_color = Color(0.72, 0.78, 0.92, 1)
+theme_override_font_sizes/font_size = 14
+
+[node name="CostLabel" type="Label" parent="Root/Center/Panel/VBox"]
+layout_mode = 2
+text = "Cost: 5 Data Fragments per attempt"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.42, 0.5, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="Sep2" type="HSeparator" parent="Root/Center/Panel/VBox"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("SepStyle")
+
+[node name="ResearchList" type="VBoxContainer" parent="Root/Center/Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="BtnRow" type="HBoxContainer" parent="Root/Center/Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="StartButton" type="Button" parent="Root/Center/Panel/VBox/BtnRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "START RESEARCH"
+theme_override_colors/font_color = Color(0.45, 0.82, 0.95, 1)
+theme_override_colors/font_disabled_color = Color(0.28, 0.34, 0.48, 0.6)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StartNormal")
+theme_override_styles/hover = SubResource("StartHover")
+theme_override_styles/pressed = SubResource("StartNormal")
+theme_override_styles/disabled = SubResource("StartDisabled")
+theme_override_styles/focus = SubResource("StartNormal")
+
+[node name="DebugButton" type="Button" parent="Root/Center/Panel/VBox/BtnRow"]
+layout_mode = 2
+visible = false
+text = "[F8]"
+theme_override_colors/font_color = Color(0.9, 0.7, 0.2, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StartDisabled")
+theme_override_styles/hover = SubResource("StartNormal")
+theme_override_styles/pressed = SubResource("StartDisabled")
+theme_override_styles/focus = SubResource("StartDisabled")
+
+[node name="StatusLabel" type="Label" parent="Root/Center/Panel/VBox"]
+layout_mode = 2
+visible = false
+text = "All current weapon research completed."
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.38, 0.72, 0.52, 1)
 theme_override_font_sizes/font_size = 13
 autowrap_mode = 3
 
@@ -111,7 +209,7 @@ layout_mode = 2
 text = "CLOSE"
 theme_override_colors/font_color = Color(0.48, 0.52, 0.68, 1)
 theme_override_font_sizes/font_size = 11
-theme_override_styles/normal = SubResource("BtnNormal")
-theme_override_styles/hover = SubResource("BtnHover")
-theme_override_styles/pressed = SubResource("BtnNormal")
-theme_override_styles/focus = SubResource("BtnNormal")
+theme_override_styles/normal = SubResource("CloseBtnNormal")
+theme_override_styles/hover = SubResource("CloseBtnHover")
+theme_override_styles/pressed = SubResource("CloseBtnNormal")
+theme_override_styles/focus = SubResource("CloseBtnNormal")

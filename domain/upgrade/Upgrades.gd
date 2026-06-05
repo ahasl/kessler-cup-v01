@@ -39,7 +39,17 @@ const CATALOG := {
 			{"cost": {Items.Type.REINFORCED_ALLOY: 2}},  # gated behind the day-5 quest
 		],
 	},
-	# Weapon-category upgrades are intentionally empty for now (researched later).
+	# Weapon upgrades — unlocked via Research Lab, then built here.
+	"laser_dmg_1": {
+		"name": "Laser Damage I",
+		"category": "weapon",
+		"desc": "Increases laser damage from 2 to 3.",
+		"base_value": 2.0,
+		"value_label": "damage",
+		"levels": [
+			{"value": 3.0, "cost": {Items.Type.METAL: 8, Items.Type.CRYSTAL: 3, Items.Type.DATACHIP: 1}},
+		],
+	},
 }
 
 

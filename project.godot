@@ -24,6 +24,7 @@ SaveManager="*res://autoload/SaveManager.gd"
 GameManager="*res://autoload/GameManager.gd"
 ProgressManager="*res://autoload/ProgressManager.gd"
 QuestManager="*res://autoload/QuestManager.gd"
+ResearchManager="*res://autoload/ResearchManager.gd"
 
 [display]
 

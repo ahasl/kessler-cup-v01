@@ -31,6 +31,9 @@ func get_ship_speed() -> float:
 
 
 func get_laser_damage() -> int:
+	var lvl := level_of("laser_dmg_1")
+	if lvl > 0:
+		return int(Upgrades.value_at("laser_dmg_1", lvl))
 	return Upgrades.BASE_LASER_DAMAGE
 
 
