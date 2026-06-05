@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" path="res://ui/storage_panel.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://ui/ai_assistant.tscn" id="10"]
 [ext_resource type="PackedScene" uid="uid://cbd0os1jmfbba" path="res://scenes/station/props/research_station.tscn" id="11"]
-[ext_resource type="PackedScene" path="res://scenes/station/props/log_console.tscn" id="12"]
+[ext_resource type="PackedScene" uid="uid://w30ypq6s7quf" path="res://scenes/station/props/log_console.tscn" id="12"]
 [ext_resource type="PackedScene" path="res://ui/quest_log_panel.tscn" id="13"]
 [ext_resource type="PackedScene" path="res://ui/screen_fade.tscn" id="14"]
 [ext_resource type="PackedScene" path="res://ui/research_panel.tscn" id="15"]
@@ -160,6 +160,8 @@ sources/0 = SubResource("TileSetAtlasSource_ljnju")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nj7xb"]
 size = Vector2(5.5, 137.625)
 
+[sub_resource type="Environment" id="StationEnv"]
+
 [node name="Station" type="Node2D" unique_id=709947840]
 script = ExtResource("1")
 
@@ -193,7 +195,7 @@ position = Vector2(-176, 215)
 
 [node name="Log" parent="room/Props" unique_id=535284673 instance=ExtResource("12")]
 unique_name_in_owner = true
-position = Vector2(-300, -180)
+position = Vector2(-242, 153)
 
 [node name="floor" type="Node2D" parent="room" unique_id=881734707]
 
@@ -254,11 +256,6 @@ color = Color(0, 0, 0, 1)
 position = Vector2(-231, 193)
 zoom = Vector2(3, 3)
 
-[node name="DockedShip" type="Polygon2D" parent="." unique_id=2121481043]
-position = Vector2(0, 190)
-color = Color(0.12, 0.3, 0.34, 1)
-polygon = PackedVector2Array(0, -34, 24, 22, 10, 30, -10, 30, -24, 22)
-
 [node name="StationHud" parent="." unique_id=299498046 instance=ExtResource("7")]
 
 [node name="UpgradePanel" parent="." unique_id=60872872 instance=ExtResource("8")]
@@ -272,3 +269,6 @@ polygon = PackedVector2Array(0, -34, 24, 22, 10, 30, -10, 30, -24, 22)
 [node name="ScreenFade" parent="." unique_id=524171746 instance=ExtResource("14")]
 
 [node name="AnI" parent="." unique_id=334552838 instance=ExtResource("10")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=297737760]
+environment = SubResource("StationEnv")

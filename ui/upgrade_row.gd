@@ -28,26 +28,30 @@ func _on_upgrade(_id_changed: String, _level: int) -> void:
 func _refresh() -> void:
 	var def: Dictionary = Upgrades.CATALOG[_id]
 	var lvl := UpgradeManager.level_of(_id)
-	var info := "%s   Lv %d/%d" % [def["name"], lvl, Upgrades.max_level(_id)]
+	var info: String = def["name"]
 
 	if UpgradeManager.is_maxed(_id):
-		if def.has("desc"):
+		if def.has("value_label"):
+			info += "  ·  %d %s" % [int(Upgrades.value_at(_id, lvl)), def["value_label"]]
+		elif def.has("desc"):
 			info += "  ·  " + str(def["desc"])
 		_name_label.text = info
-		_cost_label.text = "MAXED OUT"
+		_cost_label.text = "MAXED"
 		_buy_button.disabled = true
-		_buy_button.text = "—"
+		_buy_button.text = "✓"
 		return
 
-	# Show what the next level gives (numeric upgrades), else the description.
 	if def.has("value_label"):
-		info += "  →  %d %s" % [int(Upgrades.value_at(_id, lvl + 1)), def["value_label"]]
+		info += "  →  +%d %s" % [
+			int(Upgrades.value_at(_id, lvl + 1)) - int(Upgrades.value_at(_id, lvl)),
+			def["value_label"]
+		]
 	elif def.has("desc"):
 		info += "  ·  " + str(def["desc"])
 	_name_label.text = info
 	_cost_label.text = _format_cost(Upgrades.cost_for(_id, lvl))
 	_buy_button.disabled = not UpgradeManager.can_afford(_id)
-	_buy_button.text = "Buy"
+	_buy_button.text = "BUY"
 
 
 func _format_cost(cost: Dictionary) -> String:

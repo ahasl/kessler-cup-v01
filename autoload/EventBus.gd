@@ -24,6 +24,11 @@ signal progress_unlocked(flag: String)
 ## A quest was activated or completed (the log should refresh).
 signal quest_updated
 
+# --- STATION UI ---
+## Any station overlay (storage/upgrade/quest/research) opened or closed.
+signal overlay_opened
+signal overlay_closed
+
 # --- AI ASSISTANT (AnI) ---
 ## Emitted whenever AnI should speak. `level` is "info" or "warning".
 signal ai_message(text: String, level: String)

@@ -13,13 +13,20 @@ func _ready() -> void:
 	close()
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if _root.visible and event.is_action_pressed("ui_cancel"):
+		close()
+
+
 func open() -> void:
 	_root.visible = true
+	EventBus.overlay_opened.emit()
 	_refresh()
 
 
 func close() -> void:
 	_root.visible = false
+	EventBus.overlay_closed.emit()
 
 
 func _refresh() -> void:

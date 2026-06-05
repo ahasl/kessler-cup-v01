@@ -7,6 +7,7 @@ const SPEED := 100
 
 var _nearby: Array[Interactable] = []
 var _current: Interactable = null
+var _overlay_open: bool = false
 
 var _last_direction := "down"
 
@@ -15,9 +16,16 @@ func _ready() -> void:
 	add_to_group("station_player")
 	_reach.area_entered.connect(_on_reach_entered)
 	_reach.area_exited.connect(_on_reach_exited)
+	EventBus.overlay_opened.connect(_on_overlay_opened)
+	EventBus.overlay_closed.connect(_on_overlay_closed)
 
 
 func _physics_process(_delta: float) -> void:
+	if _overlay_open:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+
 	var input := Vector2(
 		Input.get_axis("move_left", "move_right"),
 		Input.get_axis("move_up", "move_down")
@@ -52,8 +60,21 @@ func _update_animation(input: Vector2) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _overlay_open:
+		return
 	if event.is_action_pressed("interact") and _current != null:
 		_current.interact()
+
+
+func _on_overlay_opened() -> void:
+	_overlay_open = true
+	if _current != null:
+		_current.set_highlight(false)
+		_current = null
+
+
+func _on_overlay_closed() -> void:
+	_overlay_open = false
 
 
 func _on_reach_entered(area: Area2D) -> void:
