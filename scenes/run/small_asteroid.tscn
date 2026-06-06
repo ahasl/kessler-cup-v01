@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://vlwdove281qj"]
+
+[ext_resource type="Script" uid="uid://bcnoatyp517pt" path="res://scenes/run/asteroid.gd" id="1_yreod"]
+
+[sub_resource type="CircleShape2D" id="shape"]
+radius = 14.764823
+
+[node name="Asteroid" type="StaticBody2D" unique_id=312360900]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_yreod")
+max_hp = 5
+drop_amount = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1959032006]
+shape = SubResource("shape")
+
+[node name="Body" type="Polygon2D" parent="." unique_id=1244063197]
+position = Vector2(0.99999905, -9.536743e-07)
+scale = Vector2(0.51785713, 0.5090909)
+color = Color(0.22, 0.24, 0.3, 1)
+polygon = PackedVector2Array(28, 0, 20, 16, 10, 26, -8, 27, -24, 14, -28, -4, -18, -22, -2, -28, 16, -20)
+
+[node name="Outline" type="Line2D" parent="." unique_id=1337387663]
+position = Vector2(0.99999905, 0)
+scale = Vector2(0.51666665, 0.5254237)
+points = PackedVector2Array(28, 0, 20, 16, 10, 26, -8, 27, -24, 14, -28, -4, -18, -22, -2, -28, 16, -20, 28, 0)
+width = 2.0
+default_color = Color(0.55, 0.6, 0.7, 1)
+
+[node name="Particles" type="CPUParticles2D" parent="." unique_id=142659314]
+emitting = false
+amount = 18
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 90.0
+initial_velocity_max = 200.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color = Color(0.75, 0.85, 1, 1)

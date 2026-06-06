@@ -2,20 +2,21 @@ extends CharacterBody2D
 ## Drift mine: slowly drifts (doesn't chase), drains fuel and explodes on contact
 ## with the ship, and can be shot to destroy it safely. A blinking light pulses.
 
-const MAX_HP := 4
-const DRIFT_SPEED := 24.0
+const MAX_HP       := 4
+const DRIFT_SPEED  := 24.0
 const CONTACT_FUEL := 30.0
 
 const DAMAGE_NUMBER_SCENE := preload("res://scenes/run/damage_number.tscn")
 
-@onready var _hitbox: Area2D = $Hitbox
-@onready var _light: Polygon2D = $Light
+@onready var _hitbox:    Area2D         = $Hitbox
+@onready var _light:     Polygon2D      = $Light
 @onready var _particles: CPUParticles2D = $Particles
 
-var hp: int = MAX_HP
-var _base_modulate := Color.WHITE
-var _dir := Vector2.RIGHT
-var _dead := false
+var hp:             int   = MAX_HP
+var _base_modulate: Color = Color.WHITE
+var _dir:           Vector2 = Vector2.RIGHT
+var _dead:          bool    = false
+var _alert:         Label   = null
 
 
 func _ready() -> void:
@@ -23,15 +24,28 @@ func _ready() -> void:
 	_base_modulate = modulate
 	_dir = Vector2.from_angle(randf() * TAU)
 	_hitbox.body_entered.connect(_on_body_entered)
+	_alert = Label.new()
+	_alert.text = "!"
+	_alert.add_theme_color_override("font_color", Color(1.0, 0.55, 0.1, 1.0))
+	_alert.add_theme_font_size_override("font_size", 18)
+	_alert.position = Vector2(-6, -44)
+	add_child(_alert)
 
 
 func _physics_process(delta: float) -> void:
 	velocity = _dir * DRIFT_SPEED
 	move_and_slide()
 	rotation += delta * 0.6
-	# Warning light blink.
+	_alert.rotation = -rotation  # counteract mine rotation so "!" stays upright
 	var t := Time.get_ticks_msec() / 1000.0
-	_light.modulate.a = 0.35 + 0.65 * (0.5 + 0.5 * sin(t * 6.0))
+	var blink := 0.35 + 0.65 * (0.5 + 0.5 * sin(t * 6.0))
+	_light.modulate.a = blink
+	# Alert pulses in sync with the warning light.
+	_alert.modulate.a = blink
+
+
+func set_targeted(on: bool) -> void:
+	modulate = _base_modulate * 1.6 if on else _base_modulate
 
 
 func take_damage(amount: int) -> void:
@@ -41,10 +55,6 @@ func take_damage(amount: int) -> void:
 	_show_damage(amount)
 	if hp <= 0:
 		_explode()
-
-
-func set_targeted(on: bool) -> void:
-	modulate = _base_modulate * 1.6 if on else _base_modulate
 
 
 func _show_damage(amount: int) -> void:

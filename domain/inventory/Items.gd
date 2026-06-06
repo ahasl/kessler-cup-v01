@@ -36,28 +36,3 @@ static func color(item_type: int) -> Color:
 		Type.PLASMA: return Color(0.70, 0.35, 1.0)
 		Type.REINFORCED_ALLOY: return Color(1.0, 0.6, 0.25)
 	return Color.WHITE
-
-
-## Relative chance an asteroid drops this material (0 = never from normal asteroids).
-static func drop_weight(item_type: int) -> int:
-	match item_type:
-		Type.METAL: return 90
-		Type.CRYSTAL: return 5
-		Type.DATACHIP: return 4
-		Type.ICE: return 3
-		Type.PLASMA: return 2
-		Type.REINFORCED_ALLOY: return 0  # only from special metal-rich asteroids
-	return 0
-
-
-## Weighted random material for an asteroid drop.
-static func roll_drop() -> int:
-	var total := 0
-	for t in ALL:
-		total += drop_weight(t)
-	var r := randi() % total
-	for t in ALL:
-		r -= drop_weight(t)
-		if r < 0:
-			return t
-	return Type.METAL

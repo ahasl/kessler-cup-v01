@@ -3,48 +3,58 @@ extends CharacterBody2D
 ## contact (no weapons). 5 HP; smokes below half. Always drops a Data Fragment.
 ## Self-contained / modular — drop instances into any biome scene.
 
-const MAX_HP := 3
-const SPEED := 110.0
-const CONTACT_FUEL := 10.0       # fuel drained when it rams the ship
-const DETECT_RADIUS := 420.0     # stays dormant until the ship comes this close
+const MAX_HP       := 3
+const SPEED        := 110.0
+const CONTACT_FUEL := 10.0    # fuel drained when it rams the ship
+const DETECT_RADIUS := 420.0  # stays dormant until the ship comes this close
 
-const LOOT_SCENE := preload("res://scenes/run/loot.tscn")
+const LOOT_SCENE          := preload("res://scenes/run/loot.tscn")
 const DAMAGE_NUMBER_SCENE := preload("res://scenes/run/damage_number.tscn")
 
-@onready var _smoke: CPUParticles2D = $Smoke
-@onready var _hitbox: Area2D = $Hitbox
+@onready var _smoke:  CPUParticles2D = $Smoke
+@onready var _hitbox: Area2D         = $Hitbox
 
-var hp: int = MAX_HP
-var _player: Node2D = null
-var _activated := false
-var _base_modulate := Color.WHITE
-var _dead := false
+var hp:             int    = MAX_HP
+var _player:        Node2D = null
+var _activated:     bool   = false
+var _base_modulate: Color  = Color.WHITE
+var _dead:          bool   = false
+var _alert:         Label  = null
 
 
 func _ready() -> void:
 	add_to_group("enemy")
 	_hitbox.body_entered.connect(_on_body_entered)
 	_base_modulate = modulate
+	_alert = Label.new()
+	_alert.text = "!"
+	_alert.add_theme_color_override("font_color", Color(1.0, 0.28, 0.18, 1.0))
+	_alert.add_theme_font_size_override("font_size", 18)
+	_alert.position = Vector2(-6, -52)
+	_alert.visible = false
+	add_child(_alert)
 
 
-## Brighten while the ship is aiming at it (highlight = shootable).
 func set_targeted(on: bool) -> void:
 	modulate = _base_modulate * 1.6 if on else _base_modulate
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if _player == null or not is_instance_valid(_player):
 		_player = get_tree().get_first_node_in_group("player")
 		if _player == null:
 			return
 
 	var to := _player.global_position - global_position
-	# Dormant until the ship enters detection range; then hunts for good.
 	if not _activated:
 		if to.length() <= DETECT_RADIUS:
 			_activated = true
+			_alert.visible = true
 		else:
 			return
+
+	# Pulse the alert while active.
+	_alert.modulate.a = 0.65 + 0.35 * sin(Time.get_ticks_msec() * 0.008)
 
 	if to.length() > 1.0:
 		look_at(_player.global_position)
@@ -80,7 +90,6 @@ func _die() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	# Kamikaze: ram the ship, drain fuel, then vanish (no loot — it wasn't shot down).
 	if _dead:
 		return
 	if body.is_in_group("player"):
