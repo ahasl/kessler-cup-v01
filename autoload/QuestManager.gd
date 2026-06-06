@@ -42,8 +42,8 @@ func activate(id: String) -> void:
 		return
 	_active[id] = true
 	EventBus.quest_updated.emit()
-	var line: String = Quests.LIST[id].get("activate_line", "New objective: %s." % Quests.LIST[id]["title"])
-	EventBus.say(line)
+	var q: Dictionary = Quests.LIST[id]
+	EventBus.say(q.get("activate_line", "New objective: %s." % q["title"]))
 
 
 func complete(id: String) -> void:

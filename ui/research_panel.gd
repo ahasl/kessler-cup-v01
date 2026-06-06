@@ -5,10 +5,9 @@ extends CanvasLayer
 const MINIGAME_SCENE := preload("res://ui/signal_minigame.tscn")
 const CHEAT_WINDOW   := 1.2  # seconds allowed between presses
 
-@onready var _root:         Control       = $Root
-@onready var _data_label:   Label         = $Root/Center/Panel/VBox/DataLabel
-@onready var _list:         VBoxContainer = $Root/Center/Panel/VBox/ResearchList
-@onready var _start_btn:    Button        = $Root/Center/Panel/VBox/BtnRow/StartButton
+@onready var _root:         Control = $Root
+@onready var _data_label:   Label   = $Root/Center/Panel/VBox/DataLabel
+@onready var _start_btn:    Button  = $Root/Center/Panel/VBox/BtnRow/StartButton
 @onready var _debug_btn:    Button        = $Root/Center/Panel/VBox/BtnRow/DebugButton
 @onready var _status_label: Label         = $Root/Center/Panel/VBox/StatusLabel
 @onready var _close_btn:    Button        = $Root/Center/Panel/VBox/CloseButton
@@ -68,23 +67,10 @@ func _refresh() -> void:
 	var count: int = InventoryManager.station.count(Items.Type.DATACHIP)
 	_data_label.text = "Data Fragments: %d" % count
 
-	for child in _list.get_children():
-		child.queue_free()
-	for item: Dictionary in Research.CATALOG:
-		var lbl := Label.new()
-		if ResearchManager.has(item["id"]):
-			lbl.text = "✓  %s  —  %s" % [item["name"], item["desc"]]
-			lbl.add_theme_color_override("font_color", Color(0.35, 0.72, 0.5, 1))
-		else:
-			lbl.text = "·  %s  —  %s" % [item["name"], item["desc"]]
-			lbl.add_theme_color_override("font_color", Color(0.62, 0.68, 0.82, 1))
-		lbl.add_theme_font_size_override("font_size", 12)
-		lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
-		_list.add_child(lbl)
-
 	if ResearchManager.all_done():
 		_start_btn.visible = false
 		_debug_btn.visible = false
+		_status_label.text = "All weapon research completed."
 		_status_label.visible = true
 		return
 
@@ -120,7 +106,7 @@ func _on_minigame_done(success: bool) -> void:
 		for item: Dictionary in Research.CATALOG:
 			if not ResearchManager.has(item["id"]):
 				ResearchManager.unlock(item["id"])
-				EventBus.say("Signal locked. %s acquired." % item["name"])
+				EventBus.say("New weapon upgrade unlocked: %s — %s" % [item["name"], item.get("desc", "")])
 				break
 	else:
 		EventBus.say("Signal lost. Data Fragments consumed.", "warning")
