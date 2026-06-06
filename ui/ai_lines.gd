@@ -47,6 +47,9 @@ const POOLS := {
 		"That's enough for today. Even I need a break, and I don't have a body.",
 		"No. You're done for today. Sleep. The asteroids will still be there.",
 	],
+	"intro": [
+		"You're awake. Finally. Station logs show you've been unconscious for years — adrift in the debris field. Life support held. Barely. We need to move.",
+	],
 }
 
 

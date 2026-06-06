@@ -4,6 +4,7 @@ extends Node2D
 ## station.tscn.
 
 const RESEARCH_FLAG := "research_station"
+const INTRO_FLAG    := "intro_shown"
 
 @onready var _bed: Interactable = %Bed
 @onready var _terminal: Interactable = %Terminal
@@ -27,6 +28,13 @@ func _ready() -> void:
 	_log.triggered.connect(_on_log)
 	EventBus.progress_unlocked.connect(func(_flag): _update_research())
 	_update_research()
+	if not ProgressManager.has(INTRO_FLAG):
+		ProgressManager.unlock(INTRO_FLAG)
+		get_tree().create_timer(1.2).timeout.connect(_say_intro)
+
+
+func _say_intro() -> void:
+	EventBus.say_id("intro")
 
 
 # The research lab only exists once Voyager 1 has been salvaged.
