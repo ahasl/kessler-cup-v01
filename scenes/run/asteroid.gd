@@ -8,7 +8,7 @@ const DAMAGE_NUMBER_SCENE := preload("res://scenes/run/damage_number.tscn")
 @export var max_hp:      int = 10
 @export var drop_amount: int = 2
 
-@onready var _body:      Polygon2D      = $Body
+@onready var _body:      Sprite2D       = $Body
 @onready var _particles: CPUParticles2D = $Particles
 
 var hp: int = 0
@@ -44,7 +44,7 @@ func take_damage(amount: int) -> void:
 	hp -= amount
 	_show_damage(amount)
 	var dmg := 1.0 - float(hp) / float(max_hp)
-	_body.color = Color(0.22, 0.24, 0.30).lerp(Color(0.55, 0.25, 0.25), dmg)
+	_body.modulate = Color.WHITE.lerp(Color(1.0, 0.35, 0.35), dmg)
 	if hp <= 0:
 		_destroy()
 

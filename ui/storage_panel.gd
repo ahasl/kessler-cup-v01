@@ -35,8 +35,12 @@ func _refresh() -> void:
 		var c := InventoryManager.station.count(item_type)
 		if c <= 0:
 			continue  # only list materials actually in storage
+		var tex_path := Items.texture_path(item_type)
 		var col := Items.color(item_type)
-		text += "[color=#%s]%s[/color]   ×%d\n" % [col.to_html(false), Items.display_name(item_type), c]
+		var prefix := ""
+		if tex_path != "":
+			prefix = "[img=20x20]%s[/img] " % tex_path
+		text += "%s[color=#%s]%s[/color]   ×%d\n" % [prefix, col.to_html(false), Items.display_name(item_type), c]
 	if text == "":
 		text = "[color=#808890]Storage is empty.[/color]"
 	_list.text = text

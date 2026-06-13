@@ -3,6 +3,7 @@ extends Area2D
 ## inventory. Visual/collision live in loot.tscn; colour is set per item type.
 
 @onready var _body: Polygon2D = $Body
+@onready var _icon: Sprite2D = $Icon
 
 var item_type: int = Items.Type.METAL
 var amount: int = 1
@@ -12,7 +13,17 @@ var _pulse := 0.0
 
 func _ready() -> void:
 	add_to_group("loot")
-	_body.color = Items.color(item_type)
+	var tex_path := Items.texture_path(item_type)
+	if tex_path != "":
+		var tex: Texture2D = load(tex_path)
+		_icon.texture = tex
+		var max_dim: float = max(tex.get_size().x, tex.get_size().y)
+		if max_dim > 0:
+			_icon.scale = Vector2(20.0 / max_dim, 20.0 / max_dim)
+		_icon.visible = true
+		_body.visible = false
+	else:
+		_body.color = Items.color(item_type)
 
 
 func collect() -> void:

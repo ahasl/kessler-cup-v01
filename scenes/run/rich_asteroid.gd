@@ -9,7 +9,7 @@ const METAL_BONUS := 3
 const LOOT_SCENE := preload("res://scenes/run/loot.tscn")
 const DAMAGE_NUMBER_SCENE := preload("res://scenes/run/damage_number.tscn")
 
-@onready var _body: Polygon2D = $Body
+@onready var _body: Sprite2D = $Body
 @onready var _particles: CPUParticles2D = $Particles
 
 var hp: int = MAX_HP
@@ -33,7 +33,7 @@ func take_damage(amount: int) -> void:
 	hp -= amount
 	_show_damage(amount)
 	var dmg := 1.0 - float(hp) / float(MAX_HP)
-	_body.color = Color(0.18, 0.19, 0.24).lerp(Color(0.5, 0.3, 0.18), dmg)
+	_body.modulate = Color(1.0, 0.75, 0.45).lerp(Color(1.0, 0.3, 0.3), dmg)
 	if hp <= 0:
 		_destroy()
 

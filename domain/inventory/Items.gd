@@ -36,3 +36,10 @@ static func color(item_type: int) -> Color:
 		Type.PLASMA: return Color(0.70, 0.35, 1.0)
 		Type.REINFORCED_ALLOY: return Color(1.0, 0.6, 0.25)
 	return Color.WHITE
+
+
+static func texture_path(item_type: int) -> String:
+	match item_type:
+		Type.METAL: return "res://lib/images/metaltest.png"
+		Type.DATACHIP: return "res://lib/images/datachip.png"
+	return ""

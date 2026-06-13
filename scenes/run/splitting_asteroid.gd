@@ -9,7 +9,7 @@ const FRAGMENT_DIST := 58.0
 const ASTEROID_SCENE      := preload("res://scenes/run/asteroid.tscn")
 const DAMAGE_NUMBER_SCENE := preload("res://scenes/run/damage_number.tscn")
 
-@onready var _body:      Polygon2D      = $Body
+@onready var _body:      Sprite2D       = $Body
 @onready var _particles: CPUParticles2D = $Particles
 
 var hp:             int   = MAX_HP
@@ -33,7 +33,7 @@ func take_damage(amount: int) -> void:
 	hp -= amount
 	_show_damage(amount)
 	var dmg := 1.0 - float(hp) / float(MAX_HP)
-	_body.color = Color(0.24, 0.26, 0.32).lerp(Color(0.55, 0.25, 0.25), dmg)
+	_body.modulate = Color.WHITE.lerp(Color(1.0, 0.35, 0.35), dmg)
 	if hp <= 0:
 		_destroy()
 
