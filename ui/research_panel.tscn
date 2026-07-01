@@ -39,22 +39,6 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="StyleBoxFlat" id="StartHover"]
-content_margin_left = 16.0
-content_margin_top = 8.0
-content_margin_right = 16.0
-content_margin_bottom = 8.0
-bg_color = Color(0.09, 0.17, 0.3, 0.98)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.38, 0.78, 0.95, 0.9)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
 [sub_resource type="StyleBoxFlat" id="StartDisabled"]
 content_margin_left = 16.0
 content_margin_top = 8.0
@@ -136,7 +120,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("PanelBG")
 
 [node name="VBox" type="VBoxContainer" parent="Root/Center/Panel" unique_id=166084767]
-custom_minimum_size = Vector2(360, 0)
+custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 theme_override_constants/separation = 12
 
@@ -144,7 +128,7 @@ theme_override_constants/separation = 12
 layout_mode = 2
 theme_override_colors/font_color = Color(0.38, 0.62, 0.88, 1)
 theme_override_font_sizes/font_size = 15
-text = "WEAPON RESEARCH"
+text = "RESEARCH"
 horizontal_alignment = 1
 
 [node name="Sep" type="HSeparator" parent="Root/Center/Panel/VBox" unique_id=1646882279]
@@ -162,31 +146,18 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.5, 0.65, 1)
 theme_override_font_sizes/font_size = 12
-text = "Cost: 5 Data Fragments per attempt"
+text = "Cost: 1 Data Fragment per attempt"
 horizontal_alignment = 1
 
 [node name="Sep2" type="HSeparator" parent="Root/Center/Panel/VBox" unique_id=1947932004]
 layout_mode = 2
 theme_override_styles/separator = SubResource("SepStyle")
 
-[node name="BtnRow" type="HBoxContainer" parent="Root/Center/Panel/VBox" unique_id=2065187882]
+[node name="List" type="VBoxContainer" parent="Root/Center/Panel/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="StartButton" type="Button" parent="Root/Center/Panel/VBox/BtnRow" unique_id=1185974236]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.45, 0.82, 0.95, 1)
-theme_override_colors/font_disabled_color = Color(0.28, 0.34, 0.48, 0.6)
-theme_override_font_sizes/font_size = 13
-theme_override_styles/normal = SubResource("StartNormal")
-theme_override_styles/pressed = SubResource("StartNormal")
-theme_override_styles/hover = SubResource("StartHover")
-theme_override_styles/disabled = SubResource("StartDisabled")
-theme_override_styles/focus = SubResource("StartNormal")
-text = "START RESEARCH"
-
-[node name="DebugButton" type="Button" parent="Root/Center/Panel/VBox/BtnRow" unique_id=2017683696]
+[node name="DebugButton" type="Button" parent="Root/Center/Panel/VBox" unique_id=2017683696]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.7, 0.2, 1)
@@ -195,14 +166,14 @@ theme_override_styles/normal = SubResource("StartDisabled")
 theme_override_styles/pressed = SubResource("StartDisabled")
 theme_override_styles/hover = SubResource("StartNormal")
 theme_override_styles/focus = SubResource("StartDisabled")
-text = "[F8]"
+text = "[F8] SKIP ONE"
 
 [node name="StatusLabel" type="Label" parent="Root/Center/Panel/VBox" unique_id=414032219]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.38, 0.72, 0.52, 1)
 theme_override_font_sizes/font_size = 13
-text = "All current weapon research completed."
+text = "All current research completed."
 horizontal_alignment = 1
 autowrap_mode = 3
 

@@ -1,7 +1,9 @@
 extends CanvasLayer
 ## The station PC terminal. Three tabs — Ship, Ship Weapon and Station — each
-## built from the Upgrades catalogue by category. Empty categories show a
-## placeholder.
+## built from the Upgrades catalogue by category. An id also listed in
+## Research.CATALOG only appears once it's been researched (see
+## research_panel.gd); an id with a `requires` field only appears once that
+## other upgrade is bought. Empty/fully-locked tabs show a placeholder.
 
 const ROW_SCENE := preload("res://ui/upgrade_row.tscn")
 
@@ -18,56 +20,42 @@ func _ready() -> void:
 	_tabs.set_tab_title(_tabs.get_tab_idx_from_control(_weapon_tab), "SHIP WEAPON")
 	_tabs.set_tab_title(_tabs.get_tab_idx_from_control(_station_tab), "STATION")
 	_close_button.pressed.connect(close)
-	_build("ship", _ship_tab)
-	_rebuild_weapon_tab()
-	_rebuild_station_tab()
+	_rebuild_all_tabs()
 	close()
 
 
-func _build(category: String, container: VBoxContainer) -> void:
+func _rebuild_all_tabs() -> void:
+	_rebuild_tab("ship", _ship_tab, "No ship upgrades researched yet.\nVisit the Research Lab.")
+	_rebuild_tab("weapon", _weapon_tab, "No weapon upgrades researched yet.\nVisit the Research Lab.")
+	_rebuild_tab("station", _station_tab, "No upgrades available yet.")
+
+
+func _rebuild_tab(category: String, container: VBoxContainer, locked_msg: String) -> void:
+	for child in container.get_children():
+		child.queue_free()
 	var ids := Upgrades.ids_in_category(category)
-	if ids.is_empty():
-		_add_placeholder(container, "No upgrades available yet.")
+	var available := ids.filter(_is_available)
+	if available.is_empty():
+		_add_placeholder(container, locked_msg)
 		return
-	for id in ids:
+	for id in available:
 		var row := ROW_SCENE.instantiate()
 		container.add_child(row)
 		row.setup(id)
 
 
-func _rebuild_weapon_tab() -> void:
-	for child in _weapon_tab.get_children():
-		child.queue_free()
-	var ids := Upgrades.ids_in_category("weapon")
-	var available := ids.filter(func(id: String) -> bool: return ResearchManager.has(id))
-	if available.is_empty():
-		_add_placeholder(_weapon_tab, "No weapon upgrades researched yet.\nVisit the Research Lab.")
-		return
-	for id in available:
-		var row := ROW_SCENE.instantiate()
-		_weapon_tab.add_child(row)
-		row.setup(id)
-
-
-# Some station upgrades only make sense once another one is bought (e.g. the
-# Drone Bay Upgrade needs the Drone Bay itself, via `requires` in the catalog).
-func _rebuild_station_tab() -> void:
-	for child in _station_tab.get_children():
-		child.queue_free()
-	var ids := Upgrades.ids_in_category("station")
-	var available := ids.filter(_is_available)
-	if available.is_empty():
-		_add_placeholder(_station_tab, "No upgrades available yet.")
-		return
-	for id in available:
-		var row := ROW_SCENE.instantiate()
-		_station_tab.add_child(row)
-		row.setup(id)
-
-
 func _is_available(id: String) -> bool:
+	if _needs_research(id) and not ResearchManager.has(id):
+		return false
 	var requires: String = Upgrades.CATALOG[id].get("requires", "")
 	return requires == "" or UpgradeManager.level_of(requires) >= 1
+
+
+func _needs_research(id: String) -> bool:
+	for item: Dictionary in Research.CATALOG:
+		if item["id"] == id:
+			return true
+	return false
 
 
 func _add_placeholder(container: VBoxContainer, msg: String) -> void:
@@ -86,8 +74,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func open() -> void:
-	_rebuild_weapon_tab()
-	_rebuild_station_tab()
+	_rebuild_all_tabs()
 	_root.visible = true
 	EventBus.overlay_opened.emit()
 

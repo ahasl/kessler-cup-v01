@@ -72,15 +72,28 @@ func can_afford(id: String) -> bool:
 
 
 func purchase(id: String) -> bool:
+	if not consume_cost(id):
+		return false
+	grant_level(id)
+	return true
+
+
+## Split out of `purchase()` for flows that gate the level-up behind something
+## else first (e.g. the ship-upgrade pressure minigame): pay now, decide
+## later whether `grant_level` actually happens.
+func consume_cost(id: String) -> bool:
 	if not can_afford(id):
 		return false
 	var cost := Upgrades.cost_for(id, level_of(id))
 	for item_type in cost:
 		InventoryManager.station.remove(item_type, cost[item_type])
-	levels[id] = level_of(id) + 1
 	EventBus.inventory_changed.emit()
-	EventBus.upgrade_purchased.emit(id, levels[id])
 	return true
+
+
+func grant_level(id: String) -> void:
+	levels[id] = level_of(id) + 1
+	EventBus.upgrade_purchased.emit(id, levels[id])
 
 
 # --- save provider ----------------------------------------------------------

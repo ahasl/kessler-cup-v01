@@ -15,8 +15,12 @@ const BASE_LASER_RANGE := 420.0
 
 # `category` decides WHERE an upgrade is bought:
 #   "ship"    -> the station PC terminal, Ship tab
-#   "weapon"  -> the station PC terminal, Ship Weapon tab (needs a blueprint first)
+#   "weapon"  -> the station PC terminal, Ship Weapon tab
 #   "station" -> the station PC terminal, Station tab
+# An id also listed in Research.CATALOG only shows up in its tab once
+# ResearchManager.has(id) — i.e. its minigame at the Research Station has been
+# won at least once (see research_panel.gd). Ids NOT in Research.CATALOG
+# (e.g. fuel_tank) are always buyable, no minigame required.
 const CATALOG := {
 	"fuel_tank": {
 		"name": "Fuel Tank",
@@ -37,8 +41,10 @@ const CATALOG := {
 		"category": "ship",
 		"desc": "Reinforced hull — survive new biomes (needs Reinforced Alloy)",
 		"levels": [
-			{"cost": {Items.Type.REINFORCED_ALLOY: 2}},  # gated behind the day-5 quest
+			{"cost": {Items.Type.REINFORCED_ALLOY: 2}},  # material from the day-5 quest
 		],
+		# Also listed in Research.CATALOG: must win the Pressure Equalizer at
+		# the Research Station before it appears in the Ship tab at all.
 	},
 	# Weapon upgrades — unlocked via Research Lab, then built here.
 	"laser_dmg_1": {
@@ -70,6 +76,7 @@ const CATALOG := {
 		"category": "station",
 		"desc": "A better-equipped collector drone brings home more materials per trip.",
 		"requires": "station_level",
+		"level_offset": 1,  # raw level 0 = drone level 1, see UpgradeManager.get_drone_level()
 		"levels": [
 			{"cost": {Items.Type.METAL: 40, Items.Type.CRYSTAL: 8, Items.Type.DATACHIP: 2}},   # drone level 1 -> 2
 			{"cost": {Items.Type.METAL: 80, Items.Type.CRYSTAL: 16, Items.Type.DATACHIP: 4}},  # drone level 2 -> 3
