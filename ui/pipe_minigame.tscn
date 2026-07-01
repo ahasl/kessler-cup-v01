@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://ui/pipe_minigame.gd" id="1"]
 [ext_resource type="Script" path="res://ui/pipe_bar.gd" id="2"]
+[ext_resource type="Script" path="res://ui/pressure_valve.gd" id="3"]
 
 [sub_resource type="StyleBoxFlat" id="BtnNormal"]
 bg_color = Color(0.06, 0.08, 0.14, 0.9)
@@ -67,14 +68,14 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme_override_constants/margin_left = 80
-theme_override_constants/margin_top = 44
-theme_override_constants/margin_right = 80
-theme_override_constants/margin_bottom = 44
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 36
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 36
 
 [node name="VBox" type="VBoxContainer" parent="BG/Content"]
 layout_mode = 2
-theme_override_constants/separation = 18
+theme_override_constants/separation = 14
 
 [node name="TitleLabel" type="Label" parent="BG/Content/VBox"]
 layout_mode = 2
@@ -85,16 +86,45 @@ theme_override_font_sizes/font_size = 17
 
 [node name="HintLabel" type="Label" parent="BG/Content/VBox"]
 layout_mode = 2
-text = "Relay pressure between neighboring tanks with the valves until all four match."
+text = "Drag a valve UP to open it. Pressure flows to/from the central tank until you close it again — leave one open too long and it can blow."
 horizontal_alignment = 1
+autowrap_mode = 3
 theme_override_colors/font_color = Color(0.5, 0.56, 0.68, 1)
 theme_override_font_sizes/font_size = 12
+
+[node name="CenterRow" type="CenterContainer" parent="BG/Content/VBox"]
+layout_mode = 2
+
+[node name="CenterTank" type="VBoxContainer" parent="BG/Content/VBox/CenterRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(320, 0)
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="BG/Content/VBox/CenterRow/CenterTank"]
+layout_mode = 2
+text = "CENTRAL RESERVOIR"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.6, 0.68, 0.85, 1)
+theme_override_font_sizes/font_size = 11
+
+[node name="Bar" type="Control" parent="BG/Content/VBox/CenterRow/CenterTank"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 34)
+script = ExtResource("2")
+horizontal = true
+
+[node name="Value" type="Label" parent="BG/Content/VBox/CenterRow/CenterTank"]
+layout_mode = 2
+text = "50"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.88, 0.92, 1.0, 1)
+theme_override_font_sizes/font_size = 16
 
 [node name="PipesRow" type="HBoxContainer" parent="BG/Content/VBox"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
-theme_override_constants/separation = 6
+theme_override_constants/separation = 30
 
 [node name="Pipe1" type="VBoxContainer" parent="BG/Content/VBox/PipesRow"]
 layout_mode = 2
@@ -109,9 +139,16 @@ autowrap_mode = 3
 theme_override_colors/font_color = Color(0.7, 0.75, 0.85, 1)
 theme_override_font_sizes/font_size = 12
 
+[node name="Valve" type="Control" parent="BG/Content/VBox/PipesRow/Pipe1"]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 1
+script = ExtResource("3")
+
 [node name="Bar" type="Control" parent="BG/Content/VBox/PipesRow/Pipe1"]
 layout_mode = 2
-custom_minimum_size = Vector2(0, 280)
+custom_minimum_size = Vector2(0, 220)
 size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("2")
@@ -122,35 +159,6 @@ text = "50"
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.88, 0.92, 1.0, 1)
 theme_override_font_sizes/font_size = 18
-
-[node name="Junction1" type="VBoxContainer" parent="BG/Content/VBox/PipesRow"]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 6
-
-[node name="ForwardButton" type="Button" parent="BG/Content/VBox/PipesRow/Junction1"]
-layout_mode = 2
-tooltip_text = "Move pressure right"
-text = "→"
-theme_override_colors/font_color = Color(0.5, 0.88, 1.0, 1)
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("BtnNormal")
-theme_override_styles/hover = SubResource("BtnHover")
-theme_override_styles/pressed = SubResource("BtnNormal")
-theme_override_styles/focus = SubResource("BtnNormal")
-theme_override_styles/disabled = SubResource("BtnNormal")
-
-[node name="BackButton" type="Button" parent="BG/Content/VBox/PipesRow/Junction1"]
-layout_mode = 2
-tooltip_text = "Move pressure left"
-text = "←"
-theme_override_colors/font_color = Color(0.5, 0.88, 1.0, 1)
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("BtnNormal")
-theme_override_styles/hover = SubResource("BtnHover")
-theme_override_styles/pressed = SubResource("BtnNormal")
-theme_override_styles/focus = SubResource("BtnNormal")
-theme_override_styles/disabled = SubResource("BtnNormal")
 
 [node name="Pipe2" type="VBoxContainer" parent="BG/Content/VBox/PipesRow"]
 layout_mode = 2
@@ -165,9 +173,16 @@ autowrap_mode = 3
 theme_override_colors/font_color = Color(0.7, 0.75, 0.85, 1)
 theme_override_font_sizes/font_size = 12
 
+[node name="Valve" type="Control" parent="BG/Content/VBox/PipesRow/Pipe2"]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 1
+script = ExtResource("3")
+
 [node name="Bar" type="Control" parent="BG/Content/VBox/PipesRow/Pipe2"]
 layout_mode = 2
-custom_minimum_size = Vector2(0, 280)
+custom_minimum_size = Vector2(0, 220)
 size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("2")
@@ -178,35 +193,6 @@ text = "50"
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.88, 0.92, 1.0, 1)
 theme_override_font_sizes/font_size = 18
-
-[node name="Junction2" type="VBoxContainer" parent="BG/Content/VBox/PipesRow"]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 6
-
-[node name="ForwardButton" type="Button" parent="BG/Content/VBox/PipesRow/Junction2"]
-layout_mode = 2
-tooltip_text = "Move pressure right"
-text = "→"
-theme_override_colors/font_color = Color(0.5, 0.88, 1.0, 1)
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("BtnNormal")
-theme_override_styles/hover = SubResource("BtnHover")
-theme_override_styles/pressed = SubResource("BtnNormal")
-theme_override_styles/focus = SubResource("BtnNormal")
-theme_override_styles/disabled = SubResource("BtnNormal")
-
-[node name="BackButton" type="Button" parent="BG/Content/VBox/PipesRow/Junction2"]
-layout_mode = 2
-tooltip_text = "Move pressure left"
-text = "←"
-theme_override_colors/font_color = Color(0.5, 0.88, 1.0, 1)
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("BtnNormal")
-theme_override_styles/hover = SubResource("BtnHover")
-theme_override_styles/pressed = SubResource("BtnNormal")
-theme_override_styles/focus = SubResource("BtnNormal")
-theme_override_styles/disabled = SubResource("BtnNormal")
 
 [node name="Pipe3" type="VBoxContainer" parent="BG/Content/VBox/PipesRow"]
 layout_mode = 2
@@ -221,9 +207,16 @@ autowrap_mode = 3
 theme_override_colors/font_color = Color(0.7, 0.75, 0.85, 1)
 theme_override_font_sizes/font_size = 12
 
+[node name="Valve" type="Control" parent="BG/Content/VBox/PipesRow/Pipe3"]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 1
+script = ExtResource("3")
+
 [node name="Bar" type="Control" parent="BG/Content/VBox/PipesRow/Pipe3"]
 layout_mode = 2
-custom_minimum_size = Vector2(0, 280)
+custom_minimum_size = Vector2(0, 220)
 size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("2")
@@ -234,35 +227,6 @@ text = "50"
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.88, 0.92, 1.0, 1)
 theme_override_font_sizes/font_size = 18
-
-[node name="Junction3" type="VBoxContainer" parent="BG/Content/VBox/PipesRow"]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 6
-
-[node name="ForwardButton" type="Button" parent="BG/Content/VBox/PipesRow/Junction3"]
-layout_mode = 2
-tooltip_text = "Move pressure right"
-text = "→"
-theme_override_colors/font_color = Color(0.5, 0.88, 1.0, 1)
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("BtnNormal")
-theme_override_styles/hover = SubResource("BtnHover")
-theme_override_styles/pressed = SubResource("BtnNormal")
-theme_override_styles/focus = SubResource("BtnNormal")
-theme_override_styles/disabled = SubResource("BtnNormal")
-
-[node name="BackButton" type="Button" parent="BG/Content/VBox/PipesRow/Junction3"]
-layout_mode = 2
-tooltip_text = "Move pressure left"
-text = "←"
-theme_override_colors/font_color = Color(0.5, 0.88, 1.0, 1)
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("BtnNormal")
-theme_override_styles/hover = SubResource("BtnHover")
-theme_override_styles/pressed = SubResource("BtnNormal")
-theme_override_styles/focus = SubResource("BtnNormal")
-theme_override_styles/disabled = SubResource("BtnNormal")
 
 [node name="Pipe4" type="VBoxContainer" parent="BG/Content/VBox/PipesRow"]
 layout_mode = 2
@@ -277,9 +241,16 @@ autowrap_mode = 3
 theme_override_colors/font_color = Color(0.7, 0.75, 0.85, 1)
 theme_override_font_sizes/font_size = 12
 
+[node name="Valve" type="Control" parent="BG/Content/VBox/PipesRow/Pipe4"]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 1
+script = ExtResource("3")
+
 [node name="Bar" type="Control" parent="BG/Content/VBox/PipesRow/Pipe4"]
 layout_mode = 2
-custom_minimum_size = Vector2(0, 280)
+custom_minimum_size = Vector2(0, 220)
 size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("2")
