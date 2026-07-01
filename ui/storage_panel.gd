@@ -1,13 +1,26 @@
 extends CanvasLayer
-## Lager (storage) view. Opened from the station's storage prop. Lists the full
-## contents of persistent station storage; refreshes live.
+## Lager (storage) view. Opened from the station's storage prop. Shows
+## persistent station storage as a fixed GRID_SIZE x GRID_SIZE icon grid (like
+## a stash), one slot per catalog material filled in, the rest left empty for
+## future materials. A new material in Items.gd just fills the next empty
+## slot — no scene edits needed. Refreshes live.
+
+const SLOT_SCENE := preload("res://ui/inventory_slot.tscn")
+const GRID_SIZE := 7
 
 @onready var _root: Control = $Root
-@onready var _list: RichTextLabel = $Root/Center/Panel/VBox/List
+@onready var _grid: GridContainer = $Root/Center/Panel/VBox/Grid
+@onready var _empty_label: Label = $Root/Center/Panel/VBox/EmptyLabel
 @onready var _close_button: Button = $Root/Center/Panel/VBox/CloseButton
+
+var _slots: Array = []
 
 
 func _ready() -> void:
+	for i in GRID_SIZE * GRID_SIZE:
+		var slot := SLOT_SCENE.instantiate()
+		_grid.add_child(slot)
+		_slots.append(slot)
 	_close_button.pressed.connect(close)
 	EventBus.inventory_changed.connect(_refresh)
 	close()
@@ -30,17 +43,18 @@ func close() -> void:
 
 
 func _refresh() -> void:
-	var text := ""
-	for item_type in Items.ALL:
+	if not is_node_ready():
+		return
+	var any := false
+	for i in _slots.size():
+		if i >= Items.ALL.size():
+			_slots[i].set_slot(null)
+			continue
+		var item_type: int = Items.ALL[i]
 		var c := InventoryManager.station.count(item_type)
-		if c <= 0:
-			continue  # only list materials actually in storage
-		var tex_path := Items.texture_path(item_type)
-		var col := Items.color(item_type)
-		var prefix := ""
-		if tex_path != "":
-			prefix = "[img=20x20]%s[/img] " % tex_path
-		text += "%s[color=#%s]%s[/color]   ×%d\n" % [prefix, col.to_html(false), Items.display_name(item_type), c]
-	if text == "":
-		text = "[color=#808890]Storage is empty.[/color]"
-	_list.text = text
+		if c > 0:
+			any = true
+			_slots[i].set_slot({"type": item_type, "count": c})
+		else:
+			_slots[i].set_slot(null)
+	_empty_label.visible = not any

@@ -1,4 +1,4 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://ui/storage_panel.gd" id="1"]
 
@@ -13,10 +13,10 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
-content_margin_left = 20.0
-content_margin_top = 16.0
-content_margin_right = 20.0
-content_margin_bottom = 16.0
+content_margin_left = 24.0
+content_margin_top = 20.0
+content_margin_right = 24.0
+content_margin_bottom = 20.0
 
 [sub_resource type="StyleBoxFlat" id="SepStyle"]
 bg_color = Color(0.38, 0.24, 0.56, 0.5)
@@ -55,8 +55,6 @@ content_margin_top = 6.0
 content_margin_right = 14.0
 content_margin_bottom = 6.0
 
-[sub_resource type="StyleBoxEmpty" id="EmptyStyle"]
-
 [node name="StoragePanel" type="CanvasLayer"]
 script = ExtResource("1")
 
@@ -85,8 +83,8 @@ theme_override_styles/panel = SubResource("PanelBG")
 
 [node name="VBox" type="VBoxContainer" parent="Root/Center/Panel"]
 layout_mode = 2
-custom_minimum_size = Vector2(300, 0)
-theme_override_constants/separation = 10
+custom_minimum_size = Vector2(520, 0)
+theme_override_constants/separation = 14
 
 [node name="Title" type="Label" parent="Root/Center/Panel/VBox"]
 layout_mode = 2
@@ -99,14 +97,19 @@ theme_override_font_sizes/font_size = 15
 layout_mode = 2
 theme_override_styles/separator = SubResource("SepStyle")
 
-[node name="List" type="RichTextLabel" parent="Root/Center/Panel/VBox"]
+[node name="Grid" type="GridContainer" parent="Root/Center/Panel/VBox"]
 layout_mode = 2
-custom_minimum_size = Vector2(260, 90)
-bbcode_enabled = true
-fit_content = true
-theme_override_font_sizes/normal_font_size = 14
-theme_override_styles/normal = SubResource("EmptyStyle")
-theme_override_styles/focus = SubResource("EmptyStyle")
+alignment = 1
+columns = 7
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+
+[node name="EmptyLabel" type="Label" parent="Root/Center/Panel/VBox"]
+visible = false
+layout_mode = 2
+text = "Storage is empty."
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.5, 0.53, 0.56, 1)
 
 [node name="CloseButton" type="Button" parent="Root/Center/Panel/VBox"]
 layout_mode = 2
