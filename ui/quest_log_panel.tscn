@@ -9,19 +9,35 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.62, 0.48, 0.18, 0.55)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-content_margin_left = 20.0
-content_margin_top = 16.0
-content_margin_right = 20.0
-content_margin_bottom = 16.0
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+content_margin_left = 22.0
+content_margin_top = 18.0
+content_margin_right = 22.0
+content_margin_bottom = 18.0
 
 [sub_resource type="StyleBoxFlat" id="SepStyle"]
 bg_color = Color(0.55, 0.4, 0.14, 0.5)
 content_margin_top = 1.0
 content_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="ColumnBG"]
+bg_color = Color(0.03, 0.04, 0.08, 0.6)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.16, 0.2, 0.3, 0.4)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="BtnNormal"]
 bg_color = Color(0.07, 0.09, 0.16, 0.9)
@@ -55,8 +71,6 @@ content_margin_top = 6.0
 content_margin_right = 14.0
 content_margin_bottom = 6.0
 
-[sub_resource type="StyleBoxEmpty" id="EmptyStyle"]
-
 [node name="QuestLogPanel" type="CanvasLayer"]
 script = ExtResource("1")
 
@@ -85,27 +99,72 @@ theme_override_styles/panel = SubResource("PanelBG")
 
 [node name="VBox" type="VBoxContainer" parent="Root/Center/Panel"]
 layout_mode = 2
-custom_minimum_size = Vector2(460, 0)
-theme_override_constants/separation = 10
+theme_override_constants/separation = 12
 
 [node name="Title" type="Label" parent="Root/Center/Panel/VBox"]
 layout_mode = 2
 text = "QUEST LOG"
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.82, 0.65, 0.26, 1)
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 16
 
 [node name="Sep" type="HSeparator" parent="Root/Center/Panel/VBox"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("SepStyle")
 
-[node name="List" type="RichTextLabel" parent="Root/Center/Panel/VBox"]
+[node name="Columns" type="HBoxContainer" parent="Root/Center/Panel/VBox"]
 layout_mode = 2
-custom_minimum_size = Vector2(440, 260)
-bbcode_enabled = true
-theme_override_font_sizes/normal_font_size = 14
-theme_override_styles/normal = SubResource("EmptyStyle")
-theme_override_styles/focus = SubResource("EmptyStyle")
+theme_override_constants/separation = 14
+
+[node name="Active" type="PanelContainer" parent="Root/Center/Panel/VBox/Columns"]
+custom_minimum_size = Vector2(300, 340)
+layout_mode = 2
+theme_override_styles/panel = SubResource("ColumnBG")
+
+[node name="VBox" type="VBoxContainer" parent="Root/Center/Panel/VBox/Columns/Active"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Header" type="Label" parent="Root/Center/Panel/VBox/Columns/Active/VBox"]
+layout_mode = 2
+text = "IN PROGRESS"
+theme_override_colors/font_color = Color(0.6, 0.68, 0.85, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="Scroll" type="ScrollContainer" parent="Root/Center/Panel/VBox/Columns/Active/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="List" type="VBoxContainer" parent="Root/Center/Panel/VBox/Columns/Active/VBox/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Done" type="PanelContainer" parent="Root/Center/Panel/VBox/Columns"]
+custom_minimum_size = Vector2(300, 340)
+layout_mode = 2
+theme_override_styles/panel = SubResource("ColumnBG")
+
+[node name="VBox" type="VBoxContainer" parent="Root/Center/Panel/VBox/Columns/Done"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Header" type="Label" parent="Root/Center/Panel/VBox/Columns/Done/VBox"]
+layout_mode = 2
+text = "COMPLETED"
+theme_override_colors/font_color = Color(0.6, 0.68, 0.85, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="Scroll" type="ScrollContainer" parent="Root/Center/Panel/VBox/Columns/Done/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="List" type="VBoxContainer" parent="Root/Center/Panel/VBox/Columns/Done/VBox/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
 
 [node name="CloseButton" type="Button" parent="Root/Center/Panel/VBox"]
 layout_mode = 2

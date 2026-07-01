@@ -1,10 +1,10 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dhuay1dn1cnhx"]
 
-[ext_resource type="Script" path="res://scenes/station/interactable.gd" id="1"]
-[ext_resource type="Texture2D" path="res://lib/Sci-Asset-Pack/StaticProps/Props.png" id="2"]
+[ext_resource type="Script" uid="uid://bgp32fe2uob6y" path="res://scenes/station/interactable.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cj81ms7gxen5s" path="res://lib/Sci-Asset-Pack/StaticProps/Props.png" id="2"]
 
 [sub_resource type="RectangleShape2D" id="shape"]
-size = Vector2(40, 30)
+size = Vector2(14, 20.25)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dronebay"]
 texture = ExtResource("2")
@@ -178,15 +178,15 @@ texture = ExtResource("2")
 [sub_resource type="TileSet" id="TileSet_dronebay"]
 sources/0 = SubResource("TileSetAtlasSource_dronebay")
 
-[node name="DroneBay" type="Area2D"]
+[node name="DroneBay" type="Area2D" unique_id=274757378]
 script = ExtResource("1")
 kind = "drone_bay"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-7, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=5080831]
+position = Vector2(-8, 5)
 shape = SubResource("shape")
 
-[node name="Prompt" type="Label" parent="."]
+[node name="Prompt" type="Label" parent="." unique_id=566633341]
 visible = false
 offset_left = -68.0
 offset_top = -27.0
@@ -197,12 +197,12 @@ theme_override_font_sizes/font_size = 6
 text = "[E] Drone Bay"
 horizontal_alignment = 1
 
-[node name="Blocker" type="StaticBody2D" parent="."]
+[node name="Blocker" type="StaticBody2D" parent="." unique_id=1808837174]
 
-[node name="BlockShape" type="CollisionShape2D" parent="Blocker"]
-position = Vector2(-7, 1)
+[node name="BlockShape" type="CollisionShape2D" parent="Blocker" unique_id=624165281]
+position = Vector2(-8, 5.125)
 shape = SubResource("shape")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAD+////AAABABAAAAD+/wAAAAABABEAAAD/////AAACABAAAAD//wAAAAACABEAAAAAAP//AAADABAAAAAAAAAAAAADABEAAAA=")
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1845812707]
+tile_map_data = PackedByteArray(0, 0, 255, 255, 0, 0, 0, 0, 5, 0, 6, 0, 0, 0, 255, 255, 255, 255, 0, 0, 5, 0, 5, 0, 0, 0)
 tile_set = SubResource("TileSet_dronebay")

@@ -17,9 +17,10 @@
 [ext_resource type="PackedScene" path="res://ui/quest_log_panel.tscn" id="13"]
 [ext_resource type="PackedScene" path="res://ui/screen_fade.tscn" id="14"]
 [ext_resource type="PackedScene" uid="uid://bx3oaoemq0y1h" path="res://ui/research_panel.tscn" id="15"]
-[ext_resource type="PackedScene" path="res://scenes/station/props/drone_bay.tscn" id="16"]
+[ext_resource type="PackedScene" uid="uid://dhuay1dn1cnhx" path="res://scenes/station/props/drone_bay.tscn" id="16"]
 [ext_resource type="PackedScene" path="res://ui/drone_bay_panel.tscn" id="17"]
 [ext_resource type="PackedScene" path="res://ui/pause_menu.tscn" id="18"]
+[ext_resource type="PackedScene" path="res://scenes/station/decoration/station_sparks.tscn" id="21_xin1n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nj7xb"]
 texture = ExtResource("2_cehra")
@@ -343,3 +344,6 @@ zoom = Vector2(2.5, 2.5)
 [node name="ScreenFade" parent="." unique_id=524171746 instance=ExtResource("14")]
 
 [node name="AnI" parent="." unique_id=334552838 instance=ExtResource("10")]
+
+[node name="StationSparks" parent="." unique_id=2129355910 instance=ExtResource("21_xin1n")]
+position = Vector2(-157, 192)

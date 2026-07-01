@@ -22,6 +22,7 @@ var can_control: bool = true
 var _dock_zone: Area2D = null
 var _container_zone: Area2D = null
 var _recall_zone: Area2D = null
+var _probe_zone: Area2D = null
 var _fire_timer: float = 0.0
 var _low_fuel_warned: bool = false
 var _target: Node = null
@@ -100,6 +101,9 @@ func _handle_actions(delta: float) -> void:
 		elif _recall_zone != null:
 			_recall_zone.activate(self)
 			_recall_zone = null
+		elif _probe_zone != null:
+			_probe_zone.open()
+			_probe_zone = null
 
 
 ## Passive fuel loss from a hostile environment (e.g. an un-shielded biome) or
@@ -107,6 +111,11 @@ func _handle_actions(delta: float) -> void:
 func environment_drain(amount: float) -> void:
 	if can_control:
 		_consume_fuel(amount)
+
+
+## Enemy laser hits — there's no separate HP pool, fuel IS the ship's health.
+func take_damage(amount: int) -> void:
+	environment_drain(float(amount))
 
 
 ## Instantly tops the tank back up (fuel cell pickup).
@@ -156,6 +165,9 @@ func _on_sensor_area_entered(area: Area2D) -> void:
 	elif area.is_in_group("recall_beacon"):
 		_recall_zone = area
 		area.set_prompt(true)
+	elif area.is_in_group("probe"):
+		_probe_zone = area
+		area.set_prompt(true)
 
 
 func _on_sensor_area_exited(area: Area2D) -> void:
@@ -169,3 +181,6 @@ func _on_sensor_area_exited(area: Area2D) -> void:
 	elif area == _recall_zone:
 		area.set_prompt(false)
 		_recall_zone = null
+	elif area == _probe_zone:
+		area.set_prompt(false)
+		_probe_zone = null

@@ -1,9 +1,13 @@
 extends CanvasLayer
-## Quest log. Opened from the station's log console. Lists active and completed
-## objectives (main/side) with descriptions; refreshes live.
+## Quest log. Opened from the station's log console. Two columns — active
+## ("IN PROGRESS") and completed — each a scrollable stack of quest_row
+## cards; refreshes live.
+
+const ROW_SCENE := preload("res://ui/quest_row.tscn")
 
 @onready var _root: Control = $Root
-@onready var _list: RichTextLabel = $Root/Center/Panel/VBox/List
+@onready var _active_list: VBoxContainer = $Root/Center/Panel/VBox/Columns/Active/VBox/Scroll/List
+@onready var _done_list: VBoxContainer = $Root/Center/Panel/VBox/Columns/Done/VBox/Scroll/List
 @onready var _close_button: Button = $Root/Center/Panel/VBox/CloseButton
 
 
@@ -36,22 +40,22 @@ func _on_updated() -> void:
 
 
 func _refresh() -> void:
-	var text := ""
-	var active := QuestManager.active_ids()
-	var done := QuestManager.done_ids()
-	if active.is_empty() and done.is_empty():
-		text = "[color=#808890]No objectives yet. Launch a run.[/color]"
-	for id in active:
-		text += _format(id, false)
-	for id in done:
-		text += _format(id, true)
-	_list.text = text
+	_fill(_active_list, QuestManager.active_ids(), false, "No active objectives.\nLaunch a run.")
+	_fill(_done_list, QuestManager.done_ids(), true, "Nothing completed yet.")
 
 
-func _format(id: String, completed: bool) -> String:
-	var q: Dictionary = Quests.LIST[id]
-	var is_main: bool = q["type"] == "main"
-	var col := "#ff8a4a" if is_main else "#5ad0ff"
-	var tag := "MAIN" if is_main else "SIDE"
-	var status := "   ✓ COMPLETE" if completed else ""
-	return "[color=%s][b][%s]  %s[/b]%s[/color]\n%s\n\n" % [col, tag, q["title"], status, q["desc"]]
+func _fill(list: VBoxContainer, ids: Array, completed: bool, empty_msg: String) -> void:
+	for child in list.get_children():
+		child.queue_free()
+	if ids.is_empty():
+		var lbl := Label.new()
+		lbl.text = empty_msg
+		lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
+		lbl.add_theme_color_override("font_color", Color(0.4, 0.45, 0.55))
+		lbl.add_theme_font_size_override("font_size", 12)
+		list.add_child(lbl)
+		return
+	for id in ids:
+		var row := ROW_SCENE.instantiate()
+		list.add_child(row)
+		row.setup(Quests.LIST[id], completed)
