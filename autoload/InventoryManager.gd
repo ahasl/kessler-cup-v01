@@ -35,6 +35,13 @@ func transfer_run_to_station() -> void:
 	EventBus.inventory_changed.emit()
 
 
+## Adds materials straight to persistent storage (e.g. a Drone Bay haul) —
+## no run bag involved.
+func add_station_loot(item_type: int, amount: int) -> void:
+	station.add(item_type, amount)
+	EventBus.inventory_changed.emit()
+
+
 # --- Save provider (only the persistent station storage is saved) -----------
 
 func save_data() -> Dictionary:

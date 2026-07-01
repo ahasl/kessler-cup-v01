@@ -35,6 +35,8 @@ func _ready() -> void:
 	_aim_ray.target_position = Vector2(UpgradeManager.get_laser_range(), 0)
 	_pickup_sensor.area_entered.connect(_on_sensor_area_entered)
 	_pickup_sensor.area_exited.connect(_on_sensor_area_exited)
+	EventBus.overlay_opened.connect(func(): can_control = false)
+	EventBus.overlay_closed.connect(func(): can_control = fuel > 0.0)
 	EventBus.fuel_changed.emit(fuel, max_fuel)
 
 

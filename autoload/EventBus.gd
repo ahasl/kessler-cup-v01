@@ -33,8 +33,11 @@ signal overlay_closed
 signal research_completed(research_id: String)
 
 # --- AI ASSISTANT (AnI) ---
-## Emitted whenever AnI should speak. `level` is "info" or "warning".
-signal ai_message(text: String, level: String)
+## Emitted whenever AnI should speak. `level` is "info" or "warning". `sticky`
+## messages don't auto-hide — the player must dismiss them (a "Understood"
+## button), for text that's important enough to not risk missing (e.g. quest
+## updates).
+signal ai_message(text: String, level: String, sticky: bool)
 
 ## Last message, kept so an AnI HUD created right after a scene change (e.g.
 ## arriving at the station) can still pick up a message emitted moments earlier.
@@ -42,13 +45,13 @@ var pending_message: Dictionary = {}
 
 var _last_line := ""
 
-func say(text: String, level: String = "info") -> void:
-	pending_message = {"text": text, "level": level}
-	ai_message.emit(text, level)
+func say(text: String, level: String = "info", sticky: bool = false) -> void:
+	pending_message = {"text": text, "level": level, "sticky": sticky}
+	ai_message.emit(text, level, sticky)
 
 
 ## Say a random line from an AiLines pool, avoiding an immediate repeat.
-func say_id(id: String, level: String = "info") -> void:
+func say_id(id: String, level: String = "info", sticky: bool = false) -> void:
 	var pool: Array = AiLines.POOLS.get(id, [])
 	if pool.is_empty():
 		return
@@ -58,4 +61,4 @@ func say_id(id: String, level: String = "info") -> void:
 		line = pool[randi() % pool.size()]
 		tries += 1
 	_last_line = line
-	say(line, level)
+	say(line, level, sticky)

@@ -113,11 +113,43 @@ func _on_player_died() -> void:
 	goto_station()
 
 
+## Leaving a run early via the pause menu's "Main Menu" option — same cleanup
+## as dying, minus the flavor text (the player chose to quit, not lose).
+func abandon_run() -> void:
+	if not run_active:
+		return
+	InventoryManager.discard_run()
+	ProgressManager.discard_pending()
+	run_active = false
+	EventBus.run_ended.emit(false)
+
+
 # --- Meta: sleeping ends the day and persists progression -------------------
 
 func sleep_and_save() -> void:
 	InventoryManager.reset_run()
 	day += 1
 	runs_today = 0
+	var drone_haul := _run_drone_bay()
 	SaveManager.save_game()
 	EventBus.say_id("sleep")
+	if not drone_haul.is_empty():
+		_announce_drone_haul(drone_haul)
+
+
+## The Drone Bay (Station Expansion, level 1+) sends its collector drone out
+## once per day, right after sleeping, and it comes back with materials.
+## Returns the haul (empty if there's no drone yet) so it can be announced.
+func _run_drone_bay() -> Dictionary:
+	var level := UpgradeManager.get_drone_level()
+	var haul := DroneBay.roll_haul(level)
+	for item_type in haul:
+		InventoryManager.add_station_loot(item_type, haul[item_type])
+	return haul
+
+
+func _announce_drone_haul(haul: Dictionary) -> void:
+	var parts: Array[String] = []
+	for item_type in haul:
+		parts.append("%d %s" % [int(haul[item_type]), Items.display_name(item_type)])
+	EventBus.say("%s %s" % [AiLines.pick("drone_bay_return"), ", ".join(parts)])

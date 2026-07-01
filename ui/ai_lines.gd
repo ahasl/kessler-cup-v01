@@ -55,6 +55,12 @@ const POOLS := {
 	"intro": [
 		"You're awake. Finally. Station logs show you've been unconscious for years — adrift in the debris field. Life support held. Barely. We need to move.",
 	],
+	"drone_bay_return": [
+		"Drone's back. Dragged in:",
+		"Collector drone made it home. Brought:",
+		"Scrap run's done. Haul:",
+		"Drone's in. Salvaged:",
+	],
 }
 
 

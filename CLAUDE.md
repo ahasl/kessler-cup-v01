@@ -69,7 +69,8 @@ home-station dock + E to extract. Out of fuel or straying past a biome edge = ru
 ## Content / tuning quick-reference
 - Materials (`Items.gd`): Metal, Crystal, Data Fragment (weighted drops). Add = enum + 3 cases.
 - Upgrades (`Upgrades.gd` CATALOG): `fuel_tank` (+20 fuel, ×10; 20 Metal/3 Crystal/1 Data),
-  `metal_alloy` (unlock biomes; 15 Metal). Costs scale with level via `cost_for`.
+  `metal_alloy` (unlock biomes; 15 Metal), `station_level` (category "station"; 100 Metal/
+  20 Crystal/5 Data — expands the station, see below). Costs scale with level via `cost_for`.
 - Ship base stats in `Upgrades.gd`: speed 250, max fuel 100, laser dmg 2, range 420.
 - Map: composed of Biome scenes (`scenes/run/biomes/`) placed side by side in space.tscn.
   Each `Biome` (biome.gd) declares size/requires_alloy/penalty/messages and holds its own
@@ -95,9 +96,29 @@ and `reinforced_alloy` (main, day 5, completes when Reinforced Alloy reaches sto
 Reinforced Alloy is a material dropped only by metal-rich asteroids that appear from
 day 5; it's the cost of the `metal_alloy` hull upgrade -> gates the next biome.
 
-The station **PC terminal** (`upgrade_panel.tscn`) has two tabs built from upgrade
-`category`: **Ship** (fuel_tank, metal_alloy) and **Weapon** (intentionally empty
-for now — weapon upgrades come later via research).
+The station **PC terminal** (`upgrade_panel.tscn`) has three tabs built from upgrade
+`category`: **Ship** (fuel_tank, metal_alloy), **Ship Weapon** (intentionally empty
+for now — weapon upgrades come later via research), and **Station** (station_level).
+Tab labels are set in code (`upgrade_panel.gd` via `set_tab_title`), not the node names.
+
+## Station expansion (level1 / level2)
+`station.tscn` holds two full physical layouts as siblings, `level1` and `level2`
+(each with its own StationPlayer + Props: Bed/Terminal/Door/Storage/Research/Log —
+`level2` additionally has a **Drone Bay**). Only one is visible AND processing at a
+time (`station.gd _apply_station_level()`, driven by `UpgradeManager.get_station_level()`
+— 0 = level1, 1+ = level2); the inactive level is `process_mode = DISABLED` so its
+Interactables can't fire while hidden. Buying `station_level` (EventBus.upgrade_purchased)
+swaps them live. New station level = duplicate a `levelN` scene, add its Props, no
+station.gd changes (props are looked up by name, not by scene-unique refs).
+
+The **Drone Bay** (`scenes/station/props/drone_bay.tscn`, level2 only) is a normal
+`Interactable` — press [E] for an AnI status line (`"drone_bay"` in `ai_lines.gd`).
+The actual haul happens automatically once a day, right after sleeping
+(`GameManager.sleep_and_save() -> _run_drone_bay()`), rolled from `DroneBay.gd`
+(domain/drone_bay — pure loot table keyed by drone level, currently only level 1:
+guaranteed 2 Metal + one weighted bonus roll). Materials go straight to station
+storage via `InventoryManager.add_station_loot()`. New drone level = add a `LEVELS`
+entry in `DroneBay.gd`.
 
 ## Collision layers (run domain)
 1 = player ship · 2 = asteroids (solid) · 4 = pickups (loot/docking/fuel_cell, Area2D) ·

@@ -17,6 +17,9 @@
 [ext_resource type="PackedScene" path="res://ui/quest_log_panel.tscn" id="13"]
 [ext_resource type="PackedScene" path="res://ui/screen_fade.tscn" id="14"]
 [ext_resource type="PackedScene" uid="uid://bx3oaoemq0y1h" path="res://ui/research_panel.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://scenes/station/props/drone_bay.tscn" id="16"]
+[ext_resource type="PackedScene" path="res://ui/drone_bay_panel.tscn" id="17"]
+[ext_resource type="PackedScene" path="res://ui/pause_menu.tscn" id="18"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nj7xb"]
 texture = ExtResource("2_cehra")
@@ -163,6 +166,8 @@ size = Vector2(5.5, 137.625)
 [node name="Station" type="Node2D" unique_id=709947840]
 script = ExtResource("1")
 
+[node name="PauseMenu" parent="." instance=ExtResource("18")]
+
 [node name="level2" type="Node2D" parent="." unique_id=2091461517]
 position = Vector2(-4, 0)
 
@@ -189,6 +194,9 @@ position = Vector2(-176, 215)
 [node name="Log" parent="level2/Props" unique_id=917159863 instance=ExtResource("12")]
 position = Vector2(-242, 153)
 
+[node name="DroneBay" parent="level2/Props" unique_id=1583164250 instance=ExtResource("16")]
+position = Vector2(-92, 187)
+
 [node name="floor" type="Node2D" parent="level2" unique_id=1971586642]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="level2/floor" unique_id=1397814427]
@@ -201,11 +209,10 @@ tile_set = SubResource("TileSet_ljnju")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="level2/wall" unique_id=1000882773]
 z_index = -1
-tile_map_data = PackedByteArray("AADx/wgAAAAFAAEAAADx/wkAAAAFAAIAAADy/wgAAAAGAAEAAADy/wkAAAAGAAIAAADz/wgAAAAHAAEAAADz/wkAAAAHAAIAAADu/wgAAAAJAAEAAADu/wkAAAAJAAIAAADv/wgAAAAKAAEAAADv/wkAAAAKAAIAAADw/wgAAAALAAEAAADw/wkAAAALAAIAAADx/wcAAAAKAA0AAADw/wcAAAAKAA0AAADv/wcAAAAKAA0AAADu/wcAAAAKAA0AAADz/w8AAAAKAA8AAADy/w8AAAAKAA8AAADx/w8AAAAKAA8AAADw/w8AAAAKAA8AAADv/w8AAAAKAA8AAADt/w4AAAAJAA4AAADt/w0AAAAJAA4AAADt/wwAAAAJAA4AAADt/wsAAAAJAA4AAADt/woAAAAJAA4AAADt/wgAAAAJAA4AAADt/w8AAAAHAA4AAADt/wcAAAAHAA0AAADu/w8AAAAKAA8AAAD1/w8AAAAKAA8AAAD0/w8AAAAKAA8AAAD2/w8AAAAKAA8AAADt/wkAAAAJAA4AAADz/wcAAAAGAA4AAADy/wcAAAAKAA0AAAD3/wcAAAAFAA4AAAD3/wkAAAAJAAgAAAD3/wgAAAAJAAcAAAD0/wYAAAAKAA0AAAD1/wYAAAAKAA0AAAD2/wYAAAAKAA0AAADz/wYAAAAHAA0AAAD3/wYAAAAIAA0AAAD0/wcAAAAJAAEAAAD0/wgAAAAJAAIAAAD1/wcAAAAKAAEAAAD1/wgAAAAKAAIAAAD2/wcAAAALAAEAAAD2/wgAAAALAAIAAAD3/w8AAAAKAA8AAAD9/woAAAALAA4AAAD9/wsAAAALAA4AAAD9/wwAAAALAA4AAAD9/w0AAAALAA4AAAD9/w4AAAALAA4AAAD4/w8AAAAKAA8AAAD5/w8AAAAKAA8AAAD6/w8AAAAKAA8AAAD7/w8AAAAKAA8AAAD8/w8AAAAKAA8AAADw/xUAAAAKAA8AAADx/xUAAAALAA4AAADy/xUAAAAKAA8AAADz/xUAAAAKAA8AAAD9/w8AAAAIAA4AAADv/xUAAAAKAA8AAAD6/wgAAAAJAAcAAAD6/wkAAAAJAAgAAAD7/wgAAAAKAAcAAAD7/wkAAAAKAAgAAAD8/wgAAAALAAcAAAD8/wkAAAALAAgAAAD4/wgAAAAKAAcAAAD4/wkAAAAKAAgAAAD5/wgAAAALAAcAAAD5/wkAAAALAAgAAAD4/wcAAAAKAA0AAAD5/wcAAAAKAA0AAAD6/wcAAAAKAA0AAAD7/wcAAAAKAA0AAAD8/wcAAAAKAA0AAAD9/wgAAAALAA4AAAD9/wkAAAALAA4AAAD9/wcAAAAIAA0AAAD0/xAAAAAIAA0AAAA=")
+tile_map_data = PackedByteArray("AADx/wgAAAAFAAEAAADx/wkAAAAFAAIAAADy/wgAAAAGAAEAAADy/wkAAAAGAAIAAADz/wgAAAAHAAEAAADz/wkAAAAHAAIAAADu/wgAAAAJAAEAAADu/wkAAAAJAAIAAADv/wgAAAAKAAEAAADv/wkAAAAKAAIAAADw/wgAAAALAAEAAADw/wkAAAALAAIAAADx/wcAAAAKAA0AAADw/wcAAAAKAA0AAADv/wcAAAAKAA0AAADu/wcAAAAKAA0AAADz/w8AAAAKAA8AAADy/w8AAAAKAA8AAADx/w8AAAAKAA8AAADw/w8AAAAKAA8AAADv/w8AAAAKAA8AAADt/w4AAAAJAA4AAADt/w0AAAAJAA4AAADt/wwAAAAJAA4AAADt/wsAAAAJAA4AAADt/woAAAAJAA4AAADt/wgAAAAJAA4AAADt/w8AAAAHAA4AAADt/wcAAAAHAA0AAADu/w8AAAAKAA8AAAD1/w8AAAAKAA8AAAD0/w8AAAAKAA8AAAD2/w8AAAAKAA8AAADt/wkAAAAJAA4AAADz/wcAAAAGAA4AAADy/wcAAAAKAA0AAAD3/wcAAAAFAA4AAAD3/wkAAAAJAAgAAAD3/wgAAAAJAAcAAAD0/wYAAAAKAA0AAAD1/wYAAAAKAA0AAAD2/wYAAAAKAA0AAADz/wYAAAAHAA0AAAD3/wYAAAAIAA0AAAD0/wcAAAAJAAEAAAD0/wgAAAAJAAIAAAD1/wcAAAAKAAEAAAD1/wgAAAAKAAIAAAD2/wcAAAALAAEAAAD2/wgAAAALAAIAAAD3/w8AAAAKAA8AAAD9/woAAAALAA4AAAD9/wsAAAALAA4AAAD9/wwAAAALAA4AAAD9/w0AAAALAA4AAAD9/w4AAAALAA4AAAD4/w8AAAAKAA8AAAD5/w8AAAAKAA8AAAD6/w8AAAAKAA8AAAD7/w8AAAAKAA8AAAD8/w8AAAAKAA8AAAD9/w8AAAAIAA4AAAD6/wgAAAAJAAcAAAD6/wkAAAAJAAgAAAD7/wgAAAAKAAcAAAD7/wkAAAAKAAgAAAD8/wgAAAALAAcAAAD8/wkAAAALAAgAAAD4/wgAAAAKAAcAAAD4/wkAAAAKAAgAAAD5/wgAAAALAAcAAAD5/wkAAAALAAgAAAD4/wcAAAAKAA0AAAD5/wcAAAAKAA0AAAD6/wcAAAAKAA0AAAD7/wcAAAAKAA0AAAD8/wcAAAAKAA0AAAD9/wgAAAALAA4AAAD9/wkAAAALAA4AAAD9/wcAAAAIAA0AAAA=")
 tile_set = SubResource("TileSet_7v87s")
 
 [node name="Blocker" type="StaticBody2D" parent="level2/wall" unique_id=1385518182]
-visible = false
 
 [node name="BlockShape2" type="CollisionShape2D" parent="level2/wall/Blocker" unique_id=242132825]
 position = Vector2(-195, 88.8125)
@@ -223,10 +230,6 @@ shape = SubResource("RectangleShape2D_nj7xb")
 [node name="BlockShape6" type="CollisionShape2D" parent="level2/wall/Blocker" unique_id=567772793]
 position = Vector2(-180, 141)
 rotation = 1.5707964
-shape = SubResource("RectangleShape2D_nj7xb")
-
-[node name="BlockShape5" type="CollisionShape2D" parent="level2/wall/Blocker" unique_id=975357468]
-position = Vector2(-141, 176)
 shape = SubResource("RectangleShape2D_nj7xb")
 
 [node name="BlockShape4" type="CollisionShape2D" parent="level2/wall/Blocker" unique_id=1893951072]
@@ -334,6 +337,8 @@ zoom = Vector2(2.5, 2.5)
 [node name="ResearchPanel" parent="." unique_id=93384938 instance=ExtResource("15")]
 
 [node name="QuestLogPanel" parent="." unique_id=124686209 instance=ExtResource("13")]
+
+[node name="DroneBayPanel" parent="." instance=ExtResource("17")]
 
 [node name="ScreenFade" parent="." unique_id=524171746 instance=ExtResource("14")]
 

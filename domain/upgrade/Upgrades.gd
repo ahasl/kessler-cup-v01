@@ -14,8 +14,9 @@ const BASE_LASER_DAMAGE := 2
 const BASE_LASER_RANGE := 420.0
 
 # `category` decides WHERE an upgrade is bought:
-#   "ship"   -> the station PC terminal
-#   "weapon" -> the Weapon Workbench (must be unlocked via a blueprint first)
+#   "ship"    -> the station PC terminal, Ship tab
+#   "weapon"  -> the station PC terminal, Ship Weapon tab (needs a blueprint first)
+#   "station" -> the station PC terminal, Station tab
 const CATALOG := {
 	"fuel_tank": {
 		"name": "Fuel Tank",
@@ -48,6 +49,30 @@ const CATALOG := {
 		"value_label": "damage",
 		"levels": [
 			{"value": 3.0, "cost": {Items.Type.METAL: 8, Items.Type.CRYSTAL: 3, Items.Type.DATACHIP: 1}},
+		],
+	},
+	# Station upgrades — expand the station itself. Level 1 -> 2 swaps in the
+	# larger station layout (station.gd) and unlocks the Drone Bay.
+	"station_level": {
+		"name": "Station Expansion",
+		"category": "station",
+		"desc": "Expands the station and adds a Drone Bay — a collector drone that salvages materials once a day.",
+		"levels": [
+			{"cost": {Items.Type.METAL: 100, Items.Type.CRYSTAL: 20, Items.Type.DATACHIP: 5}},
+		],
+	},
+	# Drone Bay tiers. Only shown once the Drone Bay exists (`requires`:
+	# station_level >= 1). Drone level = 1 + this upgrade's level — see
+	# UpgradeManager.get_drone_level(). Each tier brings home a bit more per
+	# day (see DroneBay.gd's LEVELS table).
+	"drone_bay_upgrade": {
+		"name": "Drone Bay Upgrade",
+		"category": "station",
+		"desc": "A better-equipped collector drone brings home more materials per trip.",
+		"requires": "station_level",
+		"levels": [
+			{"cost": {Items.Type.METAL: 40, Items.Type.CRYSTAL: 8, Items.Type.DATACHIP: 2}},   # drone level 1 -> 2
+			{"cost": {Items.Type.METAL: 80, Items.Type.CRYSTAL: 16, Items.Type.DATACHIP: 4}},  # drone level 2 -> 3
 		],
 	},
 }

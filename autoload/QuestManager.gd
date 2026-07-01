@@ -43,7 +43,7 @@ func activate(id: String) -> void:
 	_active[id] = true
 	EventBus.quest_updated.emit()
 	var q: Dictionary = Quests.LIST[id]
-	EventBus.say(q.get("activate_line", "New objective: %s." % q["title"]))
+	EventBus.say(q.get("activate_line", "New objective: %s." % q["title"]), "info", true)
 
 
 func complete(id: String) -> void:
@@ -52,7 +52,7 @@ func complete(id: String) -> void:
 	_active.erase(id)
 	_done[id] = true
 	EventBus.quest_updated.emit()
-	EventBus.say("Objective complete: %s." % Quests.LIST[id]["title"])
+	EventBus.say("Objective complete: %s." % Quests.LIST[id]["title"], "info", true)
 
 
 # --- triggers ---------------------------------------------------------------

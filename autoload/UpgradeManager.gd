@@ -46,6 +46,19 @@ func has_metal_alloy() -> bool:
 	return level_of("metal_alloy") >= 1
 
 
+## Station expansion level: 0 = starting station, 1 = expanded station + Drone Bay.
+func get_station_level() -> int:
+	return level_of("station_level")
+
+
+## Drone Bay tier: 0 = no Drone Bay yet, 1-3 = its own upgrade track
+## (drone_bay_upgrade), only meaningful once the station is expanded.
+func get_drone_level() -> int:
+	if get_station_level() < 1:
+		return 0
+	return 1 + level_of("drone_bay_upgrade")
+
+
 # --- purchasing -------------------------------------------------------------
 
 func can_afford(id: String) -> bool:
