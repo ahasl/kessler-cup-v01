@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/run/destructibles/wreckage.gd" id="1"]
+[ext_resource type="Texture2D" path="res://lib/images/objects/wreckage-small.png" id="2"]
+
+[sub_resource type="RectangleShape2D" id="shape"]
+size = Vector2(36, 36)
+
+[node name="Wreckage" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1")
+max_hp = 8
+drop_amount = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("shape")
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 80.0
+initial_velocity_max = 190.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color = Color(1, 0.6, 0.3, 1)
+
+[node name="Body" type="Sprite2D" parent="."]
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("2")

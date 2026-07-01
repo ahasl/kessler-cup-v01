@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" path="res://scenes/run/destructibles/rich_asteroid.tscn" id="15"]
 [ext_resource type="PackedScene" uid="uid://vlwdove281qj" path="res://scenes/run/destructibles/small_asteroid.tscn" id="16_xjbkc"]
 [ext_resource type="PackedScene" path="res://scenes/run/collectibles/container.tscn" id="17"]
+[ext_resource type="PackedScene" path="res://scenes/run/destructibles/wreckage_small.tscn" id="18"]
 
 [node name="BiomeHome" type="Node2D" unique_id=1087420747]
 script = ExtResource("1")
@@ -352,3 +353,15 @@ position = Vector2(1711, 1579)
 
 [node name="Asteroid20" parent="." unique_id=1536593810 instance=ExtResource("16_xjbkc")]
 position = Vector2(-1241, 1619)
+
+[node name="SmallWreck1" parent="." unique_id=1889034221 instance=ExtResource("18")]
+position = Vector2(150, 150)
+
+[node name="SmallWreck2" parent="." unique_id=1889034222 instance=ExtResource("18")]
+position = Vector2(-500, -1000)
+
+[node name="SmallWreck3" parent="." unique_id=1889034223 instance=ExtResource("18")]
+position = Vector2(1100, 350)
+
+[node name="SmallWreck4" parent="." unique_id=1889034224 instance=ExtResource("18")]
+position = Vector2(-850, 950)

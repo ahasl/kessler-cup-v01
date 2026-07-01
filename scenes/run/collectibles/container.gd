@@ -1,12 +1,16 @@
 extends Area2D
 ## Space container: floats until the ship is nearby, then opens with [E].
-## Opening spawns one of DROP_SCENES and removes the container. Currently only
-## drops a Fuel Cell — add more scenes to DROP_SCENES for variety later, no
-## other code needs to change. Self-contained / modular — drop instances into
-## any biome scene like any other pickup.
+## Opening spawns one of DROP_SCENES and removes the container. Fuel Cell is
+## the common drop; Recall Beacon is rare (listed 3x fewer times below) since
+## it's a strong, free trip home. Add more scenes/weights here for variety
+## later, no other code needs to change. Self-contained / modular — drop
+## instances into any biome scene like any other pickup.
 
 const DROP_SCENES: Array[PackedScene] = [
 	preload("res://scenes/run/collectibles/fuel_cell.tscn"),
+	preload("res://scenes/run/collectibles/fuel_cell.tscn"),
+	preload("res://scenes/run/collectibles/fuel_cell.tscn"),
+	preload("res://scenes/run/collectibles/recall_beacon.tscn"),
 ]
 
 @onready var _prompt: Label = $Prompt

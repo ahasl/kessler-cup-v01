@@ -21,6 +21,7 @@ var can_control: bool = true
 
 var _dock_zone: Area2D = null
 var _container_zone: Area2D = null
+var _recall_zone: Area2D = null
 var _fire_timer: float = 0.0
 var _low_fuel_warned: bool = false
 var _target: Node = null
@@ -94,6 +95,9 @@ func _handle_actions(delta: float) -> void:
 		elif _container_zone != null:
 			_container_zone.open()
 			_container_zone = null
+		elif _recall_zone != null:
+			_recall_zone.activate(self)
+			_recall_zone = null
 
 
 ## Passive fuel loss from a hostile environment (e.g. an un-shielded biome) or
@@ -147,6 +151,9 @@ func _on_sensor_area_entered(area: Area2D) -> void:
 	elif area.is_in_group("container"):
 		_container_zone = area
 		area.set_prompt(true)
+	elif area.is_in_group("recall_beacon"):
+		_recall_zone = area
+		area.set_prompt(true)
 
 
 func _on_sensor_area_exited(area: Area2D) -> void:
@@ -157,3 +164,6 @@ func _on_sensor_area_exited(area: Area2D) -> void:
 	elif area == _container_zone:
 		area.set_prompt(false)
 		_container_zone = null
+	elif area == _recall_zone:
+		area.set_prompt(false)
+		_recall_zone = null

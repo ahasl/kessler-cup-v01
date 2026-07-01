@@ -37,6 +37,11 @@ const POOLS := {
 		"Free fuel — the universe's apology, perhaps. Take it.",
 		"Topped off. You're welcome. I guess.",
 	],
+	"recall_beacon": [
+		"Recall beacon fired. Enjoy the free ride — whatever's still out there, you're leaving it.",
+		"Warping you home. Try not to think about the loot you're abandoning.",
+		"There. Home, instantly, no fuel spent. You didn't earn that, but here we are.",
+	],
 	"edge": [
 		"That's the edge of charted space, hotshot. One more nudge and you're a very expensive dust cloud.",
 		"Turn around. Out there is nothing, and it bites. Trust me.",
