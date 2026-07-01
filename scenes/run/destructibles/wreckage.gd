@@ -6,10 +6,10 @@ extends StaticBody2D
 const MAX_HP := 16
 const METAL_DROP := 2
 
-const LOOT_SCENE := preload("res://scenes/run/loot.tscn")
+const LOOT_SCENE := preload("res://scenes/run/collectibles/loot.tscn")
 const DAMAGE_NUMBER_SCENE := preload("res://scenes/run/damage_number.tscn")
 
-@onready var _body: Polygon2D = $Body
+@onready var _body: Sprite2D = $Body
 @onready var _particles: CPUParticles2D = $Particles
 
 var hp: int = MAX_HP
@@ -34,7 +34,7 @@ func take_damage(amount: int) -> void:
 	hp -= amount
 	_show_damage(amount)
 	var dmg := 1.0 - float(hp) / float(MAX_HP)
-	_body.color = Color(0.38, 0.4, 0.46).lerp(Color(0.6, 0.3, 0.2), dmg)
+	_body.modulate = Color(0.38, 0.4, 0.46).lerp(Color(0.6, 0.3, 0.2), dmg)
 	if hp <= 0:
 		_destroy()
 

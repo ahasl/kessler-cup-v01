@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://vlwdove281qj"]
 
-[ext_resource type="Script" uid="uid://bcnoatyp517pt" path="res://scenes/run/asteroid.gd" id="1_yreod"]
+[ext_resource type="Script" uid="uid://bcnoatyp517pt" path="res://scenes/run/destructibles/asteroid.gd" id="1_yreod"]
 [ext_resource type="Texture2D" path="res://lib/images/objects/asteroid1.png" id="2"]
 
 [sub_resource type="CircleShape2D" id="shape"]

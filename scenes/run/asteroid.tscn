@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://b03j7kat5gbh0"]
+[gd_scene format=3 uid="uid://cfhda288dn5ew"]
 
-[ext_resource type="Script" uid="uid://bcnoatyp517pt" path="res://scenes/run/destructibles/asteroid.gd" id="1"]
-[ext_resource type="Texture2D" path="res://lib/images/objects/asteroid1.png" id="2"]
+[ext_resource type="Script" path="res://scenes/run/asteroid.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://nnfkwxp38al7" path="res://lib/images/objects/asteroid1.png" id="2"]
 
 [sub_resource type="CircleShape2D" id="shape"]
 radius = 28.0
@@ -15,8 +15,8 @@ script = ExtResource("1")
 shape = SubResource("shape")
 
 [node name="Body" type="Sprite2D" parent="." unique_id=1244063197]
-texture = ExtResource("2")
 scale = Vector2(0.221, 0.221)
+texture = ExtResource("2")
 
 [node name="Particles" type="CPUParticles2D" parent="." unique_id=142659314]
 emitting = false

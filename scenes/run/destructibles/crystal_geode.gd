@@ -4,7 +4,7 @@ extends StaticBody2D
 const MAX_HP := 12
 const CRYSTAL_DROP := 4
 
-const LOOT_SCENE := preload("res://scenes/run/loot.tscn")
+const LOOT_SCENE := preload("res://scenes/run/collectibles/loot.tscn")
 const DAMAGE_NUMBER_SCENE := preload("res://scenes/run/damage_number.tscn")
 
 @onready var _body: Polygon2D = $Body

@@ -30,8 +30,14 @@ A Godot 4.6.2 binary is installed locally:
 ```
 autoload/   EventBus, SaveManager, InventoryManager, UpgradeManager, ProgressManager, GameManager  (load order matters)
 domain/     Items.gd, Inventory.gd (inventory) · Upgrades.gd (upgrade catalog)  — pure, no nodes
-scenes/run/      space, player_ship, asteroid, loot, laser, docking_pad, biome.gd
-scenes/run/biomes/  biome_home, biome_belt  (one scene PER biome; map elements placed inside)
+scenes/run/      space, player_ship, laser, damage_number, docking_pad, biome.gd  (core/functional)
+scenes/run/destructibles/  asteroid (+ small/rich/splitting variants), crystal_geode, wreckage,
+                    drift_mine, probe, drone  — objects the player can shoot/destroy
+scenes/run/collectibles/   loot, fuel_cell, container, blueprint  — objects the player picks up
+scenes/run/decoration/     planetoid, gas_giant, nebula, comet(+spawner), dust_field, god_rays,
+                    space_critter, space_parallax  — purely visual, no gameplay
+scenes/run/biomes/  biome_home, biome_belt  (one scene PER biome; map elements placed inside,
+                    referencing the folders above)
 scenes/station/  station, station_player, interactable.gd, props/{bed,terminal,door,storage}
 ui/         main_menu, loading, run_hud, station_hud, inventory_view, inventory_slot,
             upgrade_panel, upgrade_row, storage_panel, ai_assistant
@@ -103,7 +109,11 @@ passes through them (contact handled by the drone's own hitbox, no physical boun
 - `drone.tscn` (enemy): chases the player, drains `CONTACT_FUEL` on touch (no weapons), 5 HP,
   smokes below half, drops a Data Fragment. Hit via laser `take_damage`. Drop instances into a biome.
 - `fuel_cell.tscn` (pickup): flying over it fully refills fuel (handled in player_ship `_on_sensor_area_entered`).
-- Both are placed inside biome scenes (e.g. 5 drones + 3 fuel cells in `biome_home.tscn`).
+- `container.tscn` (pickup, group "container"): floats in space; press [E] in range to open
+  (tracked in player_ship like the docking zone). Opening instantiates a random entry from
+  `DROP_SCENES` in `container.gd` (currently only `fuel_cell.tscn`) and frees the container.
+  Add more scenes to `DROP_SCENES` for variety — no other code needs to change.
+- All three are placed inside biome scenes (e.g. drones, containers in `biome_home.tscn`).
 
 ## Conventions
 - snake_case files; `class_name` PascalCase (Items, Inventory, Upgrades, Interactable).

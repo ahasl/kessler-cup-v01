@@ -2,7 +2,7 @@ extends StaticBody2D
 ## Run-domain asteroid. HP and metal drop amount are set per scene via exports,
 ## so small_asteroid.tscn can reuse this script with different values.
 
-const LOOT_SCENE         := preload("res://scenes/run/loot.tscn")
+const LOOT_SCENE         := preload("res://scenes/run/collectibles/loot.tscn")
 const DAMAGE_NUMBER_SCENE := preload("res://scenes/run/damage_number.tscn")
 
 @export var max_hp:      int = 10

@@ -8,7 +8,7 @@ const SPEED        := 110.0
 const CONTACT_FUEL := 10.0    # fuel drained when it rams the ship
 const DETECT_RADIUS := 420.0  # stays dormant until the ship comes this close
 
-const LOOT_SCENE          := preload("res://scenes/run/loot.tscn")
+const LOOT_SCENE          := preload("res://scenes/run/collectibles/loot.tscn")
 const DAMAGE_NUMBER_SCENE := preload("res://scenes/run/damage_number.tscn")
 
 @onready var _smoke:  CPUParticles2D = $Smoke

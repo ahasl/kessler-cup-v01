@@ -10,7 +10,7 @@ const MAX_HP := 24
 @export var unlock_title: String = "Research Station"
 @export var probe_name: String = "Voyager 1"  # a real probe, for flavour
 
-const BLUEPRINT_SCENE := preload("res://scenes/run/blueprint.tscn")
+const BLUEPRINT_SCENE := preload("res://scenes/run/collectibles/blueprint.tscn")
 const DAMAGE_NUMBER_SCENE := preload("res://scenes/run/damage_number.tscn")
 
 @onready var _body: Polygon2D = $Body

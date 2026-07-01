@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://0uddy77mxtby"]
+[gd_scene format=3 uid="uid://bjej2qnx4vscy"]
 
-[ext_resource type="Script" uid="uid://dnp56nmu8ckq8" path="res://scenes/run/destructibles/wreckage.gd" id="1"]
+[ext_resource type="Script" path="res://scenes/run/wreckage.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://b4mt7anmke182" path="res://lib/images/objects/sattelitbroken.png" id="2_f60r0"]
 
 [sub_resource type="RectangleShape2D" id="shape"]
@@ -29,7 +29,7 @@ scale_amount_min = 2.0
 scale_amount_max = 4.0
 color = Color(1, 0.6, 0.3, 1)
 
-[node name="Body" type="Sprite2D" parent="." unique_id=1472138511]
+[node name="body" type="Sprite2D" parent="." unique_id=1472138511]
 position = Vector2(0, 0.50000304)
 scale = Vector2(0.2, 0.19666667)
 texture = ExtResource("2_f60r0")

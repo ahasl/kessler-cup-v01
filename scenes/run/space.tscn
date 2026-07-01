@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://scenes/run/space.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/run/player_ship.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://ui/run_hud.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://scenes/run/space_parallax.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/run/decoration/space_parallax.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://ui/ai_assistant.tscn" id="5"]
 [ext_resource type="Environment" path="res://environment/glow.tres" id="6"]
 [ext_resource type="PackedScene" path="res://scenes/run/biomes/biome_home.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://scenes/run/biomes/biome_belt.tscn" id="8"]
-[ext_resource type="Script" path="res://scenes/run/comet_spawner.gd" id="9"]
+[ext_resource type="Script" path="res://scenes/run/decoration/comet_spawner.gd" id="9"]
 
 [node name="Space" type="Node2D"]
 script = ExtResource("1")

@@ -6,7 +6,7 @@ const MAX_HP       := 30
 const FRAGMENTS    := 3
 const FRAGMENT_DIST := 58.0
 
-const ASTEROID_SCENE      := preload("res://scenes/run/asteroid.tscn")
+const ASTEROID_SCENE      := preload("res://scenes/run/destructibles/asteroid.tscn")
 const DAMAGE_NUMBER_SCENE := preload("res://scenes/run/damage_number.tscn")
 
 @onready var _body:      Sprite2D       = $Body

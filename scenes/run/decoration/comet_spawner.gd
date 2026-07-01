@@ -6,7 +6,7 @@ const MIN_INTERVAL := 6.0
 const MAX_INTERVAL := 14.0
 const SPAWN_DISTANCE := 1000.0
 
-const COMET_SCENE := preload("res://scenes/run/comet.tscn")
+const COMET_SCENE := preload("res://scenes/run/decoration/comet.tscn")
 
 var _timer := 0.0
 

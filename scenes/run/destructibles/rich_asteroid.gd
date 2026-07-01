@@ -6,7 +6,7 @@ const MAX_HP := 25
 const APPEAR_DAY := 5
 const METAL_BONUS := 3
 
-const LOOT_SCENE := preload("res://scenes/run/loot.tscn")
+const LOOT_SCENE := preload("res://scenes/run/collectibles/loot.tscn")
 const DAMAGE_NUMBER_SCENE := preload("res://scenes/run/damage_number.tscn")
 
 @onready var _body: Sprite2D = $Body

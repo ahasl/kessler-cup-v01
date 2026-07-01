@@ -20,6 +20,7 @@ var max_speed: float = 360.0
 var can_control: bool = true
 
 var _dock_zone: Area2D = null
+var _container_zone: Area2D = null
 var _fire_timer: float = 0.0
 var _low_fuel_warned: bool = false
 var _target: Node = null
@@ -87,8 +88,12 @@ func _handle_actions(delta: float) -> void:
 	if Input.is_action_pressed("shoot") and _fire_timer <= 0.0:
 		_fire_weapon()
 		_fire_timer = FIRE_COOLDOWN
-	if Input.is_action_just_pressed("interact") and _dock_zone != null:
-		EventBus.player_docked.emit()
+	if Input.is_action_just_pressed("interact"):
+		if _dock_zone != null:
+			EventBus.player_docked.emit()
+		elif _container_zone != null:
+			_container_zone.open()
+			_container_zone = null
 
 
 ## Passive fuel loss from a hostile environment (e.g. an un-shielded biome) or
@@ -139,6 +144,9 @@ func _on_sensor_area_entered(area: Area2D) -> void:
 		_dock_zone = area
 		if area.has_method("set_prompt"):
 			area.set_prompt(true)
+	elif area.is_in_group("container"):
+		_container_zone = area
+		area.set_prompt(true)
 
 
 func _on_sensor_area_exited(area: Area2D) -> void:
@@ -146,3 +154,6 @@ func _on_sensor_area_exited(area: Area2D) -> void:
 		if area.has_method("set_prompt"):
 			area.set_prompt(false)
 		_dock_zone = null
+	elif area == _container_zone:
+		area.set_prompt(false)
+		_container_zone = null
