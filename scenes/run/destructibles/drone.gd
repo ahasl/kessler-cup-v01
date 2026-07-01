@@ -7,6 +7,7 @@ const MAX_HP       := 3
 const SPEED        := 110.0
 const CONTACT_FUEL := 10.0    # fuel drained when it rams the ship
 const DETECT_RADIUS := 420.0  # stays dormant until the ship comes this close
+const ALERT_OFFSET := Vector2(-6, -52)
 
 const LOOT_SCENE          := preload("res://scenes/run/collectibles/loot.tscn")
 const DAMAGE_NUMBER_SCENE := preload("res://scenes/run/damage_number.tscn")
@@ -30,9 +31,12 @@ func _ready() -> void:
 	_alert.text = "!"
 	_alert.add_theme_color_override("font_color", Color(1.0, 0.28, 0.18, 1.0))
 	_alert.add_theme_font_size_override("font_size", 18)
-	_alert.position = Vector2(-6, -52)
 	_alert.visible = false
-	add_child(_alert)
+	# Sibling, not child: the drone rotates to face the player, but the alert
+	# must stay fixed (no rotation, no orbiting around the drone). Deferred
+	# since the parent is still assembling its children while this one calls
+	# _ready.
+	get_parent().add_child.call_deferred(_alert)
 
 
 func set_targeted(on: bool) -> void:
@@ -53,7 +57,8 @@ func _physics_process(delta: float) -> void:
 		else:
 			return
 
-	# Pulse the alert while active.
+	# Pulse the alert while active, kept at a fixed offset above the drone.
+	_alert.global_position = global_position + ALERT_OFFSET
 	_alert.modulate.a = 0.65 + 0.35 * sin(Time.get_ticks_msec() * 0.008)
 
 	if to.length() > 1.0:
@@ -82,6 +87,7 @@ func _show_damage(amount: int) -> void:
 
 func _die() -> void:
 	_dead = true
+	_alert.queue_free()
 	var loot := LOOT_SCENE.instantiate()
 	loot.item_type = Items.Type.DATACHIP
 	get_parent().add_child(loot)
@@ -94,6 +100,7 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	if body.is_in_group("player"):
 		_dead = true
+		_alert.queue_free()
 		if body.has_method("environment_drain"):
 			body.environment_drain(CONTACT_FUEL)
 		queue_free()

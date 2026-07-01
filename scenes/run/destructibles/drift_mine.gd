@@ -5,11 +5,11 @@ extends CharacterBody2D
 const MAX_HP       := 4
 const DRIFT_SPEED  := 24.0
 const CONTACT_FUEL := 30.0
+const ALERT_OFFSET := Vector2(-6, -44)
 
 const DAMAGE_NUMBER_SCENE := preload("res://scenes/run/damage_number.tscn")
 
 @onready var _hitbox:    Area2D         = $Hitbox
-@onready var _light:     Polygon2D      = $Light
 @onready var _particles: CPUParticles2D = $Particles
 
 var hp:             int   = MAX_HP
@@ -28,19 +28,19 @@ func _ready() -> void:
 	_alert.text = "!"
 	_alert.add_theme_color_override("font_color", Color(1.0, 0.55, 0.1, 1.0))
 	_alert.add_theme_font_size_override("font_size", 18)
-	_alert.position = Vector2(-6, -44)
-	add_child(_alert)
+	# Sibling, not child: the mine spins constantly, but the alert must stay
+	# fixed (no rotation, no orbiting around the mine). Deferred since the
+	# parent is still assembling its children while this one calls _ready.
+	get_parent().add_child.call_deferred(_alert)
 
 
 func _physics_process(delta: float) -> void:
 	velocity = _dir * DRIFT_SPEED
 	move_and_slide()
 	rotation += delta * 0.6
-	_alert.rotation = -rotation  # counteract mine rotation so "!" stays upright
+	_alert.global_position = global_position + ALERT_OFFSET
 	var t := Time.get_ticks_msec() / 1000.0
 	var blink := 0.35 + 0.65 * (0.5 + 0.5 * sin(t * 6.0))
-	_light.modulate.a = blink
-	# Alert pulses in sync with the warning light.
 	_alert.modulate.a = blink
 
 
@@ -76,6 +76,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _explode() -> void:
 	_dead = true
+	_alert.queue_free()
 	_particles.reparent(get_parent())
 	_particles.emitting = true
 	_particles.finished.connect(_particles.queue_free)
