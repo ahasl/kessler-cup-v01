@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cj81ms7gxen5s" path="res://lib/Sci-Asset-Pack/StaticProps/Props.png" id="2_k2dbv"]
 
 [sub_resource type="RectangleShape2D" id="shape"]
-size = Vector2(14, 13)
+size = Vector2(14, 23)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ym755"]
 texture = ExtResource("2_k2dbv")
@@ -183,7 +183,7 @@ script = ExtResource("1")
 kind = "log"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2023387794]
-position = Vector2(-8, 6.5)
+position = Vector2(-8, 11.5)
 shape = SubResource("shape")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1124839807]
