@@ -1,36 +1,39 @@
 extends Control
-## Draggable valve wheel. Drag up to open it, drag down to close it —
+## Press-and-hold valve wheel. Hold the mouse button down on it to open it
+## (ramps up while held); release to close it again (ramps back down). Tap
+## briefly for a small nudge, hold longer for more flow — much easier to
+## control precisely with a mouse than dragging to an exact position.
 ## `openness` (0 = shut, 1 = fully open) is read every frame by the minigame
-## to compute flow. No clicking a "transfer" button: the valve itself is the
-## control, the way a real one would be.
+## to compute flow.
 
 signal changed(value: float)
 
-const DRAG_RANGE := 90.0  # px of vertical drag from fully closed to fully open
+const RAMP_TIME := 0.4  # seconds to go fully closed <-> fully open
 
 var openness: float = 0.0
 var locked: bool = false
 
-var _dragging := false
-var _drag_start_y := 0.0
-var _drag_start_value := 0.0
+var _held := false
 
 
 func _gui_input(event: InputEvent) -> void:
 	if locked:
 		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
-			_dragging = true
-			_drag_start_y = event.position.y
-			_drag_start_value = openness
-		else:
-			_dragging = false
-	elif event is InputEventMouseMotion and _dragging:
-		var delta_y: float = _drag_start_y - event.position.y  # drag UP = open more
-		openness = clampf(_drag_start_value + delta_y / DRAG_RANGE, 0.0, 1.0)
-		changed.emit(openness)
-		queue_redraw()
+		_held = event.pressed
+		accept_event()
+
+
+func _process(delta: float) -> void:
+	if locked:
+		if openness == 0.0:
+			return
+	var target := 1.0 if (_held and not locked) else 0.0
+	if is_equal_approx(openness, target):
+		return
+	openness = move_toward(openness, target, delta / RAMP_TIME)
+	changed.emit(openness)
+	queue_redraw()
 
 
 func _draw() -> void:
@@ -50,6 +53,6 @@ func _draw() -> void:
 	draw_line(center, center + Vector2(cos(angle), sin(angle)) * (r * 0.78), needle_col, 3.0)
 	draw_circle(center, r * 0.16, needle_col)
 
-	var border_col := Color(0.5, 0.88, 1.0, 0.85) if _dragging else Color(0.2, 0.3, 0.45, 0.6)
-	var border_width := 2.5 if _dragging else 1.2
+	var border_col := Color(0.5, 0.88, 1.0, 0.85) if _held else Color(0.2, 0.3, 0.45, 0.6)
+	var border_width := 2.5 if _held else 1.2
 	draw_arc(center, r, 0.0, TAU, 32, border_col, border_width)
