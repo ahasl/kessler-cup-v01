@@ -44,6 +44,7 @@ fill_to = Vector2(0.5, 0)
 [node name="BiomeHome" type="Node2D" unique_id=1087420747]
 script = ExtResource("1")
 biome_name = "Home Sector"
+size = Vector2(4600, 4600)
 
 [node name="Planetoid" parent="." unique_id=2123104779 instance=ExtResource("6")]
 position = Vector2(1200, 1050)
@@ -130,13 +131,13 @@ position = Vector2(1060, 660)
 position = Vector2(1140, 720)
 
 [node name="Foe1a" parent="." unique_id=800734089 instance=ExtResource("19")]
-position = Vector2(400, 900)
+position = Vector2(1950, 1950)
 
 [node name="Foe1b" parent="." unique_id=596146060 instance=ExtResource("19")]
-position = Vector2(-500, -1300)
+position = Vector2(-1950, -1950)
 
 [node name="Foe1c" parent="." unique_id=367652731 instance=ExtResource("19")]
-position = Vector2(1300, -300)
+position = Vector2(1950, -1950)
 
 [node name="Drone6" parent="." unique_id=1446045540 instance=ExtResource("4")]
 position = Vector2(1064, 728)
@@ -905,3 +906,156 @@ scale = Vector2(0.18, 0.18)
 texture = ExtResource("22")
 script = ExtResource("23")
 spin_speed = -0.07
+
+[node name="Container4" parent="." instance=ExtResource("17")]
+position = Vector2(-2000, 500)
+
+[node name="Container5" parent="." instance=ExtResource("17")]
+position = Vector2(2000, -700)
+
+[node name="OuterAsteroid1" parent="." instance=ExtResource("3")]
+position = Vector2(-1900, 900)
+
+[node name="OuterAsteroid2" parent="." instance=ExtResource("3")]
+position = Vector2(1850, 1000)
+
+[node name="OuterAsteroid3" parent="." instance=ExtResource("3")]
+position = Vector2(-900, -2000)
+
+[node name="OuterAsteroid4" parent="." instance=ExtResource("3")]
+position = Vector2(900, 2050)
+
+[node name="OuterGeode" parent="." instance=ExtResource("12")]
+position = Vector2(-2050, -700)
+
+[node name="OuterWreck1" parent="." instance=ExtResource("7")]
+position = Vector2(2050, 700)
+
+[node name="OuterWreck2" parent="." instance=ExtResource("7")]
+position = Vector2(700, -2050)
+
+[node name="BgOuter1" type="Sprite2D" parent="."]
+material = SubResource("bgsil")
+position = Vector2(-1589, 1095)
+rotation = -1.67
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("21")
+script = ExtResource("23")
+spin_speed = -0.036
+
+[node name="BgOuter2" type="Sprite2D" parent="."]
+material = SubResource("bgsil")
+position = Vector2(-2090, -410)
+rotation = 2.72
+scale = Vector2(0.19, 0.19)
+texture = ExtResource("21")
+script = ExtResource("23")
+spin_speed = 0.06
+
+[node name="BgOuter3" type="Sprite2D" parent="."]
+material = SubResource("bgsil")
+position = Vector2(573, -2088)
+rotation = 2.24
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("22")
+script = ExtResource("23")
+spin_speed = 0.062
+
+[node name="BgOuter4" type="Sprite2D" parent="."]
+material = SubResource("bgsil")
+position = Vector2(1167, -1607)
+rotation = -0.19
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("21")
+script = ExtResource("23")
+spin_speed = 0.049
+
+[node name="BgOuter5" type="Sprite2D" parent="."]
+material = SubResource("bgsil")
+position = Vector2(-1779, 903)
+rotation = -0.24
+scale = Vector2(0.23, 0.23)
+texture = ExtResource("21")
+script = ExtResource("23")
+spin_speed = 0.072
+
+[node name="BgOuter6" type="Sprite2D" parent="."]
+material = SubResource("bgsil")
+position = Vector2(-1211, 1511)
+rotation = 1.53
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("21")
+script = ExtResource("23")
+spin_speed = 0.095
+
+[node name="BgOuter7" type="Sprite2D" parent="."]
+material = SubResource("bgsil")
+position = Vector2(1984, -730)
+rotation = -2.42
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("21")
+script = ExtResource("23")
+spin_speed = -0.078
+
+[node name="BgOuter8" type="Sprite2D" parent="."]
+material = SubResource("bgsil")
+position = Vector2(1763, 986)
+rotation = -2.21
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("21")
+script = ExtResource("23")
+spin_speed = 0.057
+
+[node name="BgOuter9" type="Sprite2D" parent="."]
+material = SubResource("bgsil")
+position = Vector2(-1909, -283)
+rotation = 0.87
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("21")
+script = ExtResource("23")
+spin_speed = 0.068
+
+[node name="BgOuter10" type="Sprite2D" parent="."]
+material = SubResource("bgsil")
+position = Vector2(-1292, 1691)
+rotation = -2.29
+scale = Vector2(0.23, 0.23)
+texture = ExtResource("21")
+script = ExtResource("23")
+spin_speed = 0.072
+
+[node name="BgOuter11" type="Sprite2D" parent="."]
+material = SubResource("bgsil")
+position = Vector2(-1567, -1264)
+rotation = -2.36
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("21")
+script = ExtResource("23")
+spin_speed = -0.099
+
+[node name="BgOuter12" type="Sprite2D" parent="."]
+material = SubResource("bgsil")
+position = Vector2(1180, 1531)
+rotation = 1.68
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("22")
+script = ExtResource("23")
+spin_speed = 0.089
+
+[node name="BgOuter13" type="Sprite2D" parent="."]
+material = SubResource("bgsil")
+position = Vector2(1251, -1554)
+rotation = 0.01
+scale = Vector2(0.14, 0.14)
+texture = ExtResource("21")
+script = ExtResource("23")
+spin_speed = -0.088
+
+[node name="BgOuter14" type="Sprite2D" parent="."]
+material = SubResource("bgsil")
+position = Vector2(422, 1965)
+rotation = -0.71
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("22")
+script = ExtResource("23")
+spin_speed = 0.067

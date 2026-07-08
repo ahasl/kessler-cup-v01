@@ -34,7 +34,7 @@ color = Color(0.03, 0.04, 0.08, 1)
 position = Vector2(0, 0)
 
 [node name="BiomeBelt" parent="." instance=ExtResource("8")]
-position = Vector2(2600, 0)
+position = Vector2(3300, 0)
 
 [node name="PlayerShip" parent="." instance=ExtResource("2")]
 position = Vector2(0, 60)

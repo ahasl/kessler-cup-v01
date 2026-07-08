@@ -17,6 +17,7 @@ func _ready() -> void:
 	if tex_path != "":
 		var tex: Texture2D = load(tex_path)
 		_icon.texture = tex
+		_icon.modulate = Items.color(item_type)
 		var max_dim: float = max(tex.get_size().x, tex.get_size().y)
 		if max_dim > 0:
 			_icon.scale = Vector2(20.0 / max_dim, 20.0 / max_dim)

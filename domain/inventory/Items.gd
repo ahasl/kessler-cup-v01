@@ -38,8 +38,15 @@ static func color(item_type: int) -> Color:
 	return Color.WHITE
 
 
+## Icons are white silhouettes from the game-icons.net library (CC BY 3.0),
+## tinted at render time with color() above. New material = pick a slug from
+## https://game-icons.net, drop the SVG into lib/images/icons/, add a case here.
 static func texture_path(item_type: int) -> String:
 	match item_type:
-		Type.METAL: return "res://lib/images/metaltest.png"
-		Type.DATACHIP: return "res://lib/images/datachip.png"
+		Type.METAL: return "res://lib/images/icons/metal.svg"
+		Type.CRYSTAL: return "res://lib/images/icons/crystal.svg"
+		Type.DATACHIP: return "res://lib/images/icons/datachip.svg"
+		Type.ICE: return "res://lib/images/icons/ice.svg"
+		Type.PLASMA: return "res://lib/images/icons/plasma.svg"
+		Type.REINFORCED_ALLOY: return "res://lib/images/icons/reinforced_alloy.svg"
 	return ""

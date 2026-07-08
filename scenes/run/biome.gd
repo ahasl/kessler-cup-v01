@@ -1,3 +1,4 @@
+@tool
 class_name Biome
 extends Node2D
 ## A self-contained region of the space map. The biome's own scene holds its map
@@ -8,7 +9,10 @@ extends Node2D
 
 ## The biome's rectangle is centred on this node's position.
 @export var biome_name: String = "Sector"
-@export var size: Vector2 = Vector2(3600, 3600)
+@export var size: Vector2 = Vector2(3600, 3600):
+	set(value):
+		size = value
+		queue_redraw()
 
 ## If true, the player needs the Double Metal Alloy or suffers `penalty_drain`.
 @export var requires_alloy: bool = false
@@ -19,7 +23,17 @@ extends Node2D
 
 
 func _ready() -> void:
+	queue_redraw()
+	if Engine.is_editor_hint():
+		return
 	add_to_group("biome")
+
+
+func _draw() -> void:
+	# Visualizes the same rect world_rect() computes, centred on this node —
+	# a faint hint (visible in the editor too) of where the biome actually
+	# ends, so map elements don't end up placed outside it.
+	draw_rect(Rect2(-size * 0.5, size), Color(0.4, 0.85, 1, 0.07), false, 1.5)
 
 
 func world_rect() -> Rect2:

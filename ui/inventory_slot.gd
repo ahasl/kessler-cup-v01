@@ -26,6 +26,7 @@ func set_slot(data) -> void:
 	var tex_path := Items.texture_path(item_type)
 	if tex_path != "":
 		_icon.texture = load(tex_path) as Texture2D
+		_icon.modulate = Items.color(item_type)
 		_icon.visible = true
 		_color_swatch.visible = false
 	else:
