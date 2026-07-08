@@ -18,5 +18,15 @@ shape = SubResource("shape")
 color = Color(1, 1, 1, 1)
 polygon = PackedVector2Array(8, 0, 5.66, 5.66, 0, 8, -5.66, 5.66, -8, 0, -5.66, -5.66, 0, -8, 5.66, -5.66)
 
+[node name="Glow" type="Polygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(14, 0, 7, 12.1, -7, 12.1, -14, 0, -7, -12.1, 7, -12.1)
+
+[node name="Ring" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(14, 0, 7, 12.1, -7, 12.1, -14, 0, -7, -12.1, 7, -12.1, 14, 0)
+width = 1.5
+joint_mode = 1
+
 [node name="Icon" type="Sprite2D" parent="."]
 visible = false

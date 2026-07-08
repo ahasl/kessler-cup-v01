@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://ui/run_hud.gd" id="1"]
 [ext_resource type="PackedScene" path="res://ui/inventory_view.tscn" id="2"]
 [ext_resource type="Shader" path="res://shaders/danger_vignette.gdshader" id="3"]
+[ext_resource type="Texture2D" path="res://lib/images/icons/fuel.svg" id="4"]
 
 [sub_resource type="ShaderMaterial" id="danger"]
 shader = ExtResource("3")
@@ -35,7 +36,20 @@ offset_bottom = 96.0
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="FuelTitle" type="Label" parent="HUD/FuelPanel/VBox"]
+[node name="FuelTitleRow" type="HBoxContainer" parent="HUD/FuelPanel/VBox"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 6
+
+[node name="Icon" type="TextureRect" parent="HUD/FuelPanel/VBox/FuelTitleRow"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("4")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(0.3, 1, 0.9, 1)
+
+[node name="FuelTitle" type="Label" parent="HUD/FuelPanel/VBox/FuelTitleRow"]
 layout_mode = 2
 text = "FUEL"
 horizontal_alignment = 1

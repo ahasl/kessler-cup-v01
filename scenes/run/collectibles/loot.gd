@@ -3,7 +3,9 @@ extends Area2D
 ## inventory. Visual/collision live in loot.tscn; colour is set per item type.
 
 @onready var _body: Polygon2D = $Body
-@onready var _icon: Sprite2D = $Icon
+@onready var _glow: Polygon2D = $Glow
+@onready var _ring: Line2D    = $Ring
+@onready var _icon: Sprite2D  = $Icon
 
 var item_type: int = Items.Type.METAL
 var amount: int = 1
@@ -23,6 +25,11 @@ func _ready() -> void:
 			_icon.scale = Vector2(20.0 / max_dim, 20.0 / max_dim)
 		_icon.visible = true
 		_body.visible = false
+		var col := Items.color(item_type)
+		_glow.color = Color(col.r, col.g, col.b, 0.18)
+		_glow.visible = true
+		_ring.default_color = col
+		_ring.visible = true
 	else:
 		_body.color = Items.color(item_type)
 

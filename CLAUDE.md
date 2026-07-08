@@ -136,6 +136,29 @@ passes through them (contact handled by the drone's own hitbox, no physical boun
   Add more scenes to `DROP_SCENES` for variety — no other code needs to change.
 - All three are placed inside biome scenes (e.g. drones, containers in `biome_home.tscn`).
 
+## Visual style (run domain)
+Space (ship, destructibles, decoration, docking pad) is **arcade wireframe**:
+near-black `Polygon2D` fill (barely visible against the starfield) + a bright
+`Line2D` outline that catches the `glow.tres` bloom — the outline carries ALL the
+color, the fill never does. No raster art, 3-8 vertices per shape (Line2D "soft"
+elements like rings/halos are exempt). Only **4 semantic outline colors** exist in
+the whole game — reuse these, don't invent new ones:
+- white-grey `(0.75, 0.8, 0.85)` — neutral (asteroids, wreckage)
+- cyan `(0.4, 0.9, 1)` — player / friendly / valuable pickups (ship, crystal, container, docking pad)
+- red `(1, 0.35, 0.3)` — any threat (drone, foe1, drift mine — tell them apart by shape, not color)
+- gold `(1, 0.9, 0.5)` — quest-relevant (probe, blueprint)
+No 5th color. If a new object doesn't fit one of these four semantically, that's a
+sign it needs its own category discussion, not a new hue picked ad hoc.
+
+Material/fuel icons are the deliberate exception — flat SVG silhouettes from
+game-icons.net (`lib/images/icons/`, see `Items.gd texture_path()`), tinted at
+render time via `Items.color()`. Floating pickups built from these icons (e.g.
+`loot.tscn`) still get the same halo-glow + outline-ring treatment as everything
+else so they don't read as "flat stickers" — see the `Glow`/`Ring` nodes there.
+Third-party icon attribution → `CREDITS.md`, keep it updated when adding icons.
+The station interior (`scenes/station/`) still uses a purchased pixel-art tileset
++ animated character sprite — a separate, unconverted style, left as-is for now.
+
 ## Conventions
 - snake_case files; `class_name` PascalCase (Items, Inventory, Upgrades, Interactable).
 - Match surrounding comment density / idiom. Keep behaviour in scripts, visuals/collision in scenes.

@@ -12,8 +12,9 @@ const ALERT_OFFSET := Vector2(-6, -52)
 const LOOT_SCENE          := preload("res://scenes/run/collectibles/loot.tscn")
 const DAMAGE_NUMBER_SCENE := preload("res://scenes/run/damage_number.tscn")
 
-@onready var _smoke:  CPUParticles2D = $Smoke
-@onready var _hitbox: Area2D         = $Hitbox
+@onready var _smoke:    CPUParticles2D = $Smoke
+@onready var _hitbox:   Area2D         = $Hitbox
+@onready var _name_tag: Label          = $NameTag
 
 var hp:             int    = MAX_HP
 var _player:        Node2D = null
@@ -40,10 +41,12 @@ func _ready() -> void:
 
 
 func set_targeted(on: bool) -> void:
-	modulate = _base_modulate * 1.6 if on else _base_modulate
+	modulate = _base_modulate * 1.3 if on else _base_modulate
+	_name_tag.visible = on
 
 
 func _physics_process(delta: float) -> void:
+	_name_tag.global_position = global_position
 	if _player == null or not is_instance_valid(_player):
 		_player = get_tree().get_first_node_in_group("player")
 		if _player == null:

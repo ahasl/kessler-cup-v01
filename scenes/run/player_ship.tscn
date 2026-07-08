@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://b3amjs6nidb3y"]
 
 [ext_resource type="Script" uid="uid://rd2ffxilinq6" path="res://scenes/run/player_ship.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://dr8nnj4f8ix7r" path="res://lib/images/objects/player.png" id="2"]
 
 [sub_resource type="CircleShape2D" id="body"]
 radius = 26.076809
@@ -16,10 +15,26 @@ script = ExtResource("1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=36322691]
 shape = SubResource("body")
 
-[node name="Body" type="Sprite2D" parent="." unique_id=202953748]
-rotation = 1.5707964
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2")
+[node name="Body" type="Node2D" parent="." unique_id=202953748]
+
+[node name="Thruster" type="Polygon2D" parent="Body"]
+color = Color(0.3, 0.75, 1, 0.5)
+polygon = PackedVector2Array(-14, -6, -30, 0, -14, 6)
+
+[node name="Hull" type="Polygon2D" parent="Body"]
+color = Color(0.05, 0.07, 0.1, 1)
+polygon = PackedVector2Array(30, 0, -14, -20, -6, -6, -6, 6, -14, 20)
+
+[node name="Outline" type="Line2D" parent="Body"]
+points = PackedVector2Array(30, 0, -14, -20, -6, -6, -6, 6, -14, 20, 30, 0)
+width = 2.0
+default_color = Color(0.4, 0.9, 1, 1)
+joint_mode = 1
+
+[node name="Cockpit" type="Line2D" parent="Body"]
+points = PackedVector2Array(10, 0, 0, -5, -6, 0, 0, 5, 10, 0)
+width = 1.5
+default_color = Color(0.4, 0.9, 1, 1)
 
 [node name="PickupSensor" type="Area2D" parent="." unique_id=304463349]
 collision_layer = 0

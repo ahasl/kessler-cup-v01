@@ -8,8 +8,9 @@ const DAMAGE_NUMBER_SCENE := preload("res://scenes/run/damage_number.tscn")
 @export var max_hp:      int = 10
 @export var drop_amount: int = 2
 
-@onready var _body:      Sprite2D       = $Body
+@onready var _body:      Node2D         = $Body
 @onready var _particles: CPUParticles2D = $Particles
+@onready var _name_tag:  Label          = $NameTag
 
 var hp: int = 0
 var _spin:          float   = 0.0
@@ -29,13 +30,16 @@ func _ready() -> void:
 
 
 func set_targeted(on: bool) -> void:
-	modulate = _base_modulate * 1.6 if on else _base_modulate
+	modulate = _base_modulate * 1.3 if on else _base_modulate
+	_name_tag.visible = on
 
 
 func _physics_process(delta: float) -> void:
 	rotation += _spin * delta
 	if _drift != Vector2.ZERO:
 		position += _drift * delta
+	_name_tag.global_position = global_position
+	_name_tag.rotation = 0.0
 
 
 func take_damage(amount: int) -> void:

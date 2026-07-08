@@ -15,7 +15,7 @@ script = ExtResource("1")
 shape = SubResource("shape")
 
 [node name="Hub" type="Polygon2D" parent="."]
-color = Color(0.1, 0.22, 0.26, 1)
+color = Color(0.04, 0.08, 0.09, 1)
 polygon = PackedVector2Array(-34, -20, 34, -20, 44, 0, 34, 20, -34, 20, -44, 0)
 
 [node name="HubOutline" type="Line2D" parent="."]
