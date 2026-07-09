@@ -13,6 +13,10 @@ var day: int = 1
 var run_active: bool = false
 var runs_today: int = 0
 
+## Records across all runs ever (Dave the Diver style post-run recap).
+var best_run_time: float = 0.0
+var best_distance: float = 0.0
+
 ## Target scene the loading screen should switch to once it's done.
 var _next_scene: String = ""
 
@@ -26,18 +30,25 @@ func _ready() -> void:
 # --- Save provider (run-independent meta state) -----------------------------
 
 func save_data() -> Dictionary:
-	return {"day": day, "runs_today": runs_today}
+	return {
+		"day": day, "runs_today": runs_today,
+		"best_run_time": best_run_time, "best_distance": best_distance,
+	}
 
 
 func load_data(data: Dictionary) -> void:
 	day = int(data.get("day", 1))
 	runs_today = int(data.get("runs_today", 0))
+	best_run_time = float(data.get("best_run_time", 0.0))
+	best_distance = float(data.get("best_distance", 0.0))
 
 
 func reset_data() -> void:
 	day = 1
 	runs_today = 0
 	run_active = false
+	best_run_time = 0.0
+	best_distance = 0.0
 
 
 # App-level input (window concerns, not gameplay). F11 toggles fullscreen.
@@ -88,7 +99,7 @@ func start_run() -> void:
 	_load_scene(SPACE_SCENE)
 
 
-func _on_player_docked() -> void:
+func _on_player_docked(run_time: float, max_distance: float) -> void:
 	if not run_active:
 		return
 	# SUCCESS: run loot is extracted into persistent station storage, and any
@@ -98,19 +109,42 @@ func _on_player_docked() -> void:
 	EventBus.run_ended.emit(true)
 	EventBus.say_id("docked")
 	ProgressManager.commit_pending()
-	goto_station()
+	_report_run_stats(run_time, max_distance)
 
 
-func _on_player_died() -> void:
+func _on_player_died(_run_time: float, _max_distance: float) -> void:
 	if not run_active:
 		return
-	# FAILURE: run loot AND any carried blueprints are lost.
+	# FAILURE: run loot AND any carried blueprints are lost. No run-summary
+	# recap here on purpose — that celebration is for a successful extraction,
+	# not for dying.
 	InventoryManager.discard_run()
 	ProgressManager.discard_pending()
 	run_active = false
 	EventBus.run_ended.emit(false)
 	EventBus.say_id("died", "warning")
 	goto_station()
+
+
+## Compares this run against the all-time records, updates them, and hands the
+## recap to the run-summary UI (still in the space scene). The station
+## transition itself waits for the UI to call `goto_station()` once dismissed.
+func _report_run_stats(run_time: float, max_distance: float) -> void:
+	var time_record := run_time > best_run_time
+	var distance_record := max_distance > best_distance
+	var stats := {
+		"run_time": run_time,
+		"best_run_time": max(run_time, best_run_time),
+		"time_record": time_record,
+		"max_distance": max_distance,
+		"best_distance": max(max_distance, best_distance),
+		"distance_record": distance_record,
+	}
+	if time_record:
+		best_run_time = run_time
+	if distance_record:
+		best_distance = max_distance
+	EventBus.run_summary_ready.emit(stats)
 
 
 ## Leaving a run early via the pause menu's "Main Menu" option — same cleanup

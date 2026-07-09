@@ -28,6 +28,8 @@
 [ext_resource type="PackedScene" path="res://scenes/run/destructibles/ice_asteroid.tscn" id="27"]
 [ext_resource type="PackedScene" path="res://scenes/run/destructibles/plasma_vent.tscn" id="28"]
 [ext_resource type="PackedScene" path="res://scenes/run/destructibles/interceptor.tscn" id="29"]
+[ext_resource type="PackedScene" path="res://scenes/run/decoration/space_critter.tscn" id="30"]
+[ext_resource type="PackedScene" path="res://scenes/run/decoration/derelict_freighter.tscn" id="31"]
 
 [sub_resource type="ShaderMaterial" id="bgsil"]
 shader = ExtResource("24")
@@ -1125,3 +1127,63 @@ position = Vector2(1200, -1650)
 
 [node name="Interceptor3" parent="." instance=ExtResource("29")]
 position = Vector2(0, -350)
+
+[node name="Critter1" parent="." instance=ExtResource("30")]
+position = Vector2(-793, -1571)
+tint = Color(0.4, 0.95, 1, 1)
+
+[node name="Critter2" parent="." instance=ExtResource("30")]
+position = Vector2(679, -1924)
+tint = Color(0.3, 0.72, 0.85, 1)
+
+[node name="Critter3" parent="." instance=ExtResource("30")]
+position = Vector2(161, -604)
+tint = Color(0.4, 0.95, 1, 1)
+
+[node name="Critter4" parent="." instance=ExtResource("30")]
+position = Vector2(-1989, 33)
+tint = Color(0.3, 0.72, 0.85, 1)
+
+[node name="Critter5" parent="." instance=ExtResource("30")]
+position = Vector2(-2081, -299)
+tint = Color(0.4, 0.95, 1, 1)
+
+[node name="Critter6" parent="." instance=ExtResource("30")]
+position = Vector2(-1936, -1842)
+tint = Color(0.3, 0.72, 0.85, 1)
+
+[node name="Critter7" parent="." instance=ExtResource("30")]
+position = Vector2(-340, 1471)
+tint = Color(0.4, 0.95, 1, 1)
+
+[node name="Critter8" parent="." instance=ExtResource("30")]
+position = Vector2(-1693, -1245)
+tint = Color(0.3, 0.72, 0.85, 1)
+
+[node name="Critter9" parent="." instance=ExtResource("30")]
+position = Vector2(573, 2015)
+tint = Color(0.4, 0.95, 1, 1)
+
+[node name="Critter10" parent="." instance=ExtResource("30")]
+position = Vector2(2143, -2040)
+tint = Color(0.3, 0.72, 0.85, 1)
+
+[node name="Critter11" parent="." instance=ExtResource("30")]
+position = Vector2(-1601, -1720)
+tint = Color(0.4, 0.95, 1, 1)
+
+[node name="Critter12" parent="." instance=ExtResource("30")]
+position = Vector2(-862, 1423)
+tint = Color(0.3, 0.72, 0.85, 1)
+
+[node name="Critter13" parent="." instance=ExtResource("30")]
+position = Vector2(-1437, 367)
+tint = Color(0.4, 0.95, 1, 1)
+
+[node name="Critter14" parent="." instance=ExtResource("30")]
+position = Vector2(215, -1967)
+tint = Color(0.3, 0.72, 0.85, 1)
+
+[node name="Derelict" parent="." instance=ExtResource("31")]
+position = Vector2(-2200, 2100)
+rotation = 0.4

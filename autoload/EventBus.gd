@@ -7,8 +7,15 @@ signal asteroid_destroyed(world_position: Vector2)
 signal loot_collected(item_type: int, amount: int)
 signal run_started
 signal run_ended(success: bool)
-signal player_docked
-signal player_died
+## run_time/max_distance are this run's final stats, reported by the RUN
+## domain so the META domain (GameManager) can compare against records
+## without holding a direct reference into the run scene.
+signal player_docked(run_time: float, max_distance: float)
+signal player_died(run_time: float, max_distance: float)
+## Fired once GameManager has compared this run's stats against the saved
+## records — the run-summary UI (still in the space scene) listens for this
+## and shows the recap before the station transition happens.
+signal run_summary_ready(stats: Dictionary)
 signal fuel_changed(current: float, maximum: float)
 ## Visual danger from leaving charted space. 0 = safe, 1 = about to die.
 signal edge_danger(level: float)

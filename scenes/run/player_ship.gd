@@ -30,6 +30,10 @@ var _fire_timer: float = 0.0
 var _low_fuel_warned: bool = false
 var _target: Node = null
 
+## Only counts actual flight time in space — used for the post-run summary.
+var run_time: float = 0.0
+var max_distance: float = 0.0
+
 
 func _ready() -> void:
 	add_to_group("player")
@@ -67,6 +71,9 @@ func _physics_process(delta: float) -> void:
 	velocity = velocity.move_toward(target, rate * delta)
 	move_and_slide()
 	_update_engine_fx()
+
+	run_time += delta
+	max_distance = max(max_distance, global_position.length())
 
 	_handle_actions(delta)
 	_update_target()
@@ -112,7 +119,7 @@ func _handle_actions(delta: float) -> void:
 		_fire_timer = FIRE_COOLDOWN
 	if Input.is_action_just_pressed("interact"):
 		if _dock_zone != null:
-			EventBus.player_docked.emit()
+			EventBus.player_docked.emit(run_time, max_distance)
 		elif _container_zone != null:
 			_container_zone.open()
 			_container_zone = null
@@ -151,7 +158,7 @@ func _consume_fuel(amount: float) -> void:
 		EventBus.say_id("low_fuel", "warning")
 	if fuel <= 0.0:
 		can_control = false
-		EventBus.player_died.emit()
+		EventBus.player_died.emit(run_time, max_distance)
 
 
 func _fire_weapon() -> void:

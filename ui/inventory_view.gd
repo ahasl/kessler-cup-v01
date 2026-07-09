@@ -1,12 +1,10 @@
 extends PanelContainer
 ## Reusable inventory display. Bound to any Inventory (station or run) via
 ## `bind`. Refreshes on the relevant EventBus signals. The 5 slot views are
-## inventory_slot instances placed in inventory_view.tscn.
+## inventory_slot instances placed in inventory_view.tscn. No heading — just
+## the slots (see STYLE_GUIDE.md: no game shows a label over its hotbar).
 
-@export var title: String = "INVENTORY"
-
-@onready var _title_label: Label = $VBox/Title
-@onready var _slots: HBoxContainer = $VBox/Slots
+@onready var _slots: HBoxContainer = $Slots
 
 var _inventory: Inventory = null
 
@@ -17,10 +15,8 @@ func _ready() -> void:
 	_refresh()
 
 
-func bind(inventory: Inventory, p_title := "") -> void:
+func bind(inventory: Inventory) -> void:
 	_inventory = inventory
-	if p_title != "":
-		title = p_title
 	_refresh()
 
 
@@ -31,7 +27,6 @@ func _on_loot(_item_type: int, _amount: int) -> void:
 func _refresh() -> void:
 	if not is_node_ready():
 		return
-	_title_label.text = title
 	var slot_nodes := _slots.get_children()
 	for i in slot_nodes.size():
 		var data = null

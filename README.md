@@ -2,8 +2,8 @@
 
 A 2D top-down space **extraction roguelite** foundation built in **Godot 4.6**.
 
-Loop inspiration: *Dave the Diver* (run → return → upgrade), *Slay the Spire*
-(progression), *Nova Drift* (minimal neon combat feel).
+Loop inspiration: *Dave the Diver* (run → return → upgrade, exploration charm),
+*Slay the Spire* (progression).
 
 > This is a clean, modular **Domain-Driven Design** foundation — a playable
 > prototype of the core loop, intentionally **not** a finished game.

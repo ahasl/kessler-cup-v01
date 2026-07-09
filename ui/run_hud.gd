@@ -17,7 +17,7 @@ var _edge_danger := 0.0
 
 
 func _ready() -> void:
-	_loot_view.bind(InventoryManager.run, "CARRYING")
+	_loot_view.bind(InventoryManager.run)
 	EventBus.fuel_changed.connect(_on_fuel_changed)
 	EventBus.edge_danger.connect(_on_edge_danger)
 	var max_fuel := UpgradeManager.get_max_fuel()

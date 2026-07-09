@@ -59,7 +59,7 @@ func _update_edge(pos: Vector2) -> void:
 			EventBus.say_id("edge", "warning")
 		if d_out > DEATH_MARGIN:
 			_ended = true
-			EventBus.player_died.emit()
+			EventBus.player_died.emit(_player.run_time, _player.max_distance)
 	else:
 		_edge_warned = false
 	EventBus.edge_danger.emit(level)

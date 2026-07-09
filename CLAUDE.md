@@ -1,7 +1,7 @@
 # Kessler Cup — Project Guide (for Claude)
 
 2D top-down space **extraction roguelite** in **Godot 4.6** (run → return → upgrade).
-Inspiration: Dave the Diver (loop), Slay the Spire (progression), Nova Drift (neon feel).
+Inspiration: Dave the Diver (loop, exploration charm), Slay the Spire (progression).
 This is a clean, modular **DDD foundation** — prioritise **extensibility**, never hard-code
 what should be data, never mix the two worlds (see below).
 

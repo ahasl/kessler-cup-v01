@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://scenes/run/biomes/biome_belt.tscn" id="8"]
 [ext_resource type="Script" path="res://scenes/run/decoration/comet_spawner.gd" id="9"]
 [ext_resource type="PackedScene" path="res://ui/pause_menu.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://ui/run_summary.tscn" id="11"]
 
 [node name="Space" type="Node2D"]
 script = ExtResource("1")
@@ -45,3 +46,5 @@ position = Vector2(0, 60)
 
 [node name="CometSpawner" type="Node" parent="."]
 script = ExtResource("9")
+
+[node name="RunSummary" parent="." instance=ExtResource("11")]
