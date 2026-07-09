@@ -144,18 +144,11 @@ asteroids/wreckage and with each other, and can't drift/dash through solid terra
 - All three are placed inside biome scenes (e.g. drones, containers in `biome_home.tscn`).
 
 ## Visual style (run domain)
-Space (ship, destructibles, decoration, docking pad) is **arcade wireframe**:
-near-black `Polygon2D` fill (barely visible against the starfield) + a bright
-`Line2D` outline that catches the `glow.tres` bloom — the outline carries ALL the
-color, the fill never does. No raster art, 3-8 vertices per shape (Line2D "soft"
-elements like rings/halos are exempt). Only **4 semantic outline colors** exist in
-the whole game — reuse these, don't invent new ones:
-- white-grey `(0.75, 0.8, 0.85)` — neutral (asteroids, wreckage)
-- cyan `(0.4, 0.9, 1)` — player / friendly / valuable pickups (ship, crystal, container, docking pad)
-- red `(1, 0.35, 0.3)` — any threat (drone, foe1, drift mine — tell them apart by shape, not color)
-- gold `(1, 0.9, 0.5)` — quest-relevant (probe, blueprint)
-No 5th color. If a new object doesn't fit one of these four semantically, that's a
-sign it needs its own category discussion, not a new hue picked ad hoc.
+Full contract (shapes, the 4-color outline system, material vs. semantic color,
+labeling, motion/juice rules) lives in **`STYLE_GUIDE.md`** — read it before
+touching anything visual in `scenes/run/`, and edit it in the same change if a
+new object doesn't fit an existing rule. Station interior is out of scope for
+that document (separate pixel-art style, untouched).
 
 Material/fuel icons are the deliberate exception — flat SVG silhouettes from
 game-icons.net (`lib/images/icons/`, see `Items.gd texture_path()`), tinted at

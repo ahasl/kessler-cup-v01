@@ -13,6 +13,9 @@ const LASER_SCENE := preload("res://scenes/run/laser.tscn")
 
 @onready var _pickup_sensor: Area2D = $PickupSensor
 @onready var _aim_ray: RayCast2D = $AimRay
+@onready var _engine_trail: CPUParticles2D = $Body/EngineTrail
+@onready var _flare_up: Polygon2D = $Body/FlareUp
+@onready var _flare_down: Polygon2D = $Body/FlareDown
 
 var max_fuel: float = 100.0
 var fuel: float = 100.0
@@ -63,9 +66,24 @@ func _physics_process(delta: float) -> void:
 
 	velocity = velocity.move_toward(target, rate * delta)
 	move_and_slide()
+	_update_engine_fx()
 
 	_handle_actions(delta)
 	_update_target()
+
+
+## Feeds back actual movement direction (relative to facing) so thrust/strafe
+## reads visually instead of just being implied by position change.
+func _update_engine_fx() -> void:
+	var local_v := velocity.rotated(-rotation)
+	var forward_ratio := clampf(local_v.x / max_speed, 0.0, 1.0)
+	_engine_trail.emitting = forward_ratio > 0.05
+	_engine_trail.initial_velocity_min = 60.0 + 140.0 * forward_ratio
+	_engine_trail.initial_velocity_max = 140.0 + 200.0 * forward_ratio
+
+	var lateral_ratio := clampf(-local_v.y / max_speed, -1.0, 1.0)
+	_flare_up.color.a   = clampf(-lateral_ratio, 0.0, 1.0) * 0.8
+	_flare_down.color.a = clampf(lateral_ratio, 0.0, 1.0) * 0.8
 
 
 # Highlights the destructible the ship is aiming at (not the planet).
