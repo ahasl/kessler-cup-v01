@@ -1,0 +1,77 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/run/destructibles/crystal_geode.gd" id="1"]
+
+[sub_resource type="CircleShape2D" id="shape"]
+radius = 26.0
+
+[node name="PlasmaVent" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1")
+max_hp = 14
+drop_amount = 3
+item_type = 4
+flash_color = Color(0.7, 0.35, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("shape")
+
+[node name="Spike1" type="Polygon2D" parent="."]
+color = Color(0.06, 0.04, 0.09, 1)
+polygon = PackedVector2Array(6, -8, 20, -26, 10, -14, 22, -12, 4, 12, 10, -2)
+
+[node name="Spike1Outline" type="Line2D" parent="."]
+points = PackedVector2Array(6, -8, 20, -26, 10, -14, 22, -12, 4, 12, 10, -2, 6, -8)
+width = 1.5
+default_color = Color(0.7, 0.35, 1, 1)
+joint_mode = 1
+
+[node name="Spike2" type="Polygon2D" parent="."]
+color = Color(0.06, 0.04, 0.09, 1)
+polygon = PackedVector2Array(-6, 8, -20, 26, -10, 14, -22, 12, -4, -12, -10, 2)
+
+[node name="Spike2Outline" type="Line2D" parent="."]
+points = PackedVector2Array(-6, 8, -20, 26, -10, 14, -22, 12, -4, -12, -10, 2, -6, 8)
+width = 1.5
+default_color = Color(0.7, 0.35, 1, 1)
+joint_mode = 1
+
+[node name="Body" type="Polygon2D" parent="."]
+color = Color(0.06, 0.04, 0.09, 1)
+polygon = PackedVector2Array(16, 0, 8, 13.9, -8, 13.9, -16, 0, -8, -13.9, 8, -13.9)
+
+[node name="Outline" type="Line2D" parent="."]
+points = PackedVector2Array(16, 0, 8, 13.9, -8, 13.9, -16, 0, -8, -13.9, 8, -13.9, 16, 0)
+width = 2.0
+default_color = Color(0.85, 0.6, 1, 1)
+joint_mode = 1
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 18
+one_shot = true
+explosiveness = 1.0
+lifetime = 0.6
+direction = Vector2(1, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 80.0
+initial_velocity_max = 190.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color = Color(0.75, 0.4, 1, 1)
+
+[node name="NameTag" type="Label" parent="."]
+top_level = true
+visible = false
+offset_left = -50.0
+offset_top = -46.0
+offset_right = 50.0
+offset_bottom = -28.0
+text = "Plasma Vent"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.85, 0.6, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 13

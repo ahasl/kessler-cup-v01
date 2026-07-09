@@ -31,8 +31,9 @@ A Godot 4.6.2 binary is installed locally:
 autoload/   EventBus, SaveManager, InventoryManager, UpgradeManager, ProgressManager, GameManager  (load order matters)
 domain/     Items.gd, Inventory.gd (inventory) · Upgrades.gd (upgrade catalog)  — pure, no nodes
 scenes/run/      space, player_ship, laser, damage_number, docking_pad, biome.gd  (core/functional)
-scenes/run/destructibles/  asteroid (+ small/rich/splitting variants), crystal_geode, wreckage,
-                    drift_mine, probe, drone  — objects the player can shoot/destroy
+scenes/run/destructibles/  asteroid (+ small/rich/splitting/ice variants), crystal_geode,
+                    plasma_vent, wreckage, drift_mine, probe, drone, foe1, interceptor
+                    — objects the player can shoot/destroy or must dodge
 scenes/run/collectibles/   loot, fuel_cell, container, blueprint  — objects the player picks up
 scenes/run/decoration/     planetoid, gas_giant, nebula, comet(+spawner), dust_field, god_rays,
                     space_critter, space_parallax  — purely visual, no gameplay
@@ -67,7 +68,11 @@ home-station dock + E to extract. Out of fuel or straying past a biome edge = ru
 (rescue drone, cargo gone). Loading screen on every station↔space switch.
 
 ## Content / tuning quick-reference
-- Materials (`Items.gd`): Metal, Crystal, Data Fragment (weighted drops). Add = enum + 3 cases.
+- Materials (`Items.gd`): Metal, Crystal, Data Fragment, Ice, Plasma, Reinforced Alloy. Add =
+  enum + 3 cases (name/color/icon). `asteroid.gd` and `crystal_geode.gd` take the dropped
+  `item_type` as an `@export`, so a new rock/node material source is a new scene reusing one
+  of those scripts with a different `item_type`/shape/color — no script changes (see
+  `ice_asteroid.tscn`, `plasma_vent.tscn`).
 - Upgrades (`Upgrades.gd` CATALOG): `fuel_tank` (+20 fuel, ×10; 20 Metal/3 Crystal/1 Data),
   `metal_alloy` (unlock biomes; 15 Metal), `station_level` (category "station"; 100 Metal/
   20 Crystal/5 Data — expands the station, see below). Costs scale with level via `cost_for`.
@@ -122,9 +127,11 @@ entry in `DroneBay.gd`.
 
 ## Collision layers (run domain)
 1 = player ship · 2 = asteroids (solid) · 4 = pickups (loot/docking/fuel_cell, Area2D) ·
-8 = enemies (drone body). Ship body mask=2; ship pickup-sensor mask=4; laser mask=10 (2+8,
-hits anything with `take_damage`); drone hitbox mask=1. Enemies are NOT layer 2, so the ship
-passes through them (contact handled by the drone's own hitbox, no physical bounce).
+8 = enemies (drone/foe1/interceptor/drift_mine body). Ship body mask=2; ship pickup-sensor
+mask=4; laser mask=10 (2+8, hits anything with `take_damage`); drone hitbox mask=1. Enemies
+are NOT layer 2, so the ship passes through them (contact handled by their own hitbox, no
+physical bounce) — but enemies themselves have mask=10 (2+8) so they solidly collide with
+asteroids/wreckage and with each other, and can't drift/dash through solid terrain.
 
 ## Enemies & pickups (modular content)
 - `drone.tscn` (enemy): chases the player, drains `CONTACT_FUEL` on touch (no weapons), 5 HP,

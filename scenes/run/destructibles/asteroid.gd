@@ -1,12 +1,14 @@
 extends StaticBody2D
-## Run-domain asteroid. HP and metal drop amount are set per scene via exports,
-## so small_asteroid.tscn can reuse this script with different values.
+## Run-domain asteroid. HP, drop material and drop amount are set per scene via
+## exports, so small_asteroid.tscn / ice_asteroid.tscn can reuse this script
+## with different values.
 
 const LOOT_SCENE         := preload("res://scenes/run/collectibles/loot.tscn")
 const DAMAGE_NUMBER_SCENE := preload("res://scenes/run/damage_number.tscn")
 
 @export var max_hp:      int = 10
 @export var drop_amount: int = 2
+@export var item_type:   Items.Type = Items.Type.METAL
 
 @onready var _body:      Node2D         = $Body
 @onready var _particles: CPUParticles2D = $Particles
@@ -64,7 +66,7 @@ func _destroy() -> void:
 	_dead = true
 	EventBus.asteroid_destroyed.emit(global_position)
 	var loot := LOOT_SCENE.instantiate()
-	loot.item_type  = Items.Type.METAL
+	loot.item_type  = item_type
 	loot.amount     = drop_amount
 	get_parent().add_child(loot)
 	loot.global_position = global_position

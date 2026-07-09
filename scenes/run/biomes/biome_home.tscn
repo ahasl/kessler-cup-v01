@@ -25,6 +25,9 @@
 [ext_resource type="Shader" path="res://shaders/silhouette.gdshader" id="24"]
 [ext_resource type="PackedScene" path="res://scenes/run/decoration/bg_planet.tscn" id="25"]
 [ext_resource type="PackedScene" path="res://scenes/run/decoration/gas_giant.tscn" id="26"]
+[ext_resource type="PackedScene" path="res://scenes/run/destructibles/ice_asteroid.tscn" id="27"]
+[ext_resource type="PackedScene" path="res://scenes/run/destructibles/plasma_vent.tscn" id="28"]
+[ext_resource type="PackedScene" path="res://scenes/run/destructibles/interceptor.tscn" id="29"]
 
 [sub_resource type="ShaderMaterial" id="bgsil"]
 shader = ExtResource("24")
@@ -1059,3 +1062,66 @@ scale = Vector2(0.22, 0.22)
 texture = ExtResource("22")
 script = ExtResource("23")
 spin_speed = 0.067
+
+[node name="IceAsteroid1" parent="." instance=ExtResource("27")]
+position = Vector2(-1012, -1246)
+
+[node name="IceAsteroid2" parent="." instance=ExtResource("27")]
+position = Vector2(1765, -1859)
+
+[node name="IceAsteroid3" parent="." instance=ExtResource("27")]
+position = Vector2(-351, -2116)
+
+[node name="IceAsteroid4" parent="." instance=ExtResource("27")]
+position = Vector2(-1266, 24)
+
+[node name="IceAsteroid5" parent="." instance=ExtResource("27")]
+position = Vector2(-2131, -1355)
+
+[node name="IceAsteroid6" parent="." instance=ExtResource("27")]
+position = Vector2(-1258, 402)
+
+[node name="IceAsteroid7" parent="." instance=ExtResource("27")]
+position = Vector2(1392, -2221)
+
+[node name="IceAsteroid8" parent="." instance=ExtResource("27")]
+position = Vector2(-719, -1550)
+
+[node name="IceAsteroid9" parent="." instance=ExtResource("27")]
+position = Vector2(-1833, -1815)
+
+[node name="IceAsteroid10" parent="." instance=ExtResource("27")]
+position = Vector2(1564, 467)
+
+[node name="PlasmaVent1" parent="." instance=ExtResource("28")]
+position = Vector2(1382, 1034)
+
+[node name="PlasmaVent2" parent="." instance=ExtResource("28")]
+position = Vector2(163, 2129)
+
+[node name="PlasmaVent3" parent="." instance=ExtResource("28")]
+position = Vector2(921, -2044)
+
+[node name="PlasmaVent4" parent="." instance=ExtResource("28")]
+position = Vector2(-1891, -1202)
+
+[node name="PlasmaVent5" parent="." instance=ExtResource("28")]
+position = Vector2(-1795, -999)
+
+[node name="PlasmaVent6" parent="." instance=ExtResource("28")]
+position = Vector2(611, -608)
+
+[node name="PlasmaVent7" parent="." instance=ExtResource("28")]
+position = Vector2(-1049, 1965)
+
+[node name="PlasmaVent8" parent="." instance=ExtResource("28")]
+position = Vector2(666, 491)
+
+[node name="Interceptor1" parent="." instance=ExtResource("29")]
+position = Vector2(-1200, 1650)
+
+[node name="Interceptor2" parent="." instance=ExtResource("29")]
+position = Vector2(1200, -1650)
+
+[node name="Interceptor3" parent="." instance=ExtResource("29")]
+position = Vector2(0, -350)
